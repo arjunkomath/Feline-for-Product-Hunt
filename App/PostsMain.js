@@ -15,9 +15,11 @@ var {
     ToolbarAndroid,
 } = React;
 
+var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
-var { Icon, } = require('react-native-icons');
-const { mdl, } = require('react-native-material-kit');
+var Icon = require('react-native-vector-icons/FontAwesome')
+import { Button } from 'react-native-material-design';
+import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 var ResponsiveImage = require('react-native-responsive-image');
 
 import Dimensions from 'Dimensions';
@@ -99,10 +101,12 @@ var PostsMain = React.createClass({
         return (
             <View style={styles.container}>
 
-            <ToolbarAndroid
-            title="Product Hunt"
-            style={styles.toolbar}
-            titleColor="#ffffff" />
+            <MaterialToolbar
+            title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
+            icon={navigator && navigator.isChild ? 'keyboard-backspace' : 'menu'}
+            onIconPress={() => navigator && navigator.isChild ? navigator.back() : () => {}}
+            overrides={{backgroundColor: '#F4511E'}}
+            />
 
             <ListView
             dataSource={this.state.dataSource}
@@ -117,7 +121,7 @@ var PostsMain = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
-            <mdl.Spinner/>
+            <ProgressBar styleAttr="Inverse" />
             <Text>
             Loading posts...
             </Text>
@@ -147,6 +151,28 @@ var PostsMain = React.createClass({
             >
             <Text style={styles.headline}>{post.name}</Text>
             <Text style={styles.tagline}>{post.tagline}</Text>
+
+            <View style={{flex: 1, flexDirection: 'row', marginTop: 7 }}>
+            <View style={{
+                width: 60,
+                height: 10,
+                marginLeft: 10,
+            }}>
+            <Icon.Button name="angle-up" color="#3e3e3e" backgroundColor="#ffffff">
+            <Text style={{fontSize: 15}}>{post.votes_count}</Text>
+            </Icon.Button>
+            </View>
+            <View style={{
+                width: 90,
+                height: 20,
+                marginLeft: 10
+            }}>
+            <Icon.Button name="thumbs-up" backgroundColor="#2196F3">
+            <Text style={{fontSize: 15, color: '#ffffff'}}>GET IT</Text>
+            </Icon.Button>
+            </View>
+            </View>
+
             </Image>
             </View>
             </View>
@@ -160,12 +186,12 @@ var styles = StyleSheet.create({
     },
     row: {
         flex: 1,
-        borderBottomWidth: 2,
+        borderBottomWidth: 1,
         borderBottomColor: '#bdbdbd'
     },
     headline: {
-        fontSize: 24,
-        marginTop: 175,
+        fontSize: 20,
+        marginTop: 150,
         color: '#ffffff',
         marginLeft: 15,
     },
@@ -176,18 +202,14 @@ var styles = StyleSheet.create({
     },
     loading: {
         flex: 1,
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
     },
     listView: {
         backgroundColor: '#ffffff',
-    },
-    toolbar: {
-        backgroundColor: '#F4511E',
-        height: 56,
-    },
+        marginTop: 56
+    }
 });
 
 module.exports = PostsMain;
