@@ -11,6 +11,7 @@ var {
     Text,
     View,
     ListView,
+    Image,
     ToolbarAndroid,
 } = React;
 
@@ -127,19 +128,26 @@ var PostsMain = React.createClass({
     renderPosts: function(post) {
         return (
             <View style={styles.row}>
-            <ResponsiveImage source={{uri: post.thumbnail.image_url}} initWidth={width} initHeight="200" />
+            <ResponsiveImage source={{uri: post.thumbnail.image_url}} initWidth={width} initHeight="250" />
             <View style={
                 {
-                    height: 75,
+                    height: 250,
                     width: width,
-                    marginTop: -75,
-                    paddingTop: 10,
-                    paddingLeft: 15,
-                    paddingRight: 15,
+                    marginTop: -250,
                 }
             }>
+            <Image
+            resizeMode={Image.resizeMode.strech}
+            source={require('../Images/row_bag.png')}
+            style={
+                {
+                    flex: 1
+                }
+            }
+            >
             <Text style={styles.headline}>{post.name}</Text>
             <Text style={styles.tagline}>{post.tagline}</Text>
+            </Image>
             </View>
             </View>
         );
@@ -148,7 +156,7 @@ var PostsMain = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1
+        flex: 1,
     },
     row: {
         flex: 1,
@@ -157,9 +165,14 @@ var styles = StyleSheet.create({
     },
     headline: {
         fontSize: 24,
+        marginTop: 175,
+        color: '#ffffff',
+        marginLeft: 15,
     },
     tagline: {
         fontSize: 14,
+        color: '#ffffff',
+        marginLeft: 15,
     },
     loading: {
         flex: 1,
