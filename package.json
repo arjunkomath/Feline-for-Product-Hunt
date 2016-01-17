@@ -1,0 +1,16 @@
+{
+  "name": "product_hunt",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start"
+  },
+  "dependencies": {
+    "react-native": "^0.17.0",
+    "react-native-android-statusbar": "^0.1.2",
+    "react-native-icons": "^0.7.0",
+    "react-native-material-kit": "^0.2.5",
+    "react-native-responsive-image": "^1.1.1",
+    "react-native-vector-icons": "^0.8.5"
+  }
+}
