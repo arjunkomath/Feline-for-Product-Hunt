@@ -112,7 +112,6 @@
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.0.1" level="project" />
     <orderEntry type="module" module-name="react-native-android-statusbar" exported="" />
-    <orderEntry type="module" module-name="RNMaterialKit" exported="" />
-    <orderEntry type="module" module-name="react-native-icons" exported="" />
+    <orderEntry type="module" module-name="react-native-vector-icons" exported="" />
   </component>
 </module>

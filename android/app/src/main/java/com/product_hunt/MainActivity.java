@@ -11,9 +11,8 @@ import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
+import com.oblador.vectoricons.VectorIconsPackage;
 import me.neo.react.StatusBarPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.smixx.reactnativeicons.ReactNativeIcons;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -29,10 +28,9 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .setApplication(getApplication())
                 .setBundleAssetName("index.android.bundle")
                 .setJSMainModuleName("index.android")
-                .addPackage(new StatusBarPackage(this))
                 .addPackage(new MainReactPackage())
-                .addPackage(new ReactMaterialKitPackage())
-                .addPackage(new ReactNativeIcons())
+                .addPackage(new VectorIconsPackage())
+                .addPackage(new StatusBarPackage(this))
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();

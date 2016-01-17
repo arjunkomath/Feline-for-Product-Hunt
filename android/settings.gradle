@@ -2,11 +2,8 @@ rootProject.name = 'product_hunt'
 
 include ':app'
 
+include ':react-native-vector-icons'
+project(':react-native-vector-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-vector-icons/android')
+
 include ':react-native-android-statusbar'
 project(':react-native-android-statusbar').projectDir = new File(settingsDir, '../node_modules/react-native-android-statusbar')
-
-include ':RNMaterialKit'
-project(':RNMaterialKit').projectDir = file('../node_modules/react-native-material-kit/android')
-
-include ':react-native-icons'
-project(':react-native-icons').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-icons/android')

@@ -14,7 +14,6 @@ var {
 } = React;
 
 var PostsMain = require('./App/PostsMain');
-
 var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#AB1223');
 
