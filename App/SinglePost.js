@@ -52,6 +52,7 @@ var SinglePost = React.createClass({
             this.setState({
                 comments: responseData.post.comments,
                 media: responseData.post.media,
+                post: responseData.post,
                 loaded: true,
             });
         })
