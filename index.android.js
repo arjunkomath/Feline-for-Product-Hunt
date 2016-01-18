@@ -46,6 +46,7 @@ var product_hunt = React.createClass({
                     return <SinglePost
                     navigator={navigator}
                     post={route.passProps.post}
+                    token={route.passProps.token}
                     onForward={() => {
                         var nextIndex = route.index + 1;
                         navigator.push({

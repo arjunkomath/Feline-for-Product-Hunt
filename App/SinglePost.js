@@ -1,7 +1,3 @@
-/**
-* Sample React Native App
-* https://github.com/facebook/react-native
-*/
 'use strict';
 
 var React = require('react-native');
@@ -11,16 +7,18 @@ var {
     Text,
     View,
     Image,
-    ScrollView,
+    ListView,
 } = React;
 
-var PostWidget = require('./PostWidget');
-var UserWidget = require('./UserWidget');
+var DiscussionPage = require('./Pages/DiscussionPage');
+var InfoPage = require('./Pages/InfoPage');
 
 var ProgressBar = require('ProgressBarAndroid');
 var Icon = require('react-native-vector-icons/FontAwesome')
 import { Button } from 'react-native-material-design';
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+
+var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 var SinglePost = React.createClass({
 
@@ -28,57 +26,55 @@ var SinglePost = React.createClass({
         return {
             loaded: false,
             network: true,
-            access_token: undefined,
+            access_token: this.props.token,
             post: this.props.post
         };
     },
 
     componentDidMount: function() {
-        console.log(this.state.post);
-        // this.fetchData();
+        this.fetchData();
     },
 
     fetchData: function() {
         var requestObj = {
-            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Origin': '',
+                'Authorization': 'Bearer ' + this.state.access_token,
                 'Host': 'api.producthunt.com'
-            },
-            body: JSON.stringify({
-                "client_id": keys.key,
-                "client_secret": keys.secret,
-                "grant_type": 'client_credentials'
-            })
+            }
         };
-        fetch('https://api.producthunt.com/v1/oauth/token', requestObj)
+        fetch('https://api.producthunt.com/v1/posts/'+this.state.post.id, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData);
             this.setState({
-                access_token: responseData.access_token
+                comments: responseData.post.comments,
+                loaded: true,
             });
         })
-        .done(() => {
-            console.log('Got token!');
-            this.getPosts();
-        });
+        .done(() => {});
     },
 
     render: function() {
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
         return (
-            <ScrollView
-            automaticallyAdjustContentInsets={false}
-            style={styles.scrollView}>
-
             <View style={styles.container}>
-            <PostWidget post={this.state.post} />
-            <UserWidget user={this.state.post.user} />
-            </View>
 
-            </ScrollView>
+            <MaterialToolbar
+            title={this.state.post.name}
+            icon={'keyboard-backspace'}
+            onIconPress={() => { this.props.navigator.pop()} }
+            overrides={{backgroundColor: '#F4511E'}}
+            />
+
+            <ScrollableTabView style={styles.tabs}>
+            <DiscussionPage tabLabel="Discussion" comments={this.state.comments} />
+            <InfoPage tabLabel="Media" post={this.state.post} />
+            <InfoPage tabLabel="Info" post={this.state.post} />
+            </ScrollableTabView>
+            </View>
         );
     },
 
@@ -96,10 +92,15 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    scrollView: {
+    tabs: {
         flex: 1,
-        backgroundColor: '#e3e3e3',
+        marginTop: 58,
     },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 });
 
 module.exports = SinglePost;
