@@ -120,9 +120,6 @@ var PostsMain = React.createClass({
         return (
             <View style={styles.loading}>
             <ProgressBar styleAttr="Inverse" />
-            <Text>
-            Loading posts...
-            </Text>
             </View>
         );
     },
