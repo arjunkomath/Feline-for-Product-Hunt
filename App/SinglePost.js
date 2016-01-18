@@ -11,6 +11,7 @@ var {
 } = React;
 
 var DiscussionPage = require('./Pages/DiscussionPage');
+var MediaPage = require('./Pages/MediaPage');
 var InfoPage = require('./Pages/InfoPage');
 
 var ProgressBar = require('ProgressBarAndroid');
@@ -47,8 +48,10 @@ var SinglePost = React.createClass({
         fetch('https://api.producthunt.com/v1/posts/'+this.state.post.id, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
+            console.log(responseData);
             this.setState({
                 comments: responseData.post.comments,
+                media: responseData.post.media,
                 loaded: true,
             });
         })
@@ -71,7 +74,7 @@ var SinglePost = React.createClass({
 
             <ScrollableTabView style={styles.tabs}>
             <DiscussionPage tabLabel="Discussion" comments={this.state.comments} />
-            <InfoPage tabLabel="Media" post={this.state.post} />
+            <MediaPage tabLabel="Media" media={this.state.media} />
             <InfoPage tabLabel="Info" post={this.state.post} />
             </ScrollableTabView>
             </View>
