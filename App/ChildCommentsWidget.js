@@ -26,7 +26,6 @@ var ChildCommentsWidget = React.createClass({
     },
 
     componentDidMount: function() {
-        console.log(this.state.data);
         if(this.state.data.length > 0) {
             this.setState({
                 children: this.state.children.cloneWithRows(this.state.data)
