@@ -130,7 +130,7 @@ var PostsMain = React.createClass({
     _loadPost: function(post) {
         this.props.navigator.push({
             index: 1,
-            passProps: {post: post},
+            passProps: {post: post, token: this.state.access_token},
         });
     },
 
