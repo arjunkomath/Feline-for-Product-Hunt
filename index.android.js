@@ -11,6 +11,7 @@ var {
     Text,
     View,
     Navigator,
+    BackAndroid,
 } = React;
 
 var PostsMain = require('./App/PostsMain');

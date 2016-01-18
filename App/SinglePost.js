@@ -8,6 +8,7 @@ var {
     View,
     Image,
     ListView,
+    BackAndroid,
 } = React;
 
 var DiscussionPage = require('./Pages/DiscussionPage');
@@ -34,6 +35,7 @@ var SinglePost = React.createClass({
 
     componentDidMount: function() {
         this.fetchData();
+        BackAndroid.addEventListener('hardwareBackPress', () => {this.props.navigator.pop(); return true;} )
     },
 
     fetchData: function() {
