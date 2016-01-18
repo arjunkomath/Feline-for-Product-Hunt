@@ -13,17 +13,15 @@ var {
     ListView,
     Image,
     ToolbarAndroid,
+    TouchableHighlight,
 } = React;
 
 var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
 var Icon = require('react-native-vector-icons/FontAwesome')
-import { Button } from 'react-native-material-design';
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
-var ResponsiveImage = require('react-native-responsive-image');
 
-import Dimensions from 'Dimensions';
-var {height, width} = Dimensions.get('window');
+var PostWidget = require('./PostWidget');
 
 var PostsMain = React.createClass({
 
@@ -129,53 +127,20 @@ var PostsMain = React.createClass({
         );
     },
 
+    _loadPost: function(post) {
+        this.props.navigator.push({
+            index: 1,
+            passProps: {post: post},
+        });
+    },
+
     renderPosts: function(post) {
         return (
-            <View style={styles.row}>
-            <ResponsiveImage source={{uri: post.thumbnail.image_url}} initWidth={width} initHeight="250" />
-            <View style={
-                {
-                    height: 250,
-                    width: width,
-                    marginTop: -250,
-                }
-            }>
-            <Image
-            resizeMode={Image.resizeMode.strech}
-            source={require('../Images/row_bag.png')}
-            style={
-                {
-                    flex: 1
-                }
-            }
-            >
-            <Text style={styles.headline}>{post.name}</Text>
-            <Text style={styles.tagline}>{post.tagline}</Text>
-
-            <View style={{flex: 1, flexDirection: 'row', marginTop: 7 }}>
-            <View style={{
-                width: 60,
-                height: 10,
-                marginLeft: 10,
-            }}>
-            <Icon.Button name="angle-up" color="#3e3e3e" backgroundColor="#ffffff">
-            <Text style={{fontSize: 15}}>{post.votes_count}</Text>
-            </Icon.Button>
+            <TouchableHighlight onPress={() => {this._loadPost(post)}}>
+            <View style={{flex:1}}>
+            <PostWidget post={post} />
             </View>
-            <View style={{
-                width: 90,
-                height: 20,
-                marginLeft: 10
-            }}>
-            <Icon.Button name="thumbs-up" backgroundColor="#2196F3">
-            <Text style={{fontSize: 15, color: '#ffffff'}}>GET IT</Text>
-            </Icon.Button>
-            </View>
-            </View>
-
-            </Image>
-            </View>
-            </View>
+            </TouchableHighlight>
         );
     },
 });
@@ -183,22 +148,6 @@ var PostsMain = React.createClass({
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    row: {
-        flex: 1,
-        borderBottomWidth: 1,
-        borderBottomColor: '#bdbdbd'
-    },
-    headline: {
-        fontSize: 20,
-        marginTop: 150,
-        color: '#ffffff',
-        marginLeft: 15,
-    },
-    tagline: {
-        fontSize: 14,
-        color: '#ffffff',
-        marginLeft: 15,
     },
     loading: {
         flex: 1,
