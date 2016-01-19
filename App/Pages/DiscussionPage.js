@@ -16,6 +16,7 @@ var DiscussionPage = React.createClass({
     getInitialState: function() {
         return {
             data: this.props.comments,
+            navigator: this.props.navigator,
             comments: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
@@ -42,7 +43,7 @@ var DiscussionPage = React.createClass({
     renderPosts: function(comment) {
         return (
             <View style={{flex:1}}>
-            <Comment comment={comment} />
+            <Comment comment={comment} navigator={this.state.navigator} />
             </View>
         );
     },

@@ -11,6 +11,7 @@ var {
     Text,
     View,
     Image,
+    TouchableOpacity,
     ListView,
 } = React;
 
@@ -19,10 +20,18 @@ var ChildCommentsWidget = React.createClass({
     getInitialState: function() {
         return {
             data: this.props.comment,
+            navigator: this.props.navigator,
             children: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
         };
+    },
+
+    _viewProfile: function(user) {
+        this.state.navigator.push({
+            index: 4,
+            passProps: {user: user}
+        });
     },
 
     componentDidMount: function() {
@@ -49,7 +58,10 @@ var ChildCommentsWidget = React.createClass({
     renderPosts: function(comment) {
         return (
             <View style={styles.container}>
+
+            <TouchableOpacity onPress={() => this._viewProfile(comment.user)}>
             <Image source={{uri: comment.user.image_url['50px'] }} style={styles.thumbnail} />
+            </TouchableOpacity>
 
             <View style={{flex: 1 }}>
             <Text style={styles.body}>{comment.body}</Text>

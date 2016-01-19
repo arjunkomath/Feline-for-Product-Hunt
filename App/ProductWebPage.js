@@ -36,9 +36,17 @@ var ProductWebPage = React.createClass({
         };
     },
 
+    navigatorPop(){
+        this.props.navigator.pop();
+        return true;
+    },
+
     componentDidMount: function() {
-        console.log(this.state);
-        BackAndroid.addEventListener('hardwareBackPress', () => {this.props.navigator.pop(); return true;} )
+        BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+    },
+
+    componentWillUnmount(){
+        BackAndroid.removeEventListener('hardwareBackPress',this.navigatorPop)
     },
 
     render: function() {
