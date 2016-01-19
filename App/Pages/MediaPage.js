@@ -49,7 +49,7 @@ var MediaPage = React.createClass({
     renderPosts: function(media) {
         return (
             <View style={styles.container}>
-            <ResponsiveImage source={{uri: media.image_url}} initWidth={width} initHeight="250" />
+            <ResponsiveImage source={{uri: media.image_url}} initWidth={width} initHeight="300" />
             </View>
         );
     },

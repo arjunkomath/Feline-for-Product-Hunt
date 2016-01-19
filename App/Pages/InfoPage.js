@@ -10,6 +10,7 @@ var {
     Image,
 } = React;
 
+var Icon = require('react-native-vector-icons/FontAwesome');
 var UserWidget = require('../UserWidget');
 
 var InfoPage = React.createClass({
@@ -18,6 +19,15 @@ var InfoPage = React.createClass({
         return {
             post: this.props.post
         };
+    },
+
+    renderVotes: function() {
+        var rows = [];
+        for(var i=0; i<6; i++) {
+            rows.push(<Image key={i} source={{uri: this.state.post.votes[i].user.image_url['50px'] }} style={styles.thumbnail} />)
+        }
+        rows.push(<Icon key={6} style={{marginLeft:15, marginTop: 10}} name="ellipsis-h" size={30} color="#000000" />);
+        return rows;
     },
 
     render: function() {
@@ -32,7 +42,7 @@ var InfoPage = React.createClass({
 
             <Text style={styles.head}>UPVOTES</Text>
             <View style={styles.users}>
-            {this.state.post.votes.map( (vote, i) => <Image key={i} source={{uri: vote.user.image_url['50px'] }} style={styles.thumbnail} /> ) }
+            {this.renderVotes()}
             </View>
 
             <Text style={styles.head}>PLATFORMS</Text>
