@@ -24,10 +24,6 @@ var DatePicker = React.createClass({
         };
     },
 
-    componentDidMount: function() {
-        console.log(this.state.date);
-    },
-
     render: function() {
         return (
             <View style={styles.container}>
