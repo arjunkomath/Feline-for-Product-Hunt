@@ -33,6 +33,7 @@ var PostsMain = React.createClass({
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
+            pass_date: this.props.date
         };
     },
 
@@ -70,11 +71,15 @@ var PostsMain = React.createClass({
     },
 
     getPosts: function() {
-        var today = new Date();
+        if(this.state.pass_date) {
+            var today = new Date(this.state.pass_date);
+        } else var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
         var yyyy = today.getFullYear();
         var day = yyyy+'-'+mm+'-'+dd;
+        var pass_day = yyyy+'/'+mm+'/'+dd;
+        this.setState({ date_text: String(today), date: pass_day });
         var requestObj = {
             headers: {
                 'Accept': 'application/json',
@@ -95,6 +100,21 @@ var PostsMain = React.createClass({
         .done();
     },
 
+    _pickDate: function() {
+        this.props.navigator.push({
+            index: 3,
+            passProps: {date: this.state.date}
+        });
+    },
+
+    _renderHeader: function() {
+        return (
+            <View style={{flex: 1, paddingTop: 3, paddingBottom: 3}}>
+            <Text style={styles.date}>TODAY {this.state.date_text}</Text>
+            </View>
+        )
+    },
+
     render: function() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -105,8 +125,12 @@ var PostsMain = React.createClass({
 
             <MaterialToolbar
             title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
-            icon={navigator && navigator.isChild ? 'keyboard-backspace' : 'menu'}
+            icon='menu'
             onIconPress={() => navigator && navigator.isChild ? navigator.back() : () => {}}
+            actions={[{
+                icon: 'warning',
+                onPress: () => {this._pickDate()}
+            }]}
             overrides={{backgroundColor: '#F4511E'}}
             />
 
@@ -114,6 +138,7 @@ var PostsMain = React.createClass({
             dataSource={this.state.dataSource}
             renderRow={this.renderPosts}
             style={styles.listView}
+            renderHeader={this._renderHeader}
             />
 
             </View>
@@ -159,7 +184,13 @@ var styles = StyleSheet.create({
     listView: {
         backgroundColor: '#ffffff',
         marginTop: 56
-    }
+    },
+    date: {
+        fontSize: 12,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#3e3e3e'
+    },
 });
 
 module.exports = PostsMain;
