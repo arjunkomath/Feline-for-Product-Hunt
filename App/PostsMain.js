@@ -70,7 +70,7 @@ var PostsMain = React.createClass({
     },
 
     getPosts: function() {
-        var daysAgo = daysAgo || 0;
+        var day = '2016-01-19';
         var requestObj = {
             headers: {
                 'Accept': 'application/json',
@@ -79,7 +79,7 @@ var PostsMain = React.createClass({
                 'Host': 'api.producthunt.com'
             }
         };
-        fetch('https://api.producthunt.com/v1/posts?days_ago=' + daysAgo, requestObj)
+        fetch('https://api.producthunt.com/v1/posts?day=' + day, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
             console.log(responseData);
