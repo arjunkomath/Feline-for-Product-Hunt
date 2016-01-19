@@ -33,37 +33,12 @@ var product_hunt = React.createClass({
                     name={route.name}
                     navigator={navigator}
                     date={route.pass_date}
-                    onForward={() => {
-                        var nextIndex = route.index + 1;
-                        navigator.push({
-                            name: 'Scene ' + nextIndex,
-                            index: nextIndex,
-                        });
-                    }}
-                    onBack={() => {
-                        if (route.index > 0) {
-                            navigator.pop();
-                        }
-                    }}
                     />
                 } else if(route.index == 1) {
                     return <SinglePost
                     navigator={navigator}
                     post={route.passProps.post}
                     token={route.passProps.token}
-                    onForward={() => {
-                        var nextIndex = route.index + 1;
-                        navigator.push({
-                            name: 'Scene ' + nextIndex,
-                            index: nextIndex,
-                        });
-                    }}
-                    onBack={() => {
-                        console.log('Back');
-                        if (route.index > 0) {
-                            navigator.pop();
-                        }
-                    }}
                     />
                 } else if(route.index == 2) {
                     return <ProductWebPage
