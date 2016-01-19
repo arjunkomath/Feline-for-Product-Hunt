@@ -119,7 +119,7 @@ var PostsMain = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
-            <ProgressBar styleAttr="Inverse" />
+            <ProgressBar styleAttr="Inverse" color="red" />
             </View>
         );
     },
@@ -135,7 +135,7 @@ var PostsMain = React.createClass({
         return (
             <TouchableHighlight onPress={() => {this._loadPost(post)}}>
             <View style={{flex:1}}>
-            <PostWidget post={post} />
+            <PostWidget post={post} navigator={this.props.navigator} />
             </View>
             </TouchableHighlight>
         );

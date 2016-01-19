@@ -87,7 +87,7 @@ var SinglePost = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
-            <ProgressBar styleAttr="Inverse" />
+            <ProgressBar styleAttr="Inverse" color="red" />
             </View>
         );
     },

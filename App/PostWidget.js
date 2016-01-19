@@ -24,8 +24,16 @@ var PostWidget = React.createClass({
 
     getInitialState: function() {
         return {
-            post: this.props.post
+            post: this.props.post,
+            navigator: this.props.navigator
         };
+    },
+
+    _loadWebView: function(post) {
+        this.state.navigator.push({
+            index: 2,
+            passProps: {url: this.state.post.redirect_url, title: this.state.post.name},
+        });
     },
 
     render: function() {
@@ -67,7 +75,7 @@ var PostWidget = React.createClass({
                 height: 20,
                 marginLeft: 10
             }}>
-            <Icon.Button name="thumbs-up" backgroundColor="#2196F3" onPress={() => console.log('2')}>
+            <Icon.Button name="thumbs-up" backgroundColor="#2196F3" onPress={() => this._loadWebView()}>
             <Text style={{fontSize: 15, color: '#ffffff'}}>GET IT</Text>
             </Icon.Button>
             </View>

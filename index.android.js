@@ -11,11 +11,12 @@ var {
     Text,
     View,
     Navigator,
-    BackAndroid,
 } = React;
 
 var PostsMain = require('./App/PostsMain');
 var SinglePost = require('./App/SinglePost');
+var ProductWebPage = require('./App/ProductWebPage');
+
 var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#AB1223');
 
@@ -48,6 +49,25 @@ var product_hunt = React.createClass({
                     navigator={navigator}
                     post={route.passProps.post}
                     token={route.passProps.token}
+                    onForward={() => {
+                        var nextIndex = route.index + 1;
+                        navigator.push({
+                            name: 'Scene ' + nextIndex,
+                            index: nextIndex,
+                        });
+                    }}
+                    onBack={() => {
+                        console.log('Back');
+                        if (route.index > 0) {
+                            navigator.pop();
+                        }
+                    }}
+                    />
+                } else if(route.index == 2) {
+                    return <ProductWebPage
+                    navigator={navigator}
+                    url={route.passProps.url}
+                    title={route.passProps.title}
                     onForward={() => {
                         var nextIndex = route.index + 1;
                         navigator.push({
