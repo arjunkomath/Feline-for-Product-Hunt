@@ -70,7 +70,11 @@ var PostsMain = React.createClass({
     },
 
     getPosts: function() {
-        var day = '2016-01-19';
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        var day = yyyy+'-'+mm+'-'+dd;
         var requestObj = {
             headers: {
                 'Accept': 'application/json',
