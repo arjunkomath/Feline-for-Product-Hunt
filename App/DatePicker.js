@@ -11,6 +11,7 @@ var {
     Text,
     View,
     Image,
+    BackAndroid,
 } = React;
 
 var Calendar = require('react-native-calendar-android');
@@ -22,6 +23,19 @@ var DatePicker = React.createClass({
             date: this.props.date,
             navigator: this.props.navigator
         };
+    },
+
+    navigatorPop(){
+        this.props.navigator.pop();
+        return true;
+    },
+
+    componentDidMount: function() {
+        BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+    },
+
+    componentWillUnmount(){
+        BackAndroid.removeEventListener('hardwareBackPress',this.navigatorPop)
     },
 
     render: function() {
@@ -38,7 +52,7 @@ var DatePicker = React.createClass({
             selectionColor="#FFCCBC"
             selectedDates={[ this.state.date ]}
             onDateChange={(data) => {
-                this.state.navigator.push({
+                this.state.navigator.resetTo({
                     index: 0,
                     pass_date: data.date
                 });

@@ -33,9 +33,18 @@ var SinglePost = React.createClass({
         };
     },
 
+    navigatorPop(){
+        this.props.navigator.pop();
+        return true;
+    },
+
     componentDidMount: function() {
         this.fetchData();
-        BackAndroid.addEventListener('hardwareBackPress', () => {this.props.navigator.pop(); return true;} )
+        BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+    },
+
+    componentWillUnmount(){
+        BackAndroid.removeEventListener('hardwareBackPress',this.navigatorPop)
     },
 
     fetchData: function() {
@@ -76,9 +85,9 @@ var SinglePost = React.createClass({
             />
 
             <ScrollableTabView style={styles.tabs}>
-            <DiscussionPage tabLabel="Discussion" comments={this.state.comments} />
+            <DiscussionPage tabLabel="Discussion" comments={this.state.comments} navigator={this.props.navigator}/>
             <MediaPage tabLabel="Media" media={this.state.media} />
-            <InfoPage tabLabel="Info" post={this.state.post} />
+            <InfoPage tabLabel="Info" post={this.state.post} navigator={this.props.navigator} />
             </ScrollableTabView>
             </View>
         );

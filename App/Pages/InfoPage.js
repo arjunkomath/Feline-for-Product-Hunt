@@ -8,6 +8,7 @@ var {
     View,
     ScrollView,
     Image,
+    TouchableOpacity,
 } = React;
 
 var Icon = require('react-native-vector-icons/FontAwesome');
@@ -30,6 +31,13 @@ var InfoPage = React.createClass({
         return rows;
     },
 
+    _viewProfile: function(user) {
+        this.props.navigator.push({
+            index: 4,
+            passProps: {user: user}
+        });
+    },
+
     render: function() {
         return (
             <ScrollView
@@ -37,7 +45,11 @@ var InfoPage = React.createClass({
 
             <Text style={styles.head}>MAKERS</Text>
             <View style={styles.users}>
-            {this.state.post.makers.map( (maker, i) => <Image key={i} source={{uri: maker.image_url['50px'] }} style={styles.thumbnail} /> ) }
+            {this.state.post.makers.map( (maker, i) =>
+                <TouchableOpacity key={i} onPress={() => this._viewProfile(maker)}>
+                <Image key={i} source={{uri: maker.image_url['50px'] }} style={styles.thumbnail} />
+                </TouchableOpacity>
+             ) }
             </View>
 
             <Text style={styles.head}>UPVOTES</Text>
@@ -54,7 +66,7 @@ var InfoPage = React.createClass({
             <Text style={styles.tag}>{this.state.post.category_id}</Text>
 
             <Text style={styles.head}>HUNTED BY</Text>
-            <UserWidget user={this.state.post.user} />
+            <UserWidget user={this.state.post.user} navigator={this.props.navigator} />
 
             </ScrollView>
         );

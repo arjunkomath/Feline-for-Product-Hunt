@@ -11,6 +11,8 @@ var {
     Text,
     View,
     Image,
+    TouchableOpacity,
+    BackAndroid,
 } = React;
 
 var ChildComments = require('./ChildCommentsWidget');
@@ -19,8 +21,16 @@ var CommentWidget = React.createClass({
 
     getInitialState: function() {
         return {
-            comment: this.props.comment
+            comment: this.props.comment,
+            navigator: this.props.navigator
         };
+    },
+
+    _viewProfile: function(user) {
+        this.state.navigator.push({
+            index: 4,
+            passProps: {user: user}
+        });
     },
 
     render: function() {
@@ -28,7 +38,9 @@ var CommentWidget = React.createClass({
             <View style={{flex: 1}}>
             <View style={styles.container}>
 
+            <TouchableOpacity onPress={() => this._viewProfile(this.state.comment.user)}>
             <Image source={{uri: this.state.comment.user.image_url['50px'] }} style={styles.thumbnail} />
+            </TouchableOpacity>
 
             <View style={{flex: 1 }}>
             <Text style={styles.body}>{this.state.comment.body}</Text>
@@ -36,7 +48,7 @@ var CommentWidget = React.createClass({
             </View>
 
             </View>
-            <ChildComments comment={this.state.comment.child_comments} />
+            <ChildComments comment={this.state.comment.child_comments} navigator={this.state.navigator} />
             </View>
         );
     },

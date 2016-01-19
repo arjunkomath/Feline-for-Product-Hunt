@@ -11,12 +11,14 @@ var {
     Text,
     View,
     Navigator,
+    BackAndroid,
 } = React;
 
 var PostsMain = require('./App/PostsMain');
 var SinglePost = require('./App/SinglePost');
 var ProductWebPage = require('./App/ProductWebPage');
 var DatePicker = require('./App/DatePicker');
+var ProfilePage = require('./App/Pages/ProfilePage');
 
 var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#AB1223');
@@ -28,6 +30,7 @@ var product_hunt = React.createClass({
             <Navigator
             initialRoute={{name: 'Posts', index: 0, pass_date: undefined }}
             renderScene={(route, navigator) => {
+
                 if(route.index == 0) {
                     return <PostsMain
                     name={route.name}
@@ -49,6 +52,12 @@ var product_hunt = React.createClass({
                 } else if(route.index == 3) {
                     return <DatePicker
                     navigator={navigator}
+                    date={route.passProps.date}
+                    />
+                } else if(route.index == 4) {
+                    return <ProfilePage
+                    navigator={navigator}
+                    user={route.passProps.user}
                     date={route.passProps.date}
                     />
                 }
