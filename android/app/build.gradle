@@ -77,4 +77,5 @@ dependencies {
     compile "com.facebook.react:react-native:0.17.+"
     compile project(':react-native-vector-icons')
     compile project(':react-native-android-statusbar')
+    compile project(':ReactNativeCalendarAndroid')
 }
