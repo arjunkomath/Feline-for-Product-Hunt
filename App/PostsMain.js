@@ -88,7 +88,7 @@ var PostsMain = React.createClass({
         var yyyy = today.getFullYear();
         var day = yyyy+'-'+mm+'-'+dd;
         var pass_day = yyyy+'/'+mm+'/'+dd;
-        this.setState({ date_text: String(today), date: pass_day });
+        this.setState({ date_text: today.toDateString(), date: pass_day });
         var requestObj = {
             headers: {
                 'Accept': 'application/json',
