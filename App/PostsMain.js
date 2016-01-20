@@ -20,6 +20,7 @@ var {
 var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+var Icon = require('react-native-vector-icons/FontAwesome');
 
 var PostWidget = require('./PostWidget');
 var DrawerWidget = require('./DrawerWidget');
@@ -41,7 +42,7 @@ var PostsMain = React.createClass({
 
     componentDidMount: function() {
         this.fetchData();
-        console.log(this.state);
+        // console.log(this.state);
     },
 
     fetchData: function() {
@@ -62,13 +63,14 @@ var PostsMain = React.createClass({
         fetch('https://api.producthunt.com/v1/oauth/token', requestObj)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData);
+            // console.log(responseData);
             this.setState({
                 access_token: responseData.access_token,
                 network: true
             });
         })
         .catch((err) => {
+            console.log(err);
             this.setState({
                 network: false
             });
@@ -100,22 +102,22 @@ var PostsMain = React.createClass({
         fetch('https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?day=' + day, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData);
-            if(responseData.posts) {
+            this.setState({ posts: responseData.posts });
+            if(responseData.posts.length > 0) {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
                     loaded: true,
-                    network: true
+                    network: true,
                 });
             } else {
                 this.setState({
                     loaded: true,
-                    network: true
+                    network: true,
                 });
-                console.log('no data');
             }
         })
         .catch((err) => {
+            console.log(err);
             this.setState({
                 network: false
             });
@@ -146,6 +148,10 @@ var PostsMain = React.createClass({
 
         if(!this.state.network) {
             return this.renderNetworkError();
+        }
+
+        if(!this.state.posts.length) {
+            return this.renderNoPosts();
         }
 
         var navigationView = <DrawerWidget navigator={this.props.navigator} />;
@@ -194,7 +200,36 @@ var PostsMain = React.createClass({
     renderNetworkError: function() {
         return (
             <View style={styles.loading}>
+            <Icon name="exclamation-circle" size={50} color="#000000" />
             <Text>Unable to Connect to Server! :(</Text>
+            </View>
+        );
+    },
+
+    renderNoPosts: function() {
+        var navigationView = <DrawerWidget navigator={this.props.navigator} />;
+        return (
+            <View style={styles.container}>
+            <DrawerLayoutAndroid
+            drawerWidth={300}
+            drawerPosition={DrawerLayoutAndroid.positions.Left}
+            renderNavigationView={() => navigationView}
+            ref={(ref) => this.drawer = ref }>
+            <MaterialToolbar
+            title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
+            icon='menu'
+            onIconPress={() => { this.drawer.openDrawer() }}
+            actions={[{
+                icon: 'date-range',
+                onPress: () => {this._pickDate()}
+            }]}
+            overrides={{backgroundColor: '#F4511E'}}
+            />
+            <View style={{flex: 1, marginTop: 60}}>
+            <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
+            <Text style={styles.date}>No Posts!</Text>
+            </View>
+            </DrawerLayoutAndroid>
             </View>
         );
     },
