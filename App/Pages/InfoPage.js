@@ -23,8 +23,16 @@ var InfoPage = React.createClass({
     },
 
     renderVotes: function() {
+        if(this.state.post.votes.length){
+            return (<View></View>);
+        }
+
+        var limit = 6;
+        if(this.state.post.votes.length < 6)
+            limit = this.state.post.votes.length;
+
         var rows = [];
-        for(var i=0; i<6; i++) {
+        for(var i=0; i<limit; i++) {
             rows.push(<Image key={i} source={{uri: this.state.post.votes[i].user.image_url['50px'] }} style={styles.thumbnail} />)
         }
         rows.push(<Icon key={6} style={{marginLeft:15, marginTop: 10}} name="ellipsis-h" size={30} color="#000000" />);
