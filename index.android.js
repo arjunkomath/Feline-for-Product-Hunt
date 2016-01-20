@@ -28,7 +28,7 @@ var product_hunt = React.createClass({
     render: function() {
         return (
             <Navigator
-            initialRoute={{name: 'Posts', index: 0, pass_date: undefined }}
+            initialRoute={{name: 'Posts', index: 0, pass_date: undefined, category: 'tech' }}
             renderScene={(route, navigator) => {
 
                 if(route.index == 0) {
@@ -36,6 +36,7 @@ var product_hunt = React.createClass({
                     name={route.name}
                     navigator={navigator}
                     date={route.pass_date}
+                    category={route.category}
                     />
                 } else if(route.index == 1) {
                     return <SinglePost
