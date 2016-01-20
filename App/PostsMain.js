@@ -35,11 +35,13 @@ var PostsMain = React.createClass({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             pass_date: this.props.date,
+            category: this.props.category ? this.props.category : 'tech'
         };
     },
 
     componentDidMount: function() {
         this.fetchData();
+        console.log(this.state);
     },
 
     fetchData: function() {
@@ -62,7 +64,13 @@ var PostsMain = React.createClass({
         .then((responseData) => {
             console.log(responseData);
             this.setState({
-                access_token: responseData.access_token
+                access_token: responseData.access_token,
+                network: true
+            });
+        })
+        .catch((err) => {
+            this.setState({
+                network: false
             });
         })
         .done(() => {
@@ -89,13 +97,27 @@ var PostsMain = React.createClass({
                 'Host': 'api.producthunt.com'
             }
         };
-        fetch('https://api.producthunt.com/v1/posts?day=' + day, requestObj)
+        fetch('https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?day=' + day, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
             console.log(responseData);
+            if(responseData.posts) {
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
+                    loaded: true,
+                    network: true
+                });
+            } else {
+                this.setState({
+                    loaded: true,
+                    network: true
+                });
+                console.log('no data');
+            }
+        })
+        .catch((err) => {
             this.setState({
-                dataSource: this.state.dataSource.cloneWithRows(responseData.posts),
-                loaded: true,
+                network: false
             });
         })
         .done();
@@ -111,18 +133,22 @@ var PostsMain = React.createClass({
     _renderHeader: function() {
         return (
             <View style={{flex: 1, paddingTop: 3, paddingBottom: 3}}>
-            <Text style={styles.date}>TODAY {this.state.date_text}</Text>
+            <Text style={styles.date}>{this.state.date_text}</Text>
             </View>
         )
     },
 
     render: function() {
 
-        var navigationView = <DrawerWidget navigator={this.props.navigator} />;
-
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
+
+        if(!this.state.network) {
+            return this.renderNetworkError();
+        }
+
+        var navigationView = <DrawerWidget navigator={this.props.navigator} />;
 
         return (
             <View style={styles.container}>
@@ -164,6 +190,14 @@ var PostsMain = React.createClass({
         return (
             <View style={styles.loading}>
             <ProgressBar styleAttr="Inverse" color="red" />
+            </View>
+        );
+    },
+
+    renderNetworkError: function() {
+        return (
+            <View style={styles.loading}>
+            <Text>Unable to Connect to Server! :(</Text>
             </View>
         );
     },
