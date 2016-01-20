@@ -14,6 +14,7 @@ var {
     Image,
     ToolbarAndroid,
     TouchableHighlight,
+    DrawerLayoutAndroid,
 } = React;
 
 var ProgressBar = require('ProgressBarAndroid');
@@ -21,6 +22,7 @@ var keys = require('./../Utils/keys.js');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 
 var PostWidget = require('./PostWidget');
+var DrawerWidget = require('./DrawerWidget');
 
 var PostsMain = React.createClass({
 
@@ -32,7 +34,7 @@ var PostsMain = React.createClass({
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
-            pass_date: this.props.date
+            pass_date: this.props.date,
         };
     },
 
@@ -115,6 +117,9 @@ var PostsMain = React.createClass({
     },
 
     render: function() {
+
+        var navigationView = <DrawerWidget navigator={this.props.navigator} />;
+
         if (!this.state.loaded) {
             return this.renderLoadingView();
         }
@@ -122,10 +127,16 @@ var PostsMain = React.createClass({
         return (
             <View style={styles.container}>
 
+            <DrawerLayoutAndroid
+            drawerWidth={300}
+            drawerPosition={DrawerLayoutAndroid.positions.Left}
+            renderNavigationView={() => navigationView}
+            ref={(ref) => this.drawer = ref }>
+
             <MaterialToolbar
             title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
             icon='menu'
-            onIconPress={() => navigator && navigator.isChild ? navigator.back() : () => {}}
+            onIconPress={() => { this.drawer.openDrawer() }}
             actions={[{
                 icon: 'date-range',
                 onPress: () => {this._pickDate()}
@@ -142,6 +153,8 @@ var PostsMain = React.createClass({
             style={styles.listView}
             renderHeader={this._renderHeader}
             />
+
+            </DrawerLayoutAndroid>
 
             </View>
         );
