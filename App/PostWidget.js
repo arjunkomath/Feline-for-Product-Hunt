@@ -62,11 +62,11 @@ var PostWidget = React.createClass({
 
             <View style={{flex: 1, flexDirection: 'row', marginTop: 7 }}>
             <View style={{
-                width: 65,
+                width: 75,
                 height: 10,
                 marginLeft: 10,
             }}>
-            <Icon.Button name="angle-up" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => console.log('1')}>
+            <Icon.Button name="chevron-up" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => console.log('1')}>
             <Text style={{fontSize: 15}}>{this.state.post.votes_count}</Text>
             </Icon.Button>
             </View>

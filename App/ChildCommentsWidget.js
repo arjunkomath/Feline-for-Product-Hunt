@@ -15,6 +15,7 @@ var {
     ListView,
 } = React;
 
+var Icon = require('react-native-vector-icons/FontAwesome');
 var ChildCommentsWidget = React.createClass({
 
     getInitialState: function() {
@@ -65,7 +66,7 @@ var ChildCommentsWidget = React.createClass({
 
             <View style={{flex: 1 }}>
             <Text style={styles.body}>{comment.body}</Text>
-            <Text style={styles.votes}>{comment.votes} Vote(s) | {comment.user.name}</Text>
+            <Text style={styles.votes}><Icon name="chevron-up" size={10} color="#000000" /> {comment.votes} - {comment.user.name}</Text>
             </View>
             </View>
         );
