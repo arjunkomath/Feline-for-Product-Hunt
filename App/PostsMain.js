@@ -166,9 +166,6 @@ var PostsMain = React.createClass({
             actions={[{
                 icon: 'date-range',
                 onPress: () => {this._pickDate()}
-            },{
-                icon: 'search',
-                onPress: () => {this._pickDate()}
             }]}
             overrides={{backgroundColor: '#F4511E'}}
             />

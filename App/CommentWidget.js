@@ -15,6 +15,7 @@ var {
     BackAndroid,
 } = React;
 
+var Icon = require('react-native-vector-icons/FontAwesome');
 var ChildComments = require('./ChildCommentsWidget');
 
 var CommentWidget = React.createClass({
@@ -44,7 +45,7 @@ var CommentWidget = React.createClass({
 
             <View style={{flex: 1 }}>
             <Text style={styles.body}>{this.state.comment.body}</Text>
-            <Text style={styles.votes}>{this.state.comment.votes} Vote(s) | {this.state.comment.user.name}</Text>
+            <Text style={styles.votes}><Icon name="chevron-up" size={10} color="#000000" /> {this.state.comment.votes} - {this.state.comment.user.name}</Text>
             </View>
 
             </View>
