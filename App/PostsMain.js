@@ -126,14 +126,14 @@ var PostsMain = React.createClass({
     _pickDate: function() {
         this.props.navigator.push({
             index: 3,
-            passProps: {date: this.state.date}
+            passProps: {date: this.state.date, category: this.state.category}
         });
     },
 
     _renderHeader: function() {
         return (
             <View style={{flex: 1, paddingTop: 3, paddingBottom: 3}}>
-            <Text style={styles.date}>{this.state.date_text}</Text>
+            <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
             </View>
         )
     },

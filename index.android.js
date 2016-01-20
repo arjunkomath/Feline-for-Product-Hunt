@@ -54,6 +54,7 @@ var product_hunt = React.createClass({
                     return <DatePicker
                     navigator={navigator}
                     date={route.passProps.date}
+                    category={route.passProps.category}
                     />
                 } else if(route.index == 4) {
                     return <ProfilePage

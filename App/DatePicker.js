@@ -54,7 +54,8 @@ var DatePicker = React.createClass({
             onDateChange={(data) => {
                 this.state.navigator.resetTo({
                     index: 0,
-                    pass_date: data.date
+                    pass_date: data.date,
+                    category: this.props.category
                 });
             }} />
             </View>
