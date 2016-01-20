@@ -46,6 +46,16 @@ var InfoPage = React.createClass({
         });
     },
 
+    _translateCategory: function(id) {
+        switch (id) {
+            case 1: return 'Tech'; break;
+            case 2: return 'Games'; break;
+            case 3: return 'Podcasts'; break;
+            case 4: return 'Books'; break;
+            default: return 'Tech';
+        }
+    },
+
     render: function() {
         return (
             <ScrollView
@@ -71,7 +81,7 @@ var InfoPage = React.createClass({
             </View>
 
             <Text style={styles.head}>CATEGORY</Text>
-            <Text style={styles.tag}>{this.state.post.category_id}</Text>
+            <Text style={styles.tag}>{this._translateCategory(this.state.post.category_id)}</Text>
 
             <Text style={styles.head}>HUNTED BY</Text>
             <UserWidget user={this.state.post.user} navigator={this.props.navigator} />
