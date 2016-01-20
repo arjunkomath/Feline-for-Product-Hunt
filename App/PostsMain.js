@@ -18,7 +18,6 @@ var {
 
 var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
-var Icon = require('react-native-vector-icons/FontAwesome')
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 
 var PostWidget = require('./PostWidget');
@@ -128,7 +127,10 @@ var PostsMain = React.createClass({
             icon='menu'
             onIconPress={() => navigator && navigator.isChild ? navigator.back() : () => {}}
             actions={[{
-                icon: 'warning',
+                icon: 'date-range',
+                onPress: () => {this._pickDate()}
+            },{
+                icon: 'search',
                 onPress: () => {this._pickDate()}
             }]}
             overrides={{backgroundColor: '#F4511E'}}
