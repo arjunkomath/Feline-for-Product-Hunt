@@ -97,13 +97,13 @@ var styles = StyleSheet.create({
         backgroundColor: '#3e3e3e'
     },
     headline: {
-        fontSize: 20,
-        marginTop: height/4.5,
+        fontSize: 18,
+        marginTop: height/5,
         color: '#ffffff',
         marginLeft: 15,
     },
     tagline: {
-        fontSize: 14,
+        fontSize: 12,
         color: '#ffffff',
         marginLeft: 15,
     },

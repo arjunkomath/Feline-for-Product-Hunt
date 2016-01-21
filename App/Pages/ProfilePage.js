@@ -15,6 +15,7 @@ var {
 } = React;
 
 var ResponsiveImage = require('react-native-responsive-image');
+import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome')
 
 var ProfilePage = React.createClass({
@@ -49,6 +50,12 @@ var ProfilePage = React.createClass({
     render: function() {
         return (
             <View style={styles.container}>
+            <MaterialToolbar
+            title={this.state.user.name}
+            icon={'keyboard-backspace'}
+            onIconPress={() => { this.props.navigator.pop()} }
+            overrides={{backgroundColor: '#3F51B5'}}
+            />
             <ResponsiveImage style={styles.image} source={{uri: this.state.user.image_url['264px']}} initWidth="264" initHeight="264" />
             <Text style={styles.name}>{this.state.user.name}</Text>
 
