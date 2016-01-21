@@ -75,7 +75,7 @@ var PostWidget = React.createClass({
                 height: 20,
                 marginLeft: 10
             }}>
-            <Icon.Button name="external-link" backgroundColor="#2196F3" onPress={() => this._loadWebView()}>
+            <Icon.Button name="external-link" backgroundColor="#3F51B5" onPress={() => this._loadWebView()}>
             <Text style={{fontSize: 15, color: '#ffffff'}}>GET IT</Text>
             </Icon.Button>
             </View>

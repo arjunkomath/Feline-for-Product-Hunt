@@ -134,7 +134,7 @@ var PostsMain = React.createClass({
 
     _renderHeader: function() {
         return (
-            <View style={{flex: 1, paddingTop: 3, paddingBottom: 3}}>
+            <View style={{flex: 1, paddingTop: 3, paddingBottom: 3, backgroundColor: '#3F51B5'}}>
             <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
             </View>
         )
@@ -270,7 +270,7 @@ var styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: 'bold',
         textAlign: 'center',
-        color: '#3e3e3e'
+        color: '#FF80AB'
     },
 });
 
