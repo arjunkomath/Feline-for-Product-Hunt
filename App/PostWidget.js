@@ -20,6 +20,8 @@ var ResponsiveImage = require('react-native-responsive-image');
 import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window');
 
+var _height = height/2.7;
+
 var PostWidget = React.createClass({
 
     getInitialState: function() {
@@ -39,13 +41,13 @@ var PostWidget = React.createClass({
     render: function() {
         return (
             <View style={styles.row}>
-            <ResponsiveImage source={{uri: this.state.post.thumbnail.image_url}} initWidth={width} initHeight="250" />
+            <ResponsiveImage source={{uri: this.state.post.thumbnail.image_url}} initWidth={width} initHeight={_height} />
 
             <View style={
                 {
-                    height: 250,
+                    height: _height,
                     width: width,
-                    marginTop: -250,
+                    marginTop: -_height,
                 }
             }>
             <Image
@@ -92,7 +94,7 @@ var PostWidget = React.createClass({
 var styles = StyleSheet.create({
     row: {
         flex: 1,
-        height: 250,
+        height: _height,
         backgroundColor: '#3e3e3e'
     },
     headline: {
