@@ -13,6 +13,7 @@ var {
 import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window');
 var ResponsiveImage = require('react-native-responsive-image');
+var _height = height/2;
 
 var MediaPage = React.createClass({
 
@@ -49,7 +50,7 @@ var MediaPage = React.createClass({
     renderPosts: function(media) {
         return (
             <View style={styles.container}>
-            <ResponsiveImage source={{uri: media.image_url}} initWidth={width} initHeight="300" />
+            <ResponsiveImage source={{uri: media.image_url}} initWidth={width} initHeight={_height} />
             </View>
         );
     },
