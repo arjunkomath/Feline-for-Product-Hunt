@@ -21,7 +21,7 @@ var DatePicker = require('./App/DatePicker');
 var ProfilePage = require('./App/Pages/ProfilePage');
 
 var StatusBarAndroid = require('react-native-android-statusbar');
-StatusBarAndroid.setHexColor('#AB1223');
+StatusBarAndroid.setHexColor('#303F9F');
 
 var product_hunt = React.createClass({
 

@@ -15,12 +15,11 @@ var {
 
 var Icon = require('react-native-vector-icons/FontAwesome')
 import { Button } from 'react-native-material-design';
-var ResponsiveImage = require('react-native-responsive-image');
 
 import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window');
-
 var _height = height/2.7;
+
 
 var PostWidget = React.createClass({
 
@@ -41,13 +40,12 @@ var PostWidget = React.createClass({
     render: function() {
         return (
             <View style={styles.row}>
-            <ResponsiveImage source={{uri: this.state.post.thumbnail.image_url}} initWidth={width} initHeight={_height} />
+            <Image source={{uri: this.state.post.thumbnail.image_url}} style={{width : width, height: height}}>
 
             <View style={
                 {
                     height: _height,
                     width: width,
-                    marginTop: -_height,
                 }
             }>
             <Image
@@ -85,6 +83,7 @@ var PostWidget = React.createClass({
 
             </Image>
             </View>
+            </Image>
             </View>
         );
     },
@@ -99,7 +98,7 @@ var styles = StyleSheet.create({
     },
     headline: {
         fontSize: 20,
-        marginTop: 150,
+        marginTop: height/4.5,
         color: '#ffffff',
         marginLeft: 15,
     },

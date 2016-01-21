@@ -173,7 +173,7 @@ var PostsMain = React.createClass({
                 icon: 'date-range',
                 onPress: () => {this._pickDate()}
             }]}
-            overrides={{backgroundColor: '#F4511E'}}
+            overrides={{backgroundColor: '#3F51B5'}}
             />
 
             <ListView
