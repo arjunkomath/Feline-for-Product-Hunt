@@ -81,7 +81,7 @@ var SinglePost = React.createClass({
             title={this.state.post.name}
             icon={'keyboard-backspace'}
             onIconPress={() => { this.props.navigator.pop()} }
-            overrides={{backgroundColor: '#F4511E'}}
+            overrides={{backgroundColor: '#3F51B5'}}
             />
 
             <ScrollableTabView style={styles.tabs}>
