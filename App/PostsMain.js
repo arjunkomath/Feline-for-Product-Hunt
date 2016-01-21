@@ -166,7 +166,7 @@ var PostsMain = React.createClass({
             ref={(ref) => this.drawer = ref }>
 
             <MaterialToolbar
-            title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
+            title={'Products'}
             icon='menu'
             onIconPress={() => { this.drawer.openDrawer() }}
             actions={[{

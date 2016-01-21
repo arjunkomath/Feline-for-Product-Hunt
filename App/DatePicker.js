@@ -15,6 +15,7 @@ var {
 } = React;
 
 var Calendar = require('react-native-calendar-android');
+import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 
 var DatePicker = React.createClass({
 
@@ -41,15 +42,21 @@ var DatePicker = React.createClass({
     render: function() {
         return (
             <View style={styles.container}>
+            <MaterialToolbar
+            title="Pick Date"
+            icon={'keyboard-backspace'}
+            onIconPress={() => { this.props.navigator.pop()} }
+            overrides={{backgroundColor: '#3F51B5'}}
+            />
             <Calendar
-            width={300}
+            width={350}
             topbarVisible={true}
-            arrowColor="#FF5722"
+            arrowColor="#3F51B5"
             firstDayOfWeek="monday"
             showDate="all"
             currentDate={[ this.state.date ]}
             selectionMode="single"
-            selectionColor="#FFCCBC"
+            selectionColor="#3F51B5"
             selectedDates={[ this.state.date ]}
             onDateChange={(data) => {
                 this.state.navigator.resetTo({
@@ -69,6 +76,7 @@ var styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ffffff',
     },
 });
 
