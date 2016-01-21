@@ -217,18 +217,18 @@ var PostsMain = React.createClass({
             renderNavigationView={() => navigationView}
             ref={(ref) => this.drawer = ref }>
             <MaterialToolbar
-            title={navigator && navigator.currentRoute ? navigator.currentRoute.title : 'Products'}
+            title={'Products'}
             icon='menu'
             onIconPress={() => { this.drawer.openDrawer() }}
             actions={[{
                 icon: 'date-range',
                 onPress: () => {this._pickDate()}
             }]}
-            overrides={{backgroundColor: '#F4511E'}}
+            overrides={{backgroundColor: '#3F51B5'}}
             />
-            <View style={{flex: 1, marginTop: 60}}>
+            <View style={{flex: 1, marginTop: 52, paddingTop: 10, paddingBottom: 3, height: 20, backgroundColor: '#3F51B5'}}>
             <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
-            <Text style={styles.date}>No Posts!</Text>
+            <Text style={styles.empty}>NO POSTS</Text>
             </View>
             </DrawerLayoutAndroid>
             </View>
@@ -269,6 +269,13 @@ var styles = StyleSheet.create({
     },
     date: {
         fontSize: 12,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        color: '#FF80AB'
+    },
+    empty: {
+        fontSize: 20,
+        marginTop: 30,
         fontWeight: 'bold',
         textAlign: 'center',
         color: '#FF80AB'
