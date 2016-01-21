@@ -59,13 +59,20 @@ var ProfilePage = React.createClass({
             <ResponsiveImage style={styles.image} source={{uri: this.state.user.image_url['264px']}} initWidth="264" initHeight="264" />
             <Text style={styles.name}>{this.state.user.name}</Text>
 
-            <Icon.Button name="user" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => this._loadWebView(this.state.user.profile_url)}>
-            <Text style={{fontSize: 15}}>VIEW PROFILE</Text>
-            </Icon.Button>
+            {(() => {
+                if(this.state.user.profile_url)
+                return (<Icon.Button name="user" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => this._loadWebView(this.state.user.profile_url)}>
+                <Text style={{fontSize: 15}}>VIEW PROFILE</Text>
+                </Icon.Button>)
+            })()}
 
+            {(() => {
+                if(this.state.user.website_url)
             <Icon.Button name="external-link" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => this._loadWebView(this.state.user.website_url)}>
             <Text style={{fontSize: 15}}>{this.state.user.website_url}</Text>
             </Icon.Button>
+            })()}
+
             </View>
         );
     },
@@ -77,17 +84,13 @@ var styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ffffff'
     },
     name: {
         fontSize: 15,
         fontWeight: 'bold',
         color: '#3e3e3e',
-        marginLeft: 20,
-    },
-    twitter: {
-        fontSize: 14,
-        color: '#3e3e3e',
-        marginLeft: 20,
+        marginBottom: 20,
     },
     image: {
         borderRadius: 130,

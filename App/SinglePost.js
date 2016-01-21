@@ -106,6 +106,8 @@ var SinglePost = React.createClass({
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#ffffff',
+        
     },
     tabs: {
         flex: 1,
