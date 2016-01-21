@@ -63,8 +63,17 @@ android {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    signingConfigs {
+        release {
+            storeFile file('techulus.jks')
+            storePassword '1am@rjunz'
+            keyAlias 'techulus'
+            keyPassword '1am@rjunz'
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false  // Set this to true to enable Proguard
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
