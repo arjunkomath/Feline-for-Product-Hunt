@@ -16,6 +16,7 @@ var {
 
 var Calendar = require('react-native-calendar-android');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var DatePicker = React.createClass({
 
@@ -33,6 +34,7 @@ var DatePicker = React.createClass({
 
     componentDidMount: function() {
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+        GoogleAnalytics.trackScreenView('Date Picker');
     },
 
     componentWillUnmount(){

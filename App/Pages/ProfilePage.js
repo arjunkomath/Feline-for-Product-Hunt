@@ -16,7 +16,8 @@ var {
 
 var ResponsiveImage = require('react-native-responsive-image');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
-var Icon = require('react-native-vector-icons/FontAwesome')
+var Icon = require('react-native-vector-icons/FontAwesome');
+const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var ProfilePage = React.createClass({
 
@@ -34,6 +35,7 @@ var ProfilePage = React.createClass({
 
     componentDidMount: function() {
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+        GoogleAnalytics.trackScreenView('Profile Page');
     },
 
     componentWillUnmount(){

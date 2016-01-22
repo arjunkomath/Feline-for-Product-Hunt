@@ -116,5 +116,7 @@
     <orderEntry type="module" module-name="react-native-android-statusbar" exported="" />
     <orderEntry type="module" module-name="ReactNativeCalendarAndroid" exported="" />
     <orderEntry type="module" module-name="react-native-vector-icons" exported="" />
+    <orderEntry type="module" module-name="GoogleAnalyticsBridge" exported="" />
+    <orderEntry type="module" module-name="react-native-code-push" exported="" />
   </component>
 </module>
