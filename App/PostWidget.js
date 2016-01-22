@@ -40,7 +40,7 @@ var PostWidget = React.createClass({
     render: function() {
         return (
             <View style={styles.row}>
-            <Image source={{uri: this.state.post.thumbnail.image_url}} resizeMode="cover" style={{width : width, height: height}}>
+            <Image source={{uri: this.state.post.thumbnail.image_url}} resizeMode={Image.resizeMode.cover} style={{width: width, height: _height}}>
 
             <View style={
                 {
