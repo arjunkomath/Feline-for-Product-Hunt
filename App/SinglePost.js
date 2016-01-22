@@ -19,6 +19,7 @@ var ProgressBar = require('ProgressBarAndroid');
 var Icon = require('react-native-vector-icons/FontAwesome')
 import { Button } from 'react-native-material-design';
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -41,6 +42,7 @@ var SinglePost = React.createClass({
     componentDidMount: function() {
         this.fetchData();
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+        GoogleAnalytics.trackScreenView('Post Page');
     },
 
     componentWillUnmount(){

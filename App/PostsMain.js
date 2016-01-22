@@ -21,6 +21,7 @@ var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome');
+const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var PostWidget = require('./PostWidget');
 var DrawerWidget = require('./DrawerWidget');
@@ -42,6 +43,7 @@ var PostsMain = React.createClass({
 
     componentDidMount: function() {
         this.fetchData();
+        GoogleAnalytics.trackScreenView(this.state.category.toUpperCase() + ' Products Page');
     },
 
     fetchData: function() {

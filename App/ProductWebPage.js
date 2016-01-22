@@ -22,6 +22,7 @@ var WEBVIEW_REF = 'webview';
 var DEFAULT_URL = 'https://m.facebook.com';
 
 var ProgressBar = require('ProgressBarAndroid');
+const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var ProductWebPage = React.createClass({
 
@@ -43,6 +44,7 @@ var ProductWebPage = React.createClass({
 
     componentDidMount: function() {
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
+        GoogleAnalytics.trackScreenView('WebView');
     },
 
     componentWillUnmount(){

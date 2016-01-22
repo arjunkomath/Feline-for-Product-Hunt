@@ -23,7 +23,13 @@ var ProfilePage = require('./App/Pages/ProfilePage');
 var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#303F9F');
 
+import CodePush from "react-native-code-push";
+
 var product_hunt = React.createClass({
+
+    componentDidMount: function() {
+        CodePush.sync();
+    },
 
     render: function() {
         return (

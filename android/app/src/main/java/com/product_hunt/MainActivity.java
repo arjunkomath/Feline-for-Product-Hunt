@@ -14,6 +14,8 @@ import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
 import me.neo.react.StatusBarPackage;
 import com.chymtt.reactnativecalendar.CalendarPackage;
+import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
+import com.microsoft.codepush.react.CodePush;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -25,14 +27,18 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
         super.onCreate(savedInstanceState);
         mReactRootView = new ReactRootView(this);
 
+        CodePush codePush = new CodePush("bEo2X-mD6peAHxpQMA2zw-d8dIvfE1B2J_Xug", this, BuildConfig.DEBUG);
+
         mReactInstanceManager = ReactInstanceManager.builder()
                 .setApplication(getApplication())
-                .setBundleAssetName("index.android.bundle")
+                .setJSBundleFile(codePush.getBundleUrl("index.android.bundle"))
                 .setJSMainModuleName("index.android")
                 .addPackage(new MainReactPackage())
                 .addPackage(new VectorIconsPackage())
                 .addPackage(new StatusBarPackage(this))
                 .addPackage(new CalendarPackage())
+                .addPackage(new GoogleAnalyticsBridgePackage("UA-4655726-8"))
+                .addPackage(codePush.getReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
                 .build();
