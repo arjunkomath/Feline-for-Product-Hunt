@@ -192,8 +192,9 @@ var PostsMain = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
-            <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}} />
-            <ProgressBar styleAttr="Inverse" color="red" />
+            <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
+            <ProgressBar styleAttr="Large" color="#3F51B5" />
+            </Image>
             </View>
         );
     },

@@ -96,7 +96,9 @@ var SinglePost = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
-            <ProgressBar styleAttr="Inverse" color="red" />
+            <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
+            <ProgressBar styleAttr="Large" color="#3F51B5" />
+            </Image>
             </View>
         );
     },
@@ -107,7 +109,7 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
-        
+
     },
     tabs: {
         flex: 1,
