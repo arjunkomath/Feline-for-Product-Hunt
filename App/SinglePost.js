@@ -20,6 +20,7 @@ var Icon = require('react-native-vector-icons/FontAwesome')
 import { Button } from 'react-native-material-design';
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 const GoogleAnalytics = require('react-native-google-analytics-bridge');
+var Share = require('react-native-share');
 
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -72,6 +73,16 @@ var SinglePost = React.createClass({
         .done(() => {});
     },
 
+    share: function() {
+        Share.open({
+            share_text: this.state.post.name,
+            share_URL: this.state.post.redirect_url,
+            title: "Sharing is Caring"
+        },function(e) {
+            console.log(e);
+        });
+    },
+
     render: function() {
         if (!this.state.loaded) {
             return this.renderLoadingView();
@@ -83,6 +94,10 @@ var SinglePost = React.createClass({
             title={this.state.post.name}
             icon={'keyboard-backspace'}
             onIconPress={() => { this.props.navigator.pop()} }
+            actions={[{
+                icon: 'share',
+                onPress: () => {this.share()}
+            }]}
             overrides={{backgroundColor: '#3F51B5'}}
             />
 

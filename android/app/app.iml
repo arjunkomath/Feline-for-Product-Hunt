@@ -113,6 +113,7 @@
     <orderEntry type="library" exported="" name="drawee-0.8.1" level="project" />
     <orderEntry type="library" exported="" name="appcompat-v7-23.0.1" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-23.1.0" level="project" />
+    <orderEntry type="module" module-name="react-native-share" exported="" />
     <orderEntry type="module" module-name="react-native-android-statusbar" exported="" />
     <orderEntry type="module" module-name="ReactNativeCalendarAndroid" exported="" />
     <orderEntry type="module" module-name="react-native-vector-icons" exported="" />
