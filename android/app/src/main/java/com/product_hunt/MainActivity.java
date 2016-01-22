@@ -16,6 +16,7 @@ import me.neo.react.StatusBarPackage;
 import com.chymtt.reactnativecalendar.CalendarPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.microsoft.codepush.react.CodePush;
+import cl.json.RNSharePackage;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -38,6 +39,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new StatusBarPackage(this))
                 .addPackage(new CalendarPackage())
                 .addPackage(new GoogleAnalyticsBridgePackage("UA-4655726-8"))
+                .addPackage(new RNSharePackage())
                 .addPackage(codePush.getReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)

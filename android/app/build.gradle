@@ -89,4 +89,5 @@ dependencies {
     compile project(':ReactNativeCalendarAndroid')
     compile project(':GoogleAnalyticsBridge')
     compile project(':react-native-code-push')
+    compile project(':react-native-share')
 }
