@@ -42,7 +42,6 @@ var PostsMain = React.createClass({
 
     componentDidMount: function() {
         this.fetchData();
-        // console.log(this.state);
     },
 
     fetchData: function() {
@@ -102,6 +101,7 @@ var PostsMain = React.createClass({
         fetch('https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?day=' + day, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
+            console.log(responseData.posts);
             this.setState({ posts: responseData.posts });
             if(responseData.posts.length > 0) {
                 this.setState({

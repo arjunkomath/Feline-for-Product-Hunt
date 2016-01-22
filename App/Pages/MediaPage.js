@@ -14,7 +14,7 @@ var {
 import Dimensions from 'Dimensions';
 var {height, width} = Dimensions.get('window');
 
-var _height = height/2;
+var _height = 250;
 
 var MediaPage = React.createClass({
 
@@ -51,7 +51,7 @@ var MediaPage = React.createClass({
     renderPosts: function(media) {
         return (
             <View style={styles.container}>
-            <Image source={{uri: media.image_url}} style={{width :width, height: _height}} />
+            <Image source={{uri: media.image_url}} resizeMode={Image.resizeMode.contain} style={{width :width, height: _height}} />
             </View>
         );
     },
