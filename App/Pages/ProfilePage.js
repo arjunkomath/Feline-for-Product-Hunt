@@ -58,6 +58,7 @@ var ProfilePage = React.createClass({
             />
             <ResponsiveImage style={styles.image} source={{uri: this.state.user.image_url['264px']}} initWidth="264" initHeight="264" />
             <Text style={styles.name}>{this.state.user.name}</Text>
+            <Text style={styles.name}>{this.state.user.headline}</Text>
 
             {(() => {
                 if(this.state.user.profile_url)
@@ -94,7 +95,9 @@ var styles = StyleSheet.create({
     },
     image: {
         borderRadius: 130,
-        marginBottom: 15
+        marginBottom: 15,
+        borderWidth: 6,
+        borderColor: '#3F51B5'
     }
 });
 

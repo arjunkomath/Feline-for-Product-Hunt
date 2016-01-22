@@ -34,7 +34,9 @@ var Drawer = React.createClass({
     render: function() {
         return (
             <View style={{flex: 1, backgroundColor: '#fff'}}>
-            <Image source={require('../Images/nav.jpg')} />
+            <Image source={require('../Images/nav.jpg')} >
+            <Image source={require('../Images/icon.png')} style={{width: 75, height: 75, marginLeft: 215, marginTop: 10}} />
+            </Image>
 
             <Subheader text="CATEGORY" color="paperRed" />
 
