@@ -64,8 +64,18 @@ var ProductWebPage = React.createClass({
             onShouldStartLoadWithRequest={this.onShouldStartLoadWithRequest}
             startInLoadingState={true}
             scalesPageToFit={this.state.scalesPageToFit}
-            renderLoading={() => (<View style={styles.loading}><ProgressBar styleAttr="Inverse" color="red" /></View>) }
+            renderLoading={() => this.renderLoadingView() }
             />
+            </View>
+        );
+    },
+
+    renderLoadingView: function() {
+        return (
+            <View style={styles.loading}>
+            <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
+            <ProgressBar styleAttr="Large" color="#3F51B5" />
+            </Image>
             </View>
         );
     },
