@@ -201,8 +201,6 @@ var PostsMain = React.createClass({
             <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
             <ProgressBar styleAttr="Large" color="#3F51B5" />
             </Image>
-            <Text style={{fontWeight:'bold', fontSize: 30, marginTop: 145, color: '#ffffff'}}>Feline</Text>
-            <Text style={{fontSize: 15, color: '#ffffff'}}>for Product Hunt</Text>
             </View>
         );
     },
