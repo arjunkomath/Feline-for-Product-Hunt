@@ -113,6 +113,16 @@ var SinglePost = React.createClass({
     renderLoadingView: function() {
         return (
             <View style={styles.loading}>
+            <MaterialToolbar
+            title={this.state.post.name}
+            icon={'keyboard-backspace'}
+            onIconPress={() => { this.props.navigator.pop()} }
+            actions={[{
+                icon: 'share',
+                onPress: () => {this.share()}
+            }]}
+            overrides={{backgroundColor: '#3F51B5'}}
+            />
             <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
             <ProgressBar styleAttr="Large" color="#3F51B5" />
             </Image>
@@ -136,6 +146,7 @@ var styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: '#ffffff',
     }
 });
 

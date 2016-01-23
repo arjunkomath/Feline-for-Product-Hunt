@@ -13,6 +13,7 @@ var {
     Image,
     WebView,
     BackAndroid,
+    IntentAndroid,
 } = React;
 
 var HEADER = '#3b5998';
@@ -23,6 +24,8 @@ var DEFAULT_URL = 'https://m.facebook.com';
 
 var ProgressBar = require('ProgressBarAndroid');
 const GoogleAnalytics = require('react-native-google-analytics-bridge');
+import { Toolbar as MaterialToolbar } from 'react-native-material-design';
+var Share = require('react-native-share');
 
 var ProductWebPage = React.createClass({
 
@@ -51,10 +54,34 @@ var ProductWebPage = React.createClass({
         BackAndroid.removeEventListener('hardwareBackPress',this.navigatorPop)
     },
 
+    share: function() {
+        Share.open({
+            share_text: this.state.title,
+            share_URL: this.state.url,
+            title: "Sharing is Caring"
+        },function(e) {
+            console.log(e);
+        });
+    },
+
     render: function() {
         return (
             <View style={styles.container}>
-            <Text style={styles.status}>{this.state.title}</Text>
+
+            <MaterialToolbar
+            title={this.state.title}
+            icon={'keyboard-backspace'}
+            onIconPress={() => { this.props.navigator.pop(); return true; } }
+            actions={[{
+                icon: 'share',
+                onPress: () => {this.share()}
+            },{
+                icon: 'open-in-browser',
+                onPress: () => {IntentAndroid.openURL(this.state.url)}
+            }]}
+            overrides={{backgroundColor: '#3F51B5'}}
+            />
+
             <WebView
             ref={WEBVIEW_REF}
             automaticallyAdjustContentInsets={false}
@@ -101,7 +128,8 @@ var styles = StyleSheet.create({
     webView: {
         flex: 1,
         backgroundColor: '#3e3e3e',
-        height: 400
+        height: 400,
+        marginTop: 56,
     },
 });
 
