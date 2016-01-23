@@ -85,13 +85,28 @@ var PostsMain = React.createClass({
     getPosts: function() {
         if(this.state.pass_date) {
             var today = new Date(this.state.pass_date);
-        } else var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        var day = yyyy+'-'+mm+'-'+dd;
-        var pass_day = yyyy+'/'+mm+'/'+dd;
-        this.setState({ date_text: today.toDateString(), date: pass_day });
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            var day = yyyy+'-'+mm+'-'+dd;
+            var pass_day = yyyy+'/'+mm+'/'+dd;
+
+            this.setState({ date_text: today.toDateString(), date: pass_day });
+
+            var url = 'https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?day=' + day;
+        } else {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            var day = yyyy+'-'+mm+'-'+dd;
+            var pass_day = yyyy+'/'+mm+'/'+dd;
+
+            this.setState({ date_text: 'TODAY', date: pass_day });
+
+            var url = 'https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?days_ago=0';
+        }
+
         var requestObj = {
             headers: {
                 'Accept': 'application/json',
@@ -100,7 +115,7 @@ var PostsMain = React.createClass({
                 'Host': 'api.producthunt.com'
             }
         };
-        fetch('https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?day=' + day, requestObj)
+        fetch(url, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
             console.log(responseData.posts);
