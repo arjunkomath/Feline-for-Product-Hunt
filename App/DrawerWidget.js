@@ -11,10 +11,13 @@ var {
     Text,
     View,
     Image,
+    ScrollView,
+    IntentAndroid,
 } = React;
 
 import { Subheader } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome');
+import { Divider } from 'react-native-material-design';
 
 var Drawer = React.createClass({
 
@@ -31,12 +34,21 @@ var Drawer = React.createClass({
         });
     },
 
+    contact: function() {
+        IntentAndroid.openURL('mailto:arjunkomath@gmail.com');
+    },
+
     render: function() {
         return (
             <View style={{flex: 1, backgroundColor: '#fff'}}>
             <Image source={require('../Images/nav.jpg')} >
             <Image source={require('../Images/icon.png')} style={{width: 75, height: 75, marginLeft: 215, marginTop: 10}} />
             </Image>
+
+            <ScrollView
+            automaticallyAdjustContentInsets={false}
+            scrollEventThrottle={200}
+            style={styles.container}>
 
             <Subheader text="CATEGORY" color="paperRed" />
 
@@ -56,6 +68,20 @@ var Drawer = React.createClass({
             Books
             </Icon.Button>
 
+            <Divider style={{marginTop: 10}} />
+
+            <Icon.Button name="bug" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.contact()}>
+            Report Bug
+            </Icon.Button>
+
+            <Icon.Button name="user" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.contact()}>
+            Contact
+            </Icon.Button>
+
+            <Text style={styles.version}>Version 1.0.0</Text>
+
+            </ScrollView>
+
             </View>
         );
     },
@@ -69,7 +95,12 @@ var styles = StyleSheet.create({
     buttons: {
         height: 50,
         marginLeft: 10,
-    }
+    },
+    version: {
+        height: 50,
+        marginLeft: 20,
+        marginTop: 15
+    },
 });
 
 module.exports = Drawer;
