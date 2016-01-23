@@ -33,7 +33,7 @@ var product_hunt = React.createClass({
     },
 
     componentDidMount: function() {
-        CodePush.sync();
+        CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE });
         HockeyApp.start();
         HockeyApp.checkForUpdate();
     },
