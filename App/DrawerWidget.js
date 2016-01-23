@@ -18,6 +18,7 @@ var {
 import { Subheader } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome');
 import { Divider } from 'react-native-material-design';
+var HockeyApp = require('react-native-hockeyapp');
 
 var Drawer = React.createClass({
 
@@ -70,7 +71,7 @@ var Drawer = React.createClass({
 
             <Divider style={{marginTop: 10}} />
 
-            <Icon.Button name="bug" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.contact()}>
+            <Icon.Button name="bug" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => HockeyApp.feedback()}>
             Report Bug
             </Icon.Button>
 

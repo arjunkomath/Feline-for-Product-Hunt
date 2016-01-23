@@ -11,6 +11,7 @@
     "react-native-calendar-android": "0.0.2",
     "react-native-code-push": "^1.5.3-beta",
     "react-native-google-analytics-bridge": "^0.2.0",
+    "react-native-hockeyapp": "^0.1.4",
     "react-native-material-design": "^0.3.1",
     "react-native-parsed-text": "0.0.10",
     "react-native-responsive-image": "^1.1.1",

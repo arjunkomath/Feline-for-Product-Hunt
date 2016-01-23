@@ -24,11 +24,18 @@ var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#303F9F');
 
 import CodePush from "react-native-code-push";
+var HockeyApp = require('react-native-hockeyapp');
 
 var product_hunt = React.createClass({
 
+    componentWillMount() {
+        HockeyApp.configure('1d4c277608044d458352f56171c4bdd5', true);
+    },
+
     componentDidMount: function() {
         CodePush.sync();
+        HockeyApp.start();
+        HockeyApp.checkForUpdate();
     },
 
     render: function() {
