@@ -28,7 +28,7 @@ import CodePush from "react-native-code-push";
 var product_hunt = React.createClass({
 
     componentDidMount: function() {
-        CodePush.sync();
+        CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE });
     },
 
     render: function() {
