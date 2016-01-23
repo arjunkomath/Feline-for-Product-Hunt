@@ -51,7 +51,7 @@ var MediaPage = React.createClass({
     renderPosts: function(media) {
         return (
             <View style={styles.container}>
-            <Image source={{uri: media.image_url}} resizeMode={Image.resizeMode.contain} style={{width :width, height: _height}} />
+            <Image source={{uri: media.image_url}} resizeMode={Image.resizeMode.cover} style={{width :width, height: width}} />
             </View>
         );
     },

@@ -19,6 +19,7 @@ import { Subheader } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome');
 import { Divider } from 'react-native-material-design';
 var HockeyApp = require('react-native-hockeyapp');
+var Share = require('react-native-share');
 
 var Drawer = React.createClass({
 
@@ -37,6 +38,16 @@ var Drawer = React.createClass({
 
     contact: function() {
         IntentAndroid.openURL('mailto:arjunkomath@gmail.com');
+    },
+
+    share: function() {
+        Share.open({
+            share_text: 'Feline for Product Hunt',
+            share_URL: 'https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt',
+            title: "Sharing is Caring"
+        },function(e) {
+            console.log(e);
+        });
     },
 
     render: function() {
@@ -67,6 +78,12 @@ var Drawer = React.createClass({
 
             <Icon.Button name="book" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this._viewPosts('books')}>
             Books
+            </Icon.Button>
+
+            <Divider style={{marginTop: 10}} />
+
+            <Icon.Button name="heart" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.share()}>
+            Share Feline
             </Icon.Button>
 
             <Divider style={{marginTop: 10}} />
