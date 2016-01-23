@@ -17,6 +17,8 @@ import com.chymtt.reactnativecalendar.CalendarPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.microsoft.codepush.react.CodePush;
 import cl.json.RNSharePackage;
+import com.slowpath.hockeyapp.RNHockeyAppModule;
+import com.slowpath.hockeyapp.RNHockeyAppPackage;
 
 public class MainActivity extends Activity implements DefaultHardwareBackBtnHandler {
 
@@ -40,6 +42,7 @@ public class MainActivity extends Activity implements DefaultHardwareBackBtnHand
                 .addPackage(new CalendarPackage())
                 .addPackage(new GoogleAnalyticsBridgePackage("UA-4655726-8"))
                 .addPackage(new RNSharePackage())
+                .addPackage(new RNHockeyAppPackage(this))
                 .addPackage(codePush.getReactPackage())
                 .setUseDeveloperSupport(BuildConfig.DEBUG)
                 .setInitialLifecycleState(LifecycleState.RESUMED)
