@@ -174,6 +174,10 @@ var PostsMain = React.createClass({
             actions={[{
                 icon: 'date-range',
                 onPress: () => {this._pickDate()}
+            },
+            {
+                icon: 'refresh',
+                onPress: () => {this.getPosts()}
             }]}
             overrides={{backgroundColor: '#3F51B5'}}
             />
@@ -206,83 +210,83 @@ var PostsMain = React.createClass({
             <View style={styles.loading}>
             <Icon name="exclamation-circle" size={50} color="#000000" />
             <Text>Unable to Connect to Server! :(</Text>
-            </View>
-        );
-    },
+                </View>
+            );
+        },
 
-    renderNoPosts: function() {
-        var navigationView = <DrawerWidget navigator={this.props.navigator} />;
-        return (
-            <View style={styles.container}>
-            <DrawerLayoutAndroid
-            drawerWidth={300}
-            drawerPosition={DrawerLayoutAndroid.positions.Left}
-            renderNavigationView={() => navigationView}
-            ref={(ref) => this.drawer = ref }>
-            <MaterialToolbar
-            title={'Products'}
-            icon='menu'
-            onIconPress={() => { this.drawer.openDrawer() }}
-            actions={[{
-                icon: 'date-range',
-                onPress: () => {this._pickDate()}
-            }]}
-            overrides={{backgroundColor: '#3F51B5'}}
-            />
-            <View style={{flex: 1, marginTop: 52, paddingTop: 10, paddingBottom: 3, height: 20, backgroundColor: '#3F51B5'}}>
-            <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
-            <Text style={styles.empty}>NO POSTS</Text>
-            </View>
-            </DrawerLayoutAndroid>
-            </View>
-        );
-    },
+        renderNoPosts: function() {
+            var navigationView = <DrawerWidget navigator={this.props.navigator} />;
+            return (
+                <View style={styles.container}>
+                <DrawerLayoutAndroid
+                drawerWidth={300}
+                drawerPosition={DrawerLayoutAndroid.positions.Left}
+                renderNavigationView={() => navigationView}
+                ref={(ref) => this.drawer = ref }>
+                <MaterialToolbar
+                title={'Products'}
+                icon='menu'
+                onIconPress={() => { this.drawer.openDrawer() }}
+                actions={[{
+                    icon: 'date-range',
+                    onPress: () => {this._pickDate()}
+                }]}
+                overrides={{backgroundColor: '#3F51B5'}}
+                />
+                <View style={{flex: 1, marginTop: 52, paddingTop: 10, paddingBottom: 3, height: 20, backgroundColor: '#3F51B5'}}>
+                <Text style={styles.date}>{this.state.category.toUpperCase()} - {this.state.date_text}</Text>
+                <Text style={styles.empty}>NO POSTS</Text>
+                </View>
+                </DrawerLayoutAndroid>
+                </View>
+            );
+        },
 
-    _loadPost: function(post) {
-        this.props.navigator.push({
-            index: 1,
-            passProps: {post: post, token: this.state.access_token},
-        });
-    },
+        _loadPost: function(post) {
+            this.props.navigator.push({
+                index: 1,
+                passProps: {post: post, token: this.state.access_token},
+            });
+        },
 
-    renderPosts: function(post) {
-        return (
-            <TouchableHighlight onPress={() => {this._loadPost(post)}}>
-            <View style={{flex:1}}>
-            <PostWidget post={post} navigator={this.props.navigator} />
-            </View>
-            </TouchableHighlight>
-        );
-    },
-});
+        renderPosts: function(post) {
+            return (
+                <TouchableHighlight onPress={() => {this._loadPost(post)}}>
+                <View style={{flex:1}}>
+                <PostWidget post={post} navigator={this.props.navigator} />
+                </View>
+                </TouchableHighlight>
+            );
+        },
+    });
 
-var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    loading: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#F5FCFF',
-    },
-    listView: {
-        backgroundColor: '#ffffff',
-        marginTop: 56
-    },
-    date: {
-        fontSize: 12,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#FF80AB'
-    },
-    empty: {
-        fontSize: 20,
-        marginTop: 30,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#FF80AB'
-    },
-});
+    var styles = StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+        loading: {
+            flex: 1,
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: '#F5FCFF',
+        },
+        listView: {
+            backgroundColor: '#ffffff',
+            marginTop: 56
+        },
+        date: {
+            fontSize: 12,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: '#FF80AB'
+        },
+        empty: {
+            fontSize: 20,
+            marginTop: 30,
+            fontWeight: 'bold',
+            textAlign: 'center',
+            color: '#FF80AB'
+        },
+    });
 
-module.exports = PostsMain;
+    module.exports = PostsMain;
