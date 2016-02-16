@@ -1,6 +1,5 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* Date Picker
 */
 'use strict';
 

@@ -1,6 +1,5 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* Navigation Drawer
 */
 'use strict';
 
@@ -53,14 +52,14 @@ var Drawer = React.createClass({
     render: function() {
         return (
             <View style={{flex: 1, backgroundColor: '#fff'}}>
-            <Image source={require('../Images/nav.jpg')} >
-            <Image source={require('../Images/icon.png')} style={{width: 75, height: 75, marginLeft: 215, marginTop: 10}} />
-            </Image>
-
             <ScrollView
             automaticallyAdjustContentInsets={false}
             scrollEventThrottle={200}
             style={styles.container}>
+            
+            <Image source={require('../Images/nav.jpg')} >
+            <Image source={require('../Images/icon.png')} style={{width: 75, height: 75, marginLeft: 215, marginTop: 10}} />
+            </Image>
 
             <Subheader text="CATEGORY" color="paperRed" />
 

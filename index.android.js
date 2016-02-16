@@ -1,6 +1,6 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* Feline for Product Hunt
+* https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt
 */
 'use strict';
 

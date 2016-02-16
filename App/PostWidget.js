@@ -1,6 +1,5 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* Post Widget for Populating the ListView
 */
 'use strict';
 

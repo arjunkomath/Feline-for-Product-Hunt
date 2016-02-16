@@ -1,6 +1,5 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* Home Page / Posts Page
 */
 'use strict';
 
