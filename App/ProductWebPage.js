@@ -1,6 +1,5 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
+* WebView for Rendering Product URL
 */
 'use strict';
 

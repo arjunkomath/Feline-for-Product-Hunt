@@ -1,3 +1,6 @@
+/**
+* Product Page
+*/
 'use strict';
 
 var React = require('react-native');
