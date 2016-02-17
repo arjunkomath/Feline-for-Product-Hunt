@@ -1,4 +1,8 @@
 <img src="https://lh3.googleusercontent.com/MCoiCCwUan0dxzqRR_Mrr7kO308roYdI2aTsIpUGYWzUmpJT1-R2_J04weQKFEd3Mg=w300-rw" width="75">
+[![GitHub issues](https://img.shields.io/github/issues/arjunkomath/Feline-for-Product-Hunt.svg)](https://github.com/arjunkomath/Feline-for-Product-Hunt/issues)
+[![GitHub stars](https://img.shields.io/github/stars/arjunkomath/Feline-for-Product-Hunt.svg)](https://github.com/arjunkomath/Feline-for-Product-Hunt/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/arjunkomath/Feline-for-Product-Hunt/master/LICENSE)
+[![Twitter](https://img.shields.io/twitter/url/https/github.com/arjunkomath/Feline-for-Product-Hunt.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=%5Bobject%20Object%5D)
 # Feline for Product Hunt
 ### A beautiful, Open Source unofficial [Android app](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
 
