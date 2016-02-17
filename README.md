@@ -16,7 +16,9 @@ Unfortunately we currently don't have write-access to the Product Hunt API. You 
 Feature Request, Bugs and Ideas can be added [here.](https://github.com/arjunkomath/Feline-for-Product-Hunt/issues)
 
 ## Thanks
-Product Hunt Team :)
+* [Product Hunt Team :)](https://www.producthunt.com/about)
+* [Facebook - React Native](https://facebook.github.io/react-native/)
+* [Microsoft - CodePush](http://microsoft.github.io/code-push/)
 
 ## About Author
 * Built with <3 by [Arjun Komath](https://twitter.com/arjunz) / [arjunkomath@gmail.com](mailto:arjunkomath@gmail.com)
