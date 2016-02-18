@@ -49,6 +49,12 @@ var Drawer = React.createClass({
         });
     },
 
+    collections: function() {
+        this.props.navigator.push({
+            index: 5,
+        });
+    },
+
     render: function() {
         return (
             <View style={{flex: 1, backgroundColor: '#fff'}}>
@@ -77,6 +83,12 @@ var Drawer = React.createClass({
 
             <Icon.Button name="book" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this._viewPosts('books')}>
             Books
+            </Icon.Button>
+
+            <Subheader text="COLLECTIONS" color="paperRed" />
+
+            <Icon.Button name="star-o" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.collections() }>
+            Featured
             </Icon.Button>
 
             <Divider style={{marginTop: 10}} />
