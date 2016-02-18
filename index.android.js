@@ -15,6 +15,7 @@ var {
 } = React;
 
 var PostsMain = require('./App/PostsMain');
+var CollectionsMain = require('./App/CollectionsMain');
 var SinglePost = require('./App/SinglePost');
 var ProductWebPage = require('./App/ProductWebPage');
 var DatePicker = require('./App/DatePicker');
@@ -74,6 +75,10 @@ var product_hunt = React.createClass({
                     navigator={navigator}
                     user={route.passProps.user}
                     date={route.passProps.date}
+                    />
+                } else if(route.index == 5) {
+                    return <CollectionsMain
+                    navigator={navigator}
                     />
                 }
             }
