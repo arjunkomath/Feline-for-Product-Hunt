@@ -211,20 +211,11 @@ var Collections = React.createClass({
         );
     },
 
-    _loadPost: function(post) {
-        this.props.navigator.push({
-            index: 1,
-            passProps: {post: post, token: this.state.access_token},
-        });
-    },
-
     renderCollections: function(collection) {
         return (
-            <TouchableHighlight onPress={() => {this._loadPost(post)}}>
             <View style={{flex:1}}>
             <CollectionWidget collection={collection} navigator={this.props.navigator} />
             </View>
-            </TouchableHighlight>
         );
     },
 });

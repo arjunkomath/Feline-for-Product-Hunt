@@ -31,7 +31,7 @@ var CollectionWidget = React.createClass({
     _loadWebView: function(post) {
         this.state.navigator.push({
             index: 2,
-            passProps: {url: this.state.post.redirect_url, title: this.state.post.name},
+            passProps: {url: this.state.collection.collection_url, title: this.state.collection.name},
         });
     },
 
@@ -64,7 +64,7 @@ var CollectionWidget = React.createClass({
                 height: 10,
                 marginLeft: 10,
             }}>
-            <Icon.Button name="chevron-up" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => console.log('1')}>
+            <Icon.Button name="user" color="#3e3e3e" backgroundColor="#ffffff" onPress={() => console.log('1')}>
             <Text style={{fontSize: 15}}>{this.state.collection.subscriber_count}</Text>
             </Icon.Button>
             </View>
@@ -95,7 +95,7 @@ var styles = StyleSheet.create({
         backgroundColor: '#3e3e3e'
     },
     headline: {
-        fontSize: 22,
+        fontSize: 18,
         marginTop: height/5,
         color: '#ffffff',
         marginLeft: 15,
