@@ -80,7 +80,7 @@ var Collections = React.createClass({
     },
 
     getPosts: function() {
-        var url = 'https://api.producthunt.com//v1/collections?search[featured]=true&per_page=25';
+        var url = 'https://api.producthunt.com/v1/collections?search[featured]=true&per_page=25';
 
         var requestObj = {
             headers: {
@@ -98,6 +98,48 @@ var Collections = React.createClass({
             if(responseData.collections.length > 0) {
                 this.setState({
                     dataSource: this.state.dataSource.cloneWithRows(responseData.collections),
+                    older: responseData.collections[24].id,
+                    loaded: true,
+                    network: true,
+                });
+            } else {
+                this.setState({
+                    loaded: true,
+                    network: true,
+                });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+            this.setState({
+                network: false
+            });
+        })
+        .done();
+    },
+
+    getMorePosts: function() {
+        var older = this.state.older;
+        console.log('Load older than '+older);
+        var url = 'https://api.producthunt.com/v1/collections?search[featured]=true&per_page=25&older='+older;
+
+        var requestObj = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.access_token,
+                'Host': 'api.producthunt.com'
+            }
+        };
+        fetch(url, requestObj)
+        .then((response) => response.json())
+        .then((responseData) => {
+            console.log(responseData.collections);
+            this.setState({ collections: responseData.collections });
+            if(responseData.collections.length > 0) {
+                this.setState({
+                    dataSource: this.state.dataSource.cloneWithRows(responseData.collections),
+                    older: responseData.collections[24].id,
                     loaded: true,
                     network: true,
                 });
@@ -161,6 +203,7 @@ var Collections = React.createClass({
             renderRow={this.renderCollections}
             style={styles.listView}
             renderHeader={this._renderHeader}
+            onEndReached={this.getMorePosts}
             />
 
             </DrawerLayoutAndroid>
