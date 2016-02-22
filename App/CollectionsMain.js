@@ -31,6 +31,7 @@ var Collections = React.createClass({
         return {
             loaded: false,
             network: true,
+            is_loading: true,
             access_token: undefined,
             dataSource: new ListView.DataSource({
                 rowHasChanged: (row1, row2) => row1 !== row2,
@@ -101,11 +102,13 @@ var Collections = React.createClass({
                     older: responseData.collections[24].id,
                     loaded: true,
                     network: true,
+                    is_loading: false,
                 });
             } else {
                 this.setState({
                     loaded: true,
                     network: true,
+                    is_loading: false,
                 });
             }
         })
@@ -119,7 +122,11 @@ var Collections = React.createClass({
     },
 
     getMorePosts: function() {
+        if(this.state.is_loading)
+            return true;
+        this.state.is_loading = true;
         var older = this.state.older;
+        var collections = this.state.collections;
         console.log('Load older than '+older);
         var url = 'https://api.producthunt.com/v1/collections?search[featured]=true&per_page=25&older='+older;
 
@@ -135,18 +142,23 @@ var Collections = React.createClass({
         .then((response) => response.json())
         .then((responseData) => {
             console.log(responseData.collections);
-            this.setState({ collections: responseData.collections });
+            responseData.collections.map( function(item){
+                collections.push(item);
+            });
+            this.setState({ collections: collections });
             if(responseData.collections.length > 0) {
                 this.setState({
-                    dataSource: this.state.dataSource.cloneWithRows(responseData.collections),
+                    dataSource: this.state.dataSource.cloneWithRows(collections),
                     older: responseData.collections[24].id,
                     loaded: true,
                     network: true,
+                    is_loading: false,
                 });
             } else {
                 this.setState({
                     loaded: true,
                     network: true,
+                    is_loading: false,
                 });
             }
         })
@@ -157,13 +169,6 @@ var Collections = React.createClass({
             });
         })
         .done();
-    },
-
-    _renderHeader: function() {
-        return (
-            <View style={{flex: 1, paddingTop: 3, paddingBottom: 3, backgroundColor: '#3F51B5'}}>
-            </View>
-        )
     },
 
     render: function() {
@@ -202,14 +207,13 @@ var Collections = React.createClass({
             dataSource={this.state.dataSource}
             renderRow={this.renderCollections}
             style={styles.listView}
-            renderHeader={this._renderHeader}
             onEndReached={this.getMorePosts}
             />
 
             </DrawerLayoutAndroid>
 
             </View>
-        );
+            );
     },
 
     renderLoadingView: function() {
@@ -219,7 +223,7 @@ var Collections = React.createClass({
             <ProgressBar styleAttr="Large" color="#3F51B5" />
             </Image>
             </View>
-        );
+            );
     },
 
     renderNetworkError: function() {
@@ -228,7 +232,7 @@ var Collections = React.createClass({
             <Icon name="exclamation-circle" size={50} color="#000000" />
             <Text>Unable to Connect to Server</Text>
             </View>
-        );
+            );
     },
 
     renderNoPosts: function() {
@@ -251,7 +255,7 @@ var Collections = React.createClass({
             </View>
             </DrawerLayoutAndroid>
             </View>
-        );
+            );
     },
 
     renderCollections: function(collection) {
@@ -259,7 +263,7 @@ var Collections = React.createClass({
             <View style={{flex:1}}>
             <CollectionWidget collection={collection} navigator={this.props.navigator} />
             </View>
-        );
+            );
     },
 });
 

@@ -95,7 +95,7 @@ var styles = StyleSheet.create({
         backgroundColor: '#3e3e3e'
     },
     headline: {
-        fontSize: 18,
+        fontSize: 17,
         marginTop: height/5,
         color: '#ffffff',
         marginLeft: 15,
