@@ -19,6 +19,11 @@ Unfortunately we currently don't have write-access to the Product Hunt API. You 
 ## Contribute
 Feature Request, Bugs and Ideas can be added [here.](https://github.com/arjunkomath/Feline-for-Product-Hunt/issues)
 
+Deploy the app via CodePush:
+```
+react-native bundle --platform android --entry-file index.android.js --bundle-output codepush.js --dev false
+code-push release feline codepush.js 1.0.0 -d Production --des "Description"
+```
 ## Thanks
 * [Product Hunt Team :)](https://www.producthunt.com/about)
 * [Facebook - React Native](https://facebook.github.io/react-native/)
