@@ -33,6 +33,6 @@ local.properties
 node_modules/
 npm-debug.log
 
-/Utils/keys.js
-/android/app/techulus.jks
-/android/app/build.gradle
+Utils/keys.js
+android/app/build.gradle
+android/app/techulus.jks
