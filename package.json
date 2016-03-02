@@ -6,9 +6,9 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "react-native": "^0.17.0",
+    "react-native": "^0.20.0",
     "react-native-android-statusbar": "^0.1.2",
-    "react-native-calendar-android": "0.0.2",
+    "react-native-calendar-android": "0.0.3",
     "react-native-code-push": "^1.6.0-beta",
     "react-native-google-analytics-bridge": "^0.2.0",
     "react-native-hockeyapp": "^0.1.4",
