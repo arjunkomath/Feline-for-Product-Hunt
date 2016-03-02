@@ -9,7 +9,7 @@
     "react-native": "^0.20.0",
     "react-native-android-statusbar": "^0.1.2",
     "react-native-calendar-android": "0.0.3",
-    "react-native-code-push": "^1.6.0-beta",
+    "react-native-code-push": "^1.7.3-beta",
     "react-native-google-analytics-bridge": "^0.2.0",
     "react-native-hockeyapp": "^0.1.4",
     "react-native-material-design": "^0.3.1",

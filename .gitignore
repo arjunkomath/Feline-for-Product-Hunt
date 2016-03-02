@@ -36,3 +36,4 @@ npm-debug.log
 Utils/keys.js
 android/app/build.gradle
 android/app/techulus.jks
+release
