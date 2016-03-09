@@ -1,5 +1,7 @@
 package com.product_hunt;
 
+import android.content.Intent;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -14,9 +16,11 @@ import com.microsoft.codepush.react.CodePush;
 import cl.json.RNSharePackage;
 import com.slowpath.hockeyapp.RNHockeyAppModule;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;
 
 public class MainActivity extends ReactActivity {
     private CodePush _codePush;
+    private ReactNativePushNotificationPackage mReactNativePushNotificationPackage;
 
     @Override
     protected String getJSBundleFile() {
@@ -48,6 +52,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected List<ReactPackage> getPackages() {
         this._codePush = new CodePush("bEo2X-mD6peAHxpQMA2zw-d8dIvfE1B2J_Xug", this, BuildConfig.DEBUG);
+        mReactNativePushNotificationPackage = new ReactNativePushNotificationPackage(this);
 
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
@@ -57,7 +62,16 @@ public class MainActivity extends ReactActivity {
                 new CalendarPackage(),
                 new GoogleAnalyticsBridgePackage("UA-4655726-8"),
                 new RNSharePackage(),
-                new RNHockeyAppPackage(this)
+                new RNHockeyAppPackage(this),
+              mReactNativePushNotificationPackage
       );
     }
+
+    @Override
+    protected void onNewIntent (Intent intent) {
+        super.onNewIntent(intent);
+
+        mReactNativePushNotificationPackage.newIntent(intent);
+    }
+
 }

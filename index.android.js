@@ -26,6 +26,60 @@ StatusBarAndroid.setHexColor('#303F9F');
 
 import CodePush from "react-native-code-push";
 var HockeyApp = require('react-native-hockeyapp');
+var PushNotification = require('react-native-push-notification');
+var keys = require('./Utils/keys.js');
+
+PushNotification.configure({
+
+    // (optional) Called when Token is generated (iOS and Android)
+    onRegister: function(token) {
+        var url = "http://d47f6ad0-e094-11e5-ab2c-c504a486d394.app.jexia.com";
+        var requestObj = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                key: keys.jexia_key,
+                secret: keys.jexia_secret
+            })
+        };
+        fetch(url, requestObj)
+        .then((response) => response.json())
+        .catch((err) => {
+            console.log(err);
+        })
+        .then((responseData) => {
+            var requestObj = {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + responseData.token
+                },
+                body: JSON.stringify(token)
+            };
+            fetch(url+'/gcm_subscribers', requestObj)
+            .then((response) => response.json())
+            .catch((err) => {
+                console.log(err);
+            })
+            .then((responseData) => {
+                console.log(responseData);
+            });
+        });
+    },
+
+    // (required) Called when a remote or local notification is opened or received
+    onNotification: function(notification) {
+        console.log( 'NOTIFICATION:', notification );
+    },
+
+    // ANDROID ONLY: (optional) GCM Sender ID.
+    senderID: "217633192466"
+
+});
 
 var product_hunt = React.createClass({
 
@@ -84,8 +138,8 @@ var product_hunt = React.createClass({
             }
         }
         />
-    );
-},
+        );
+    },
 
 });
 
