@@ -12,6 +12,7 @@ var {
     View,
     Navigator,
     BackAndroid,
+    AsyncStorage
 } = React;
 
 var PostsMain = require('./App/PostsMain');
@@ -31,44 +32,53 @@ var keys = require('./Utils/keys.js');
 
 PushNotification.configure({
 
-    // (optional) Called when Token is generated (iOS and Android)
-    onRegister: function(token) {
+    onRegister: async function(token) {
         var url = "http://d47f6ad0-e094-11e5-ab2c-c504a486d394.app.jexia.com";
-        var requestObj = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                key: keys.jexia_key,
-                secret: keys.jexia_secret
-            })
-        };
-        fetch(url, requestObj)
-        .then((response) => response.json())
-        .catch((err) => {
-            console.log(err);
-        })
-        .then((responseData) => {
+        var gcm_id = await AsyncStorage.getItem('GCM_ID');
+        if(!gcm_id || (gcm_id != token.token)) {
+            AsyncStorage.setItem('GCM_ID', token.token);
+
             var requestObj = {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + responseData.token
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(token)
+                body: JSON.stringify({
+                    key: keys.jexia_key,
+                    secret: keys.jexia_secret
+                })
             };
-            fetch(url+'/gcm_subscribers', requestObj)
+            fetch(url, requestObj)
             .then((response) => response.json())
             .catch((err) => {
                 console.log(err);
             })
             .then((responseData) => {
-                console.log(responseData);
+                var requestObj = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + responseData.token
+                    },
+                    body: JSON.stringify({
+                        token: token.token,
+                        os: 'android'
+                    })
+                };
+                fetch(url+'/gcm_subscribers', requestObj)
+                .then((response) => response.json())
+                .catch((err) => {
+                    console.log(err);
+                })
+                .then((responseData) => {
+                    console.log(responseData);
+                });
             });
-        });
+
+            console.log('Update Token');
+        }
     },
 
     // (required) Called when a remote or local notification is opened or received
