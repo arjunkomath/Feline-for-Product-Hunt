@@ -35,6 +35,12 @@ var Drawer = React.createClass({
         });
     },
 
+    _viewStarred: function() {
+        this.state.navigator.resetTo({
+            index: 6
+        });
+    },
+
     contact: function() {
         IntentAndroid.openURL('mailto:arjunkomath@gmail.com');
     },
@@ -85,6 +91,10 @@ var Drawer = React.createClass({
             Books
             </Icon.Button>
 
+            <Icon.Button name="star" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this._viewStarred()}>
+            Starred Posts
+            </Icon.Button>
+
             <Subheader text="COLLECTIONS" color="paperRed" />
 
             <Icon.Button name="star-o" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.collections() }>
@@ -107,7 +117,7 @@ var Drawer = React.createClass({
             Contact
             </Icon.Button>
 
-            <Text style={styles.version}>Version 1.1</Text>
+            <Text style={styles.version}>Version 1.2</Text>
 
             </ScrollView>
 

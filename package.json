@@ -18,6 +18,7 @@
     "react-native-responsive-image": "^1.1.1",
     "react-native-scrollable-tab-view": "^0.3.4",
     "react-native-share": "^1.0.4",
+    "react-native-store": "^0.4.1",
     "react-native-vector-icons": "^1.0.4"
   }
 }
