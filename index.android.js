@@ -30,6 +30,11 @@ import CodePush from "react-native-code-push";
 var HockeyApp = require('react-native-hockeyapp');
 var keys = require('./Utils/keys.js');
 
+import Store from 'react-native-store';
+const DB = {
+    'theme': Store.model('theme')
+}
+
 var product_hunt = React.createClass({
 
     componentWillMount() {
@@ -40,6 +45,19 @@ var product_hunt = React.createClass({
         CodePush.sync();
         HockeyApp.start();
         HockeyApp.checkForUpdate();
+        DB.theme.find().then((resp) => {
+            console.log(resp);
+            if(!resp) {
+                DB.theme.add({theme: 'dark'}).then(() => {
+                    console.log('Dark theme set!');
+                });
+            } else {
+                DB.theme.updateById({theme: 'light'}, 1).then(() => {
+                    console.log('Light theme set!');
+                });
+            }
+        });
+        
     },
 
     render: function() {

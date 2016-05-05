@@ -14,12 +14,26 @@ var {
 var Icon = require('react-native-vector-icons/FontAwesome');
 var UserWidget = require('../UserWidget');
 
+import Store from 'react-native-store';
+const DB = {
+    'theme': Store.model('theme')
+}
+
+var themes = require('../Themes/main');
+
 var InfoPage = React.createClass({
 
     getInitialState: function() {
         return {
             post: this.props.post
         };
+    },
+
+    componentDidMount: function() {
+        DB.theme.find().then( (resp) => {
+            var theme = themes[resp[0].theme ? resp[0].theme : 'light'];
+            this.setState({theme: theme});
+        });
     },
 
     renderVotes: function() {
@@ -61,7 +75,7 @@ var InfoPage = React.createClass({
             <ScrollView
             style={styles.container}>
 
-            <Text style={styles.head}>MAKERS</Text>
+            <Text style={this.headStyle()}>MAKERS</Text>
             <View style={styles.users}>
             {this.state.post.makers.map( (maker, i) =>
                 <TouchableOpacity key={i} onPress={() => this._viewProfile(maker)}>
@@ -70,24 +84,58 @@ var InfoPage = React.createClass({
              ) }
             </View>
 
-            <Text style={styles.head}>UPVOTES</Text>
+            <Text style={this.headStyle()}>UPVOTES</Text>
             <View style={styles.users}>
             {this.renderVotes()}
             </View>
 
-            <Text style={styles.head}>PLATFORMS</Text>
+            <Text style={this.headStyle()}>PLATFORMS</Text>
             <View style={styles.users}>
             {this.state.post.platforms.map( (platform, i) => <Text key={i} style={styles.tag}>{platform.name}</Text> ) }
             </View>
 
-            <Text style={styles.head}>CATEGORY</Text>
-            <Text style={styles.tag}>{this._translateCategory(this.state.post.category_id)}</Text>
+            <Text style={this.headStyle()}>CATEGORY</Text>
+            <Text style={this.tagStyle()}>{this._translateCategory(this.state.post.category_id)}</Text>
 
-            <Text style={styles.head}>HUNTED BY</Text>
+            <Text style={this.headStyle()}>HUNTED BY</Text>
             <UserWidget user={this.state.post.user} navigator={this.props.navigator} />
 
             </ScrollView>
         );
+    },
+
+    headStyle: function() {
+        if(this.state.theme){
+            return {
+                fontWeight: 'bold',
+                marginTop: 15,
+                marginBottom: 5,
+                marginLeft: 10,
+                color: this.state.theme.foreground
+            }
+        } else return {
+            fontWeight: 'bold',
+            marginTop: 15,
+            marginBottom: 5,
+            marginLeft: 10,
+            color: '#000000'
+        }
+    },
+
+    tagStyle: function() {
+        if(this.state.theme){
+            return {
+                marginTop: 5,
+                marginBottom: 5,
+                marginLeft: 10,
+                color: this.state.theme.foreground
+            }
+        } else return {
+            marginTop: 5,
+            marginBottom: 5,
+            marginLeft: 10,
+            color: '#3e3e3e'
+        }
     },
 
 });
@@ -95,19 +143,6 @@ var InfoPage = React.createClass({
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-    },
-    head: {
-        fontWeight: 'bold',
-        marginTop: 15,
-        marginBottom: 5,
-        marginLeft: 10,
-        color: '#000000'
-    },
-    tag: {
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
-        color: '#3e3e3e'
     },
     thumbnail: {
         height: 50,

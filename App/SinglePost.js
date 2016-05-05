@@ -30,8 +30,10 @@ var ScrollableTabView = require('react-native-scrollable-tab-view');
 
 import Store from 'react-native-store';
 const DB = {
-	'starred': Store.model('starred')
+	'starred': Store.model('starred'),
+	'theme': Store.model('theme')
 }
+var themes = require('./Themes/main');
 
 var SinglePost = React.createClass({
 
@@ -55,6 +57,10 @@ var SinglePost = React.createClass({
 		this.getStarredPosts();
 		BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
 		GoogleAnalytics.trackScreenView('Post Page');
+		DB.theme.find().then( (resp) => {
+			var theme = themes[resp[0].theme ? resp[0].theme : 'light'];
+			this.setState({theme: theme});
+		});
 	},
 
 	componentWillUnmount(){
@@ -183,7 +189,7 @@ var SinglePost = React.createClass({
 
 			{this.renderToolbar()}
 
-			<ScrollableTabView style={styles.tabs}>
+			<ScrollableTabView style={this.tabsStyle()}>
 			<DiscussionPage tabLabel="Discussion" comments={this.state.comments} navigator={this.props.navigator}/>
 			<MediaPage tabLabel="Media" media={this.state.media} />
 			<InfoPage tabLabel="Info" post={this.state.post} navigator={this.props.navigator} />
@@ -194,7 +200,7 @@ var SinglePost = React.createClass({
 
 	renderLoadingView: function() {
 		return (
-			<View style={styles.loading}>
+			<View style={this.loadingStyle()}>
 			<MaterialToolbar
 			title={this.state.post.name}
 			icon={'keyboard-backspace'}
@@ -212,22 +218,41 @@ var SinglePost = React.createClass({
 			);
 	},
 
+	loadingStyle: function() {
+		if(this.state.theme){
+			return {
+				flex: 1,
+				justifyContent: 'center',
+				alignItems: 'center',
+				backgroundColor: this.state.theme.background
+			}
+		} else return {
+			flex: 1,
+			justifyContent: 'center',
+			alignItems: 'center',
+			backgroundColor: '#ffffff',
+		}
+	},
+
+	tabsStyle: function() {
+		if(this.state.theme){
+			return {
+				flex: 1,
+				marginTop: 58,
+				backgroundColor: this.state.theme.background
+			}
+		} else return {
+			flex: 1,
+			marginTop: 58,
+			backgroundColor: '#3e3e3e',
+		}
+	}
+
 });
 
 var styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#ffffff',
-
-	},
-	tabs: {
-		flex: 1,
-		marginTop: 58,
-	},
-	loading: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
 		backgroundColor: '#ffffff',
 	}
 });

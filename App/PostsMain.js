@@ -117,7 +117,7 @@ var PostsMain = React.createClass({
         fetch(url, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData.posts);
+            // console.log(responseData.posts);
             this.setState({ posts: responseData.posts });
             if(responseData.posts.length > 0) {
                 this.setState({
