@@ -5,8 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
+  "peerDependencies": {
+    "react": "^0.14.5"
+  },
   "dependencies": {
-    "react-native": "^0.20.0",
+    "react-native": "^0.25.1",
     "react-native-android-statusbar": "^0.1.2",
     "react-native-calendar-android": "0.0.3",
     "react-native-code-push": "^1.7.3-beta",
@@ -14,7 +17,6 @@
     "react-native-hockeyapp": "^0.1.4",
     "react-native-material-design": "^0.3.1",
     "react-native-parsed-text": "0.0.10",
-    "react-native-push-notification": "^1.0.2",
     "react-native-responsive-image": "^1.1.1",
     "react-native-scrollable-tab-view": "^0.3.4",
     "react-native-share": "^1.0.4",

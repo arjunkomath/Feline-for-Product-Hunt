@@ -22,6 +22,3 @@ project(':react-native-share').projectDir = new File(rootProject.projectDir, '..
 
 include ':react-native-hockeyapp', ':app'
 project(':react-native-hockeyapp').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-hockeyapp/android')
-
-include ':react-native-push-notification'
-project(':react-native-push-notification').projectDir = file('../node_modules/react-native-push-notification/RNPushNotificationAndroid')
