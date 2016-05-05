@@ -15,6 +15,14 @@ var {
 } = React;
 
 var Icon = require('react-native-vector-icons/FontAwesome');
+
+import Store from 'react-native-store';
+const DB = {
+    'theme': Store.model('theme')
+}
+
+var themes = require('./Themes/main');
+
 var ChildCommentsWidget = React.createClass({
 
     getInitialState: function() {
@@ -40,6 +48,10 @@ var ChildCommentsWidget = React.createClass({
                 children: this.state.children.cloneWithRows(this.state.data)
             });
         }
+        DB.theme.find().then( (resp) => {
+            var theme = themes[resp[0].theme ? resp[0].theme : 'light'];
+            this.setState({theme: theme});
+        });
     },
 
     render: function() {
@@ -57,37 +69,60 @@ var ChildCommentsWidget = React.createClass({
 
     renderPosts: function(comment) {
         return (
-            <View style={styles.container}>
+            <View style={this.mainBag()}>
 
             <TouchableOpacity onPress={() => this._viewProfile(comment.user)}>
             <Image source={{uri: comment.user.image_url['50px'] }} style={styles.thumbnail} />
             </TouchableOpacity>
 
             <View style={{flex: 1 }}>
-            <Text style={styles.body}>{comment.body}</Text>
+            <Text style={this.bodyStyle()}>{comment.body}</Text>
             <Text style={styles.votes}><Icon name="chevron-up" size={10} color="#000000" /> {comment.votes} - {comment.user.name}</Text>
             </View>
             </View>
         );
     },
 
+    mainBag: function() {
+        if(this.state.theme){
+            return {
+                flex: 1,
+                flexDirection: 'row',
+                color: this.state.theme.foreground,
+                backgroundColor: this.state.theme.childBackground,
+                paddingTop: 10,
+                paddingBottom: 10,
+                paddingLeft: 10,
+                paddingRight: 10,
+            }
+        } else return {
+            flex: 1,
+            flexDirection: 'row',
+            backgroundColor: '#F5F5F5',
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 10,
+            paddingRight: 10,
+        }
+    },
+
+    bodyStyle: function() {
+        if(this.state.theme){
+            return {
+                fontSize: 14,
+                color: this.state.theme.foreground,
+                marginLeft: 20,
+            }
+        } else return {
+            fontSize: 14,
+            color: '#3e3e3e',
+            marginLeft: 20,
+        }
+    },
+
 });
 
 var styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#FAFAFA',
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingRight: 10,
-        paddingLeft: 50,
-    },
-    body: {
-        fontSize: 14,
-        color: '#3e3e3e',
-        marginLeft: 20,
-    },
     votes: {
         fontSize: 10,
         color: '#3e3e3e',
