@@ -14,12 +14,14 @@ var {
     ToolbarAndroid,
     TouchableHighlight,
     DrawerLayoutAndroid,
+    ToastAndroid
 } = React;
 
 var ProgressBar = require('ProgressBarAndroid');
 var keys = require('./../Utils/keys.js');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 var Icon = require('react-native-vector-icons/FontAwesome');
+import { Divider } from 'react-native-material-design';
 const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var PostWidget = require('./PostWidget');
@@ -71,8 +73,10 @@ var PostsMain = React.createClass({
         })
         .catch((err) => {
             console.log(err);
+            ToastAndroid.show('Please check your Internet connection', ToastAndroid.LONG);
             this.setState({
-                network: false
+                network: false,
+                loaded: true
             });
         })
         .done(() => {
@@ -134,8 +138,10 @@ var PostsMain = React.createClass({
         })
         .catch((err) => {
             console.log(err);
+            ToastAndroid.show('Please check your Internet connection', ToastAndroid.LONG);
             this.setState({
-                network: false
+                network: false,
+                loaded: true
             });
         })
         .done();
@@ -219,11 +225,16 @@ var PostsMain = React.createClass({
         );
     },
 
-    renderNetworkError: function() {
+    renderNetworkError: function () {
         return (
             <View style={styles.loading}>
-            <Icon name="exclamation-circle" size={50} color="#000000" />
-            <Text>Unable to Connect to Server</Text>
+                <Icon name="exclamation-circle" size={50} color="#ffffff"/>
+                <Text style={{color: '#ffffff'}}>Unable to Connect to Server</Text>
+                <Divider style={{marginTop: 10}}/>
+                <Icon.Button name="refresh" backgroundColor="#ffffff" color="#3e3e3e"
+                             onPress={() => this.getPosts()}>
+                   Retry
+                </Icon.Button>
             </View>
         );
     },
