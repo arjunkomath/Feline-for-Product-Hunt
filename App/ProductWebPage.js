@@ -113,7 +113,7 @@ var ProductWebPage = React.createClass({
 
 var styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     status: {
         fontSize: 12,
@@ -127,10 +127,10 @@ var styles = StyleSheet.create({
     },
     webView: {
         flex: 1,
-        backgroundColor: '#3e3e3e',
+        backgroundColor: '#ffffff',
         height: 400,
-        marginTop: 56,
-    },
+        marginTop: 56
+    }
 });
 
 module.exports = ProductWebPage;
