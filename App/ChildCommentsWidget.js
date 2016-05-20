@@ -5,16 +5,18 @@
 
 var React = require('react-native');
 var {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
     Image,
     TouchableOpacity,
     ListView,
+    IntentAndroid
 } = React;
 
 var Icon = require('react-native-vector-icons/FontAwesome');
+import ParsedText from 'react-native-parsed-text';
+
 var ChildCommentsWidget = React.createClass({
 
     getInitialState: function() {
@@ -42,6 +44,17 @@ var ChildCommentsWidget = React.createClass({
         }
     },
 
+    handleUrlPress: function(url) {
+        this.state.navigator.push({
+            index: 2,
+            passProps: {url: url, title: url},
+        });
+    },
+
+    handleEmailPress: function(email) {
+        IntentAndroid.openURL('mailto:'+email);
+    },
+
     render: function() {
         if(this.state.data.length == 0) {
             return (<View></View>);
@@ -64,7 +77,19 @@ var ChildCommentsWidget = React.createClass({
             </TouchableOpacity>
 
             <View style={{flex: 1 }}>
-            <Text style={styles.body}>{comment.body}</Text>
+
+                <ParsedText
+                    style={styles.body}
+                    parse={
+                [
+                    {type: 'url', style: styles.url, onPress: this.handleUrlPress},
+                    {type: 'email', style: styles.url, onPress: this.handleEmailPress},
+                ]
+            }
+                >
+                    {comment.body}
+                </ParsedText>
+
             <Text style={styles.votes}><Icon name="chevron-up" size={10} color="#000000" /> {comment.votes} - {comment.user.name}</Text>
             </View>
             </View>
@@ -82,6 +107,13 @@ var styles = StyleSheet.create({
         paddingBottom: 10,
         paddingRight: 10,
         paddingLeft: 50,
+    },
+    url: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        color: '#3F51B5',
+        marginLeft: 20,
+        textDecorationLine: 'underline',
     },
     body: {
         fontSize: 14,

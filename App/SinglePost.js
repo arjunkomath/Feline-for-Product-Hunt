@@ -68,7 +68,6 @@ var SinglePost = React.createClass({
 					and: [{ id: this.state.post.id }]
 				}
 			}).then( (resp) => {
-				console.log(resp);
 				if(resp)
 					this.setState({starred: true}); 
 				else
