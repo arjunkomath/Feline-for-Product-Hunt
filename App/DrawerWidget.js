@@ -20,12 +20,35 @@ import { Divider } from 'react-native-material-design';
 var HockeyApp = require('react-native-hockeyapp');
 var Share = require('react-native-share');
 
+const InAppBilling = require("react-native-billing");
+
 var Drawer = React.createClass({
 
     getInitialState: function() {
         return {
-            navigator: this.props.navigator
+            navigator: this.props.navigator,
+            showDonate: false
         };
+    },
+
+    componentDidMount() {
+        InAppBilling.open()
+            .then(() => {
+                InAppBilling.isSubscribed('buy_me_a_coffee').then(
+                    (data) => {
+                        console.log('Coffee? '+ data);
+                        if(!data) {
+                            this.setState({
+                                showDonate: true
+                            })
+                        }
+                        return InAppBilling.close()
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return InAppBilling.close()
+                    });
+            });
     },
 
     _viewPosts: function(category) {
@@ -53,6 +76,19 @@ var Drawer = React.createClass({
         },function(e) {
             console.log(e);
         });
+    },
+
+    donate: function () {
+        InAppBilling.open()
+            .then(() => InAppBilling.subscribe('buy_me_a_coffee'))
+            .then((details) => {
+                console.log("You purchased: ", details)
+                return InAppBilling.close()
+            })
+            .catch((err) => {
+                console.log(err);
+                return InAppBilling.close()
+            });
     },
 
     collections: function() {
@@ -102,6 +138,13 @@ var Drawer = React.createClass({
             </Icon.Button>
 
             <Divider style={{marginTop: 10}} />
+
+                { this.state.showDonate ? (
+                    <Icon.Button name="coffee" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.donate()}>
+                    Buy me a coffee
+                    </Icon.Button>
+                    ) : (<Text></Text>)
+                }
 
             <Icon.Button name="heart" backgroundColor="#ffffff" color="#3e3e3e" style={styles.buttons} onPress={() => this.share()}>
             Share Feline

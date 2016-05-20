@@ -43,3 +43,4 @@ Utils/keys.js
 android/app/build.gradle
 android/app/techulus.jks
 release
+android/app/src/main/res/values/strings.xml
