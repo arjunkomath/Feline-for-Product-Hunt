@@ -3,7 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "react-native run-android",
+    "install": "cd android && ./gradlew installRelease",
+    "build": "cd android && ./gradlew assembleRelease",
+    "push": "code-push release-react feline android --deploymentName Production --description 'push' --entryFile index.android.js"
   },
   "peerDependencies": {
     "react": "^0.14.5"
