@@ -5,7 +5,6 @@
 
 var React = require('react-native');
 var {
-    AppRegistry,
     StyleSheet,
     Text,
     View,
@@ -154,6 +153,13 @@ var PostsMain = React.createClass({
         });
     },
 
+    _startSearch: function() {
+        this.props.navigator.push({
+            index: 7,
+            passProps: { category: this.state.category}
+        });
+    },
+
     _renderHeader: function() {
         return (
             <View style={{flex: 1, paddingTop: 3, paddingBottom: 3, backgroundColor: '#3F51B5'}}>
@@ -196,8 +202,8 @@ var PostsMain = React.createClass({
                 onPress: () => {this._pickDate()}
             },
             {
-                icon: 'refresh',
-                onPress: () => {this.getPosts()}
+                icon: 'search',
+                onPress: () => {this._startSearch()}
             }]}
             overrides={{backgroundColor: '#3F51B5'}}
             />

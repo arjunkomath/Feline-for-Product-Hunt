@@ -19,7 +19,7 @@ var HEADER = '#3b5998';
 
 var TEXT_INPUT_REF = 'urlInput';
 var WEBVIEW_REF = 'webview';
-var DEFAULT_URL = 'https://m.facebook.com';
+var DEFAULT_URL = 'https://www.producthunt.com';
 
 var ProgressBar = require('ProgressBarAndroid');
 const GoogleAnalytics = require('react-native-google-analytics-bridge');

@@ -22,6 +22,7 @@ var ProductWebPage = require('./App/ProductWebPage');
 var DatePicker = require('./App/DatePicker');
 var ProfilePage = require('./App/Pages/ProfilePage');
 var Starred = require('./App/Starred');
+var SearchPage = require('./App/SearchPage');
 
 var StatusBarAndroid = require('react-native-android-statusbar');
 StatusBarAndroid.setHexColor('#303F9F');
@@ -85,6 +86,10 @@ var product_hunt = React.createClass({
                     />
                 } else if(route.index == 6) {
                     return <Starred
+                    navigator={navigator}
+                    />
+                } else if(route.index == 7) {
+                    return <SearchPage
                     navigator={navigator}
                     />
                 }
