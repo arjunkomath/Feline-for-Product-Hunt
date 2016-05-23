@@ -280,11 +280,11 @@ var PostsMain = React.createClass({
         });
     },
 
-    renderPosts: function(post) {
+    renderPosts: function(post, sId, id) {
         return (
             <TouchableHighlight onPress={() => {this._loadPost(post)}}>
             <View style={{flex:1}}>
-            <PostWidget post={post} navigator={this.props.navigator} />
+            <PostWidget post={post} navigator={this.props.navigator} delay={id * 25} />
             </View>
             </TouchableHighlight>
         );
@@ -294,6 +294,7 @@ var PostsMain = React.createClass({
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: '#3F51B5',
     },
     loading: {
         flex: 1,
@@ -302,7 +303,7 @@ var styles = StyleSheet.create({
         backgroundColor: '#3F51B5',
     },
     listView: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#3F51B5',
         marginTop: 56
     },
     date: {

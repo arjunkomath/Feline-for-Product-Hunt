@@ -5,7 +5,7 @@
 
 var React = require('react-native');
 var {
-    AppRegistry,
+    Animated,
     StyleSheet,
     Text,
     View,
@@ -25,8 +25,17 @@ var PostWidget = React.createClass({
     getInitialState: function() {
         return {
             post: this.props.post,
-            navigator: this.props.navigator
+            navigator: this.props.navigator,
+            fadeAnim: new Animated.Value(0)
         };
+    },
+
+    componentDidMount: function () {
+        Animated.timing(this.state.fadeAnim, {
+            toValue: 1,
+            delay: this.props.delay,
+            duration: 750
+        }).start();
     },
 
     _loadWebView: function(post) {
@@ -38,7 +47,7 @@ var PostWidget = React.createClass({
 
     render: function() {
         return (
-            <View style={styles.row}>
+            <Animated.View style={styles.row, {opacity: this.state.fadeAnim}}>
             <Image source={{uri: this.state.post.thumbnail.image_url}} resizeMode={Image.resizeMode.cover} style={{width: width, height: _height}}>
 
             <View style={
@@ -83,7 +92,7 @@ var PostWidget = React.createClass({
             </Image>
             </View>
             </Image>
-            </View>
+            </Animated.View>
         );
     },
 

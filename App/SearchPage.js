@@ -181,11 +181,11 @@ var Starred = React.createClass({
         );
     },
 
-    renderPosts: function (post) {
+    renderPosts: function (post, sId, id) {
         return (
             <TouchableHighlight onPress={() => {this._loadPost(post)}}>
                 <View style={{flex:1}}>
-                    <PostWidget post={post} navigator={this.props.navigator}/>
+                    <PostWidget post={post} navigator={this.props.navigator} delay={ id*25 }/>
                 </View>
             </TouchableHighlight>
         );
