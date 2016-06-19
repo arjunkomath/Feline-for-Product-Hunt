@@ -7,11 +7,9 @@
 var React = require('react-native');
 var {
     AppRegistry,
-    StyleSheet,
-    Text,
-    View,
     Navigator,
-    BackAndroid,
+    Linking,
+    ToastAndroid,
     AsyncStorage
 } = React;
 
@@ -38,9 +36,20 @@ var product_hunt = React.createClass({
     },
 
     componentDidMount: function() {
-        CodePush.sync();
+        // CodePush.sync();
         HockeyApp.start();
         HockeyApp.checkForUpdate();
+        var url = Linking.getInitialURL().then((url) => {
+            if (url) {
+                var parts = url.split('?');
+                if(parts[1]) {
+                    var code = parts[1].split('=')[1];
+                    AsyncStorage.setItem('access_code', code, () => {
+                        ToastAndroid.show('You have logged in!', ToastAndroid.SHORT);
+                    })
+                }
+            }
+        }).catch(err => console.error('An error occurred', err));
     },
 
     render: function() {

@@ -10,7 +10,7 @@ var {
     View,
     ListView,
     Image,
-    ToolbarAndroid,
+    AsyncStorage,
     TouchableHighlight,
     DrawerLayoutAndroid,
     ToastAndroid
@@ -42,46 +42,94 @@ var PostsMain = React.createClass({
     },
 
     componentDidMount: function() {
-        this.fetchData();
+        AsyncStorage.getItem('access_code', (err, code) => {
+            if(err) console.log(err);
+            if(!code) {
+                this.fetchData();
+            } else {
+                this.setState({
+                    code: code
+                }, this.fetchData);
+            }
+        });
         GoogleAnalytics.trackScreenView(this.state.category.toUpperCase() + ' Products Page');
     },
 
     fetchData: function() {
-        var requestObj = {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Origin': '',
-                'Host': 'api.producthunt.com'
-            },
-            body: JSON.stringify({
-                "client_id": keys.key,
-                "client_secret": keys.secret,
-                "grant_type": 'client_credentials'
-            })
-        };
-        fetch('https://api.producthunt.com/v1/oauth/token', requestObj)
-        .then((response) => response.json())
-        .then((responseData) => {
-            // console.log(responseData);
-            this.setState({
-                access_token: responseData.access_token,
-                network: true
-            });
-        })
-        .catch((err) => {
-            console.log(err);
-            ToastAndroid.show('Please check your Internet connection', ToastAndroid.LONG);
-            this.setState({
-                network: false,
-                loaded: true
-            });
-        })
-        .done(() => {
-            console.log('Got token!');
-            this.getPosts();
+
+        AsyncStorage.getItem('access_token', (err, token) => {
+            if(err) console.log(err);
+            if(!token) {
+
+                // fetch fresh access token
+                if(this.state.code) {
+                    var requestObj = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Origin': '',
+                            'Host': 'api.producthunt.com'
+                        },
+                        body: JSON.stringify({
+                            "client_id": keys.key,
+                            "client_secret": keys.secret,
+                            "redirect_uri": keys.redirect_uri,
+                            "code": this.state.code,
+                            "grant_type": 'authorization_code'
+                        })
+                    };
+                } else {
+                    var requestObj = {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'Origin': '',
+                            'Host': 'api.producthunt.com'
+                        },
+                        body: JSON.stringify({
+                            "client_id": keys.key,
+                            "client_secret": keys.secret,
+                            "grant_type": 'client_credentials'
+                        })
+                    };
+                }
+                fetch('https://api.producthunt.com/v1/oauth/token', requestObj)
+                    .then((response) => response.json())
+                    .then((responseData) => {
+                        console.log(responseData);
+                        AsyncStorage.setItem('access_token', responseData.access_token, () => {
+                            this.setState({
+                                access_token: responseData.access_token,
+                                network: true
+                            }, () => this.getPosts());
+                        })
+
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        ToastAndroid.show('Please check your Internet connection', ToastAndroid.LONG);
+                        this.setState({
+                            network: false,
+                            loaded: true
+                        });
+                    })
+                    .done(() => {
+                        console.log('Got token!');
+                    });
+
+            } else {
+                this.setState({
+                    access_token: token
+                }, () => {
+                    this.getPosts();
+                    this.getNotifications();
+                })
+            }
         });
+
+
     },
 
     getPosts: function() {
@@ -120,7 +168,7 @@ var PostsMain = React.createClass({
         fetch(url, requestObj)
         .then((response) => response.json())
         .then((responseData) => {
-            console.log(responseData.posts);
+            // console.log(responseData.posts);
             this.setState({ posts: responseData.posts });
             if(responseData.posts.length > 0) {
                 this.setState({
@@ -144,6 +192,30 @@ var PostsMain = React.createClass({
             });
         })
         .done();
+    },
+
+    getNotifications: function () {
+        console.log('fetch notifs');
+        var url = 'https://api.producthunt.com/v1/notifications?search[type]=all';
+        var requestObj = {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + this.state.access_token,
+                'Host': 'api.producthunt.com'
+            }
+        };
+        console.log(requestObj);
+        fetch(url, requestObj)
+            .then((response) => response.json())
+            .then((responseData) => {
+                console.log(responseData);
+            })
+            .catch((err) => {
+                console.log(err);
+                ToastAndroid.show('Please check your Internet connection', ToastAndroid.LONG);
+            })
+            .done();
     },
 
     _pickDate: function() {
