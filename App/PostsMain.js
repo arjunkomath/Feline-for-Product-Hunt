@@ -25,6 +25,8 @@ const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var PostWidget = require('./PostWidget');
 var DrawerWidget = require('./DrawerWidget');
+import { AdMobBanner } from 'react-native-admob'
+const InAppBilling = require("react-native-billing");
 
 var PostsMain = React.createClass({
 
@@ -37,13 +39,32 @@ var PostsMain = React.createClass({
                 rowHasChanged: (row1, row2) => row1 !== row2,
             }),
             pass_date: this.props.date,
-            category: this.props.category ? this.props.category : 'tech'
+            category: this.props.category ? this.props.category : 'tech',
+            showAds: false
         };
     },
 
     componentDidMount: function() {
         this.fetchData();
         GoogleAnalytics.trackScreenView(this.state.category.toUpperCase() + ' Products Page');
+
+        InAppBilling.open()
+            .then(() => {
+                InAppBilling.isSubscribed('buy_me_a_coffee').then(
+                    (data) => {
+                        console.log('Coffee? '+ data);
+                        if(!data) {
+                            this.setState({
+                                showAds: true
+                            })
+                        }
+                        return InAppBilling.close()
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        return InAppBilling.close()
+                    });
+            });
     },
 
     fetchData: function() {
@@ -281,6 +302,23 @@ var PostsMain = React.createClass({
     },
 
     renderPosts: function(post, sId, id) {
+        if(id % 4 == 0 && this.state.showAds) {
+            return (
+                <View style={{flex:1, alignItems: 'center'}}>
+                    <TouchableHighlight onPress={() => {this._loadPost(post)}}>
+                        <View style={{flex:1}}>
+                            <PostWidget post={post} navigator={this.props.navigator} delay={id * 25}/>
+                        </View>
+                    </TouchableHighlight>
+                    <AdMobBanner
+                        style={{marginTop: 5, marginBottom: 5}}
+                        bannerSize="banner"
+                        adUnitID="ca-app-pub-1104404799908393/2597282422"
+                        testDeviveID="EMULATOR"
+                        didFailToReceiveAdWithError={ (err) => console.log(err) }/>
+                </View>
+            );
+        }
         return (
             <TouchableHighlight onPress={() => {this._loadPost(post)}}>
             <View style={{flex:1}}>

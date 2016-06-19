@@ -15,6 +15,7 @@ import cl.json.RNSharePackage;
 import com.slowpath.hockeyapp.RNHockeyAppModule;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
 import com.idehub.Billing.InAppBillingBridgePackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 
 public class MainActivity extends ReactActivity {
     private CodePush _codePush;
@@ -58,7 +59,8 @@ public class MainActivity extends ReactActivity {
                 new GoogleAnalyticsBridgePackage("UA-4655726-8"),
                 new RNSharePackage(),
                 new RNHockeyAppPackage(this),
-                new InAppBillingBridgePackage(this)
+                new InAppBillingBridgePackage(this),
+                new RNAdMobPackage()
         );
     }
 }
