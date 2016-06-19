@@ -160,7 +160,7 @@ var Drawer = React.createClass({
             Contact
             </Icon.Button>
 
-            <Text style={styles.version}>Version 1.2.1</Text>
+            <Text style={styles.version}>Version 1.3</Text>
 
             </ScrollView>
 
