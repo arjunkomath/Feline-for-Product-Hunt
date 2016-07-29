@@ -25,7 +25,7 @@ var Starred = require('./App/Starred');
 var SearchPage = require('./App/SearchPage');
 
 var StatusBarAndroid = require('react-native-android-statusbar');
-StatusBarAndroid.setHexColor('#303F9F');
+StatusBarAndroid.setHexColor('#3F51B5');
 
 import CodePush from "react-native-code-push";
 var HockeyApp = require('react-native-hockeyapp');
