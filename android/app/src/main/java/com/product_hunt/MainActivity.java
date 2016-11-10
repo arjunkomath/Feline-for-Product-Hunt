@@ -1,24 +1,41 @@
 package com.product_hunt;
 
+import android.os.Bundle;
+
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
+
 import com.oblador.vectoricons.VectorIconsPackage;
+
 import me.neo.react.StatusBarPackage;
+
 import com.chymtt.reactnativecalendar.CalendarPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.microsoft.codepush.react.CodePush;
+
 import cl.json.RNSharePackage;
+
 import com.slowpath.hockeyapp.RNHockeyAppModule;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
 import com.idehub.Billing.InAppBillingBridgePackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
+import com.smixx.fabric.FabricPackage;
+import com.crashlytics.android.Crashlytics;
+
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends ReactActivity {
     private CodePush _codePush;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
+    }
 
     @Override
     protected String getJSBundleFile() {
@@ -51,7 +68,7 @@ public class MainActivity extends ReactActivity {
     protected List<ReactPackage> getPackages() {
         this._codePush = new CodePush("bEo2X-mD6peAHxpQMA2zw-d8dIvfE1B2J_Xug", this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
+                new MainReactPackage(),
                 this._codePush.getReactPackage(),
                 new VectorIconsPackage(),
                 new StatusBarPackage(this),
@@ -60,6 +77,7 @@ public class MainActivity extends ReactActivity {
                 new RNSharePackage(),
                 new RNHockeyAppPackage(this),
                 new InAppBillingBridgePackage(this),
+                new FabricPackage(),
                 new RNAdMobPackage()
         );
     }

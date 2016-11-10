@@ -4,6 +4,7 @@
     <permission
         android:name="${applicationId}.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
+
     <uses-permission android:name="${applicationId}.permission.C2D_MESSAGE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -11,30 +12,34 @@
     <uses-permission android:name="com.android.vending.BILLING" />
 
     <application
-      android:allowBackup="true"
-      android:label="@string/app_name"
-      android:icon="@mipmap/ic_launcher"
-      android:theme="@style/AppTheme">
-      <activity
-        android:name=".MainActivity"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-          android:screenOrientation="portrait">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
-          <!-- note that the leading "/" is required for pathPrefix-->
-          <!-- Accepts URIs that begin with "example://gizmos” -->
-          <data android:scheme="example"
-              android:host="gizmos" />
-          
-      </activity>
-      <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+            <!-- note that the leading "/" is required for pathPrefix-->
+            <!-- Accepts URIs that begin with "example://gizmos” -->
+            <data
+                android:host="gizmos"
+                android:scheme="example" />
+
+        </activity>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
         <activity android:name="net.hockeyapp.android.UpdateActivity" />
         <activity android:name="net.hockeyapp.android.FeedbackActivity" />
 
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="e6a2d775b975bef8d524aebf647eecd2102d7710" />
     </application>
 
 </manifest>
