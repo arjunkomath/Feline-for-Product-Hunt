@@ -22,6 +22,10 @@ var AlgoliaSearchHelper = require('algoliasearch-helper');
 var PostWidget = require('./PostWidget');
 var keys = require('./../Utils/keys.js');
 
+var Fabric = require('react-native-fabric');
+var { Answers } = Fabric;
+
+
 var Starred = React.createClass({
 
     getInitialState: function () {
@@ -93,6 +97,7 @@ var Starred = React.createClass({
             posts: [],
             searching: true
         });
+        Answers.logSearch(this.state.keyword);
         this.helper.setQuery(this.state.keyword).search();
     },
 
