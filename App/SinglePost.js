@@ -102,7 +102,6 @@ var SinglePost = React.createClass({
                 });
             })
             .done(() => {
-                Answers.logContentView(this.state.post.name, this.state.post.category_id, this.state.post.id);
             });
     },
 

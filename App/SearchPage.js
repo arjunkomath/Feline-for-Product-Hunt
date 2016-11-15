@@ -97,7 +97,6 @@ var Starred = React.createClass({
             posts: [],
             searching: true
         });
-        Answers.logSearch(this.state.keyword);
         this.helper.setQuery(this.state.keyword).search();
     },
 
