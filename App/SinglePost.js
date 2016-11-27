@@ -1,6 +1,6 @@
 /**
- * Product Page
- */
+* Product Page
+*/
 'use strict';
 
 var React = require('react-native');
@@ -27,6 +27,7 @@ const GoogleAnalytics = require('react-native-google-analytics-bridge');
 var Share = require('react-native-share');
 
 var ScrollableTabView = require('react-native-scrollable-tab-view');
+import ActionButton from 'react-native-action-button';
 
 var Fabric = require('react-native-fabric');
 var {Answers} = Fabric;
@@ -72,9 +73,9 @@ var SinglePost = React.createClass({
                 }
             }).then((resp) => {
                 if (resp)
-                    this.setState({starred: true});
+                this.setState({starred: true});
                 else
-                    this.setState({starred: false})
+                this.setState({starred: false})
             });
         } catch (err) {
             console.log(err);
@@ -91,18 +92,18 @@ var SinglePost = React.createClass({
             }
         };
         fetch('https://api.producthunt.com/v1/posts/' + this.state.post.id, requestObj)
-            .then((response) => response.json())
-            .then((responseData) => {
-                // console.log(responseData);
-                this.setState({
-                    comments: responseData.post.comments,
-                    media: responseData.post.media,
-                    post: responseData.post,
-                    loaded: true,
-                });
-            })
-            .done(() => {
+        .then((response) => response.json())
+        .then((responseData) => {
+            // console.log(responseData);
+            this.setState({
+                comments: responseData.post.comments,
+                media: responseData.post.media,
+                post: responseData.post,
+                loaded: true,
             });
+        })
+        .done(() => {
+        });
     },
 
     share: function () {
@@ -153,84 +154,87 @@ var SinglePost = React.createClass({
                         onPress: () => {
                             this.share()
                         }
-                    }, {
-                        icon: 'star',
-                        onPress: () => {
-                            this.star()
-                        }
                     }
-                    ]}
-                    overrides={{backgroundColor: '#3F51B5'}}
+                ]}
+                overrides={{backgroundColor: '#3F51B5'}}
                 />
-            )
-        } else {
-            return (
-                <MaterialToolbar
-                    title={this.state.post.name}
-                    icon={'keyboard-backspace'}
-                    onIconPress={() => {
-                        this.props.navigator.pop()
-                    } }
-                    actions={[{
-                        icon: 'share',
-                        onPress: () => {
-                            this.share()
-                        }
-                    }, {
-                        icon: 'star-border',
-                        onPress: () => {
-                            this.star()
-                        }
+        )
+    } else {
+        return (
+            <MaterialToolbar
+                title={this.state.post.name}
+                icon={'keyboard-backspace'}
+                onIconPress={() => {
+                    this.props.navigator.pop()
+                } }
+                actions={[{
+                    icon: 'share',
+                    onPress: () => {
+                        this.share()
                     }
-                    ]}
-                    overrides={{backgroundColor: '#3F51B5'}}
+                }
+            ]}
+            overrides={{backgroundColor: '#3F51B5'}}
+            />
+    )
+}
+},
+
+render: function () {
+    if (!this.state.loaded) {
+        return this.renderLoadingView();
+    }
+    return (
+        <View style={styles.container}>
+
+            {this.renderToolbar()}
+
+            <ScrollableTabView style={styles.tabs}>
+                <DiscussionPage tabLabel="Discussion" comments={this.state.comments}
+                    navigator={this.props.navigator}/>
+                <MediaPage tabLabel="Media" media={this.state.media}/>
+                <InfoPage tabLabel="Info" post={this.state.post} navigator={this.props.navigator}/>
+            </ScrollableTabView>
+
+            { this.state.starred ?
+                (<ActionButton
+                    buttonColor="rgba(255,64,129,1)"
+                    icon={<Icon name="star" style={styles.actionButtonIcon} />}
+                    onPress={() => { this.star() }} />)
+                :
+                (<ActionButton
+                    buttonColor="rgba(255,64,129,1)"
+                    icon={<Icon name="star-o" style={styles.actionButtonIcon} />}
+                    onPress={() => { this.star() }} />)
+            }
+
+        </View>
+    );
+},
+
+renderLoadingView: function () {
+    return (
+        <View style={styles.loading}>
+            <MaterialToolbar
+                title={this.state.post.name}
+                icon={'keyboard-backspace'}
+                onIconPress={() => {
+                    this.props.navigator.pop()
+                } }
+                actions={[{
+                    icon: 'share',
+                    onPress: () => {
+                        this.share()
+                    }
+                }]}
+                overrides={{backgroundColor: '#3F51B5'}}
                 />
-            )
-        }
-    },
-
-    render: function () {
-        if (!this.state.loaded) {
-            return this.renderLoadingView();
-        }
-        return (
-            <View style={styles.container}>
-
-                {this.renderToolbar()}
-
-                <ScrollableTabView style={styles.tabs}>
-                    <DiscussionPage tabLabel="Discussion" comments={this.state.comments}
-                                    navigator={this.props.navigator}/>
-                    <MediaPage tabLabel="Media" media={this.state.media}/>
-                    <InfoPage tabLabel="Info" post={this.state.post} navigator={this.props.navigator}/>
-                </ScrollableTabView>
-            </View>
-        );
-    },
-
-    renderLoadingView: function () {
-        return (
-            <View style={styles.loading}>
-                <MaterialToolbar
-                    title={this.state.post.name}
-                    icon={'keyboard-backspace'}
-                    onIconPress={() => {
-                        this.props.navigator.pop()
-                    } }
-                    actions={[{
-                        icon: 'share',
-                        onPress: () => {
-                            this.share()
-                        }
-                    }]}
-                    overrides={{backgroundColor: '#3F51B5'}}
-                />
-                <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
-                    <ProgressBar styleAttr="Large" color="#3F51B5"/>
-                </Image>
-            </View>
-        );
-    },
+            <Image source={require('../Images/icon.png')} style={{height: 75, width: 75}}>
+                <ProgressBar styleAttr="Large" color="#3F51B5"/>
+            </Image>
+        </View>
+    );
+},
 
 });
 
@@ -249,6 +253,11 @@ var styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#ffffff',
+    },
+    actionButtonIcon: {
+        fontSize: 20,
+        height: 22,
+        color: 'white',
     }
 });
 
