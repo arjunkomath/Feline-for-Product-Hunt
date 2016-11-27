@@ -25,7 +25,7 @@ Feature Request, Bugs and Ideas can be added [here.](https://github.com/arjunkom
 * [Microsoft - CodePush](http://microsoft.github.io/code-push/)
 
 ## :heart_eyes: About Author
-* Built with <3 by [Arjun Komath](https://twitter.com/arjunz) / [arjunkomath@gmail.com](mailto:arjunkomath@gmail.com)
+* Built with <3 by [Arjun](https://twitter.com/arjunz) / [arjunkomath@gmail.com](mailto:arjunkomath@gmail.com)
 
 ## :copyright: License
 - See the [LICENSE](https://github.com/arjunkomath/Feline-for-Product-Hunt/blob/master/LICENSE) file for license rights and limitations (MIT).
