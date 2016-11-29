@@ -23,8 +23,7 @@ var PostWidget = require('./PostWidget');
 var keys = require('./../Utils/keys.js');
 
 var Fabric = require('react-native-fabric');
-var { Answers } = Fabric;
-
+var Mixpanel = require('react-native-mixpanel');
 
 var Starred = React.createClass({
 
@@ -41,6 +40,7 @@ var Starred = React.createClass({
     },
 
     componentWillMount: function () {
+        Mixpanel.track('View Search Page');
         var helper = this.helper = AlgoliaSearchHelper(algoliasearch, 'Post_production');
         helper.on('result', (res) => {
             this.setState({
@@ -98,6 +98,9 @@ var Starred = React.createClass({
             searching: true
         });
         this.helper.setQuery(this.state.keyword).search();
+        Mixpanel.trackWithProperties('Search', {
+            keyword: this.state.keyword
+        });
     },
 
     goBack: function () {

@@ -1,5 +1,5 @@
 {
-  "name": "Feline for Product Hunt",
+  "name": "Feline-Product-Hunt",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -25,6 +25,7 @@
     "react-native-google-analytics-bridge": "^0.2.0",
     "react-native-hockeyapp": "^0.1.4",
     "react-native-material-design": "^0.3.1",
+    "react-native-mixpanel": "0.0.11",
     "react-native-parsed-text": "0.0.10",
     "react-native-responsive-image": "^1.1.1",
     "react-native-scrollable-tab-view": "^0.3.4",

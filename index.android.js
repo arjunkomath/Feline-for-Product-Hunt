@@ -30,11 +30,13 @@ StatusBarAndroid.setHexColor('#3F51B5');
 import CodePush from "react-native-code-push";
 var HockeyApp = require('react-native-hockeyapp');
 var keys = require('./Utils/keys.js');
+var Mixpanel = require('react-native-mixpanel');
 
 var product_hunt = React.createClass({
 
     componentWillMount() {
         HockeyApp.configure('1d4c277608044d458352f56171c4bdd5', true);
+        Mixpanel.sharedInstanceWithToken('62174ff235b4bfc637469dc856cfe50b');
     },
 
     componentDidMount: function() {

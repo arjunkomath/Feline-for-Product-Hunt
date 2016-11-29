@@ -31,3 +31,6 @@ project(':RNAdMob').projectDir = new File(rootProject.projectDir, '../node_modul
 
 include ':react-native-fabric'
 project(':react-native-fabric').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fabric/android')
+
+include ':RNMixpanel', ':app'
+project(':RNMixpanel').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-mixpanel/android')

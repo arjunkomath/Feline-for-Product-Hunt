@@ -27,6 +27,7 @@ import com.smixx.fabric.FabricPackage;
 import com.crashlytics.android.Crashlytics;
 
 import io.fabric.sdk.android.Fabric;
+import com.kevinejohn.RNMixpanel.*;
 
 public class MainActivity extends ReactActivity {
     private CodePush _codePush;
@@ -78,6 +79,7 @@ public class MainActivity extends ReactActivity {
                 new RNHockeyAppPackage(this),
                 new InAppBillingBridgePackage(this),
                 new FabricPackage(),
+                new RNMixpanel(),
                 new RNAdMobPackage()
         );
     }

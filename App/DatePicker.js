@@ -16,6 +16,7 @@ var {
 var Calendar = require('react-native-calendar-android');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 const GoogleAnalytics = require('react-native-google-analytics-bridge');
+var Mixpanel = require('react-native-mixpanel');
 
 var DatePicker = React.createClass({
 
@@ -34,6 +35,7 @@ var DatePicker = React.createClass({
     componentDidMount: function() {
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
         GoogleAnalytics.trackScreenView('Date Picker');
+        Mixpanel.track('Date Picker');
     },
 
     componentWillUnmount(){
@@ -60,6 +62,9 @@ var DatePicker = React.createClass({
             selectionColor="#3F51B5"
             selectedDates={[ this.state.date ]}
             onDateChange={(data) => {
+                Mixpanel.trackWithProperties('Pick Date', {
+                    date: data.date
+                });
                 this.state.navigator.resetTo({
                     index: 0,
                     pass_date: data.date,

@@ -24,6 +24,7 @@ const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var PostWidget = require('./PostWidget');
 var DrawerWidget = require('./DrawerWidget');
+var Mixpanel = require('react-native-mixpanel');
 
 import Store from 'react-native-store';
 const DB = {
@@ -46,6 +47,7 @@ var Starred = React.createClass({
 	componentDidMount: function() {
 		this.fetchData();
 		GoogleAnalytics.trackScreenView('Starred Page');
+        Mixpanel.track("Starred Page");
 	},
 
 	fetchData: function() {
@@ -93,7 +95,7 @@ var Starred = React.createClass({
 						posts: resp,
 						loaded: true,
 						dataSource: this.state.dataSource.cloneWithRows(resp)
-					}); 
+					});
 				} else {
 					this.setState({
 						loaded: true

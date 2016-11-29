@@ -19,6 +19,7 @@ var Icon = require('react-native-vector-icons/FontAwesome');
 import { Divider } from 'react-native-material-design';
 var HockeyApp = require('react-native-hockeyapp');
 var Share = require('react-native-share');
+var Mixpanel = require('react-native-mixpanel');
 
 const InAppBilling = require("react-native-billing");
 
@@ -65,10 +66,12 @@ var Drawer = React.createClass({
     },
 
     contact: function() {
+        Mixpanel.track("Contact");
         IntentAndroid.openURL('mailto:arjunkomath@gmail.com');
     },
 
     share: function() {
+        Mixpanel.track("Share Feline");
         Share.open({
             share_text: 'Feline for Product Hunt',
             share_URL: 'https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt',
@@ -79,13 +82,16 @@ var Drawer = React.createClass({
     },
 
     donate: function () {
+        Mixpanel.track("Choose Donate");
         InAppBilling.open()
             .then(() => InAppBilling.subscribe('buy_me_a_coffee'))
             .then((details) => {
                 console.log("You purchased: ", details)
+                Mixpanel.track("Donate Success");
                 return InAppBilling.close()
             })
             .catch((err) => {
+                Mixpanel.track("Donate Failure");
                 console.log(err);
                 return InAppBilling.close()
             });
@@ -104,7 +110,7 @@ var Drawer = React.createClass({
             automaticallyAdjustContentInsets={false}
             scrollEventThrottle={200}
             style={styles.container}>
-            
+
             <Image source={require('../Images/nav.jpg')} >
             <Image source={require('../Images/icon.png')} style={{width: 75, height: 75, marginLeft: 215, marginTop: 10}} />
             </Image>

@@ -28,6 +28,8 @@ var DrawerWidget = require('./DrawerWidget');
 import { AdMobBanner } from 'react-native-admob'
 const InAppBilling = require("react-native-billing");
 
+var Mixpanel = require('react-native-mixpanel');
+
 var PostsMain = React.createClass({
 
     getInitialState: function() {
@@ -129,6 +131,10 @@ var PostsMain = React.createClass({
 
             var url = 'https://api.producthunt.com/v1/categories/'+this.state.category+'/posts?days_ago=0';
         }
+
+        Mixpanel.trackWithProperties('View Posts Page', {
+            category: this.state.category
+        });
 
         var requestObj = {
             headers: {

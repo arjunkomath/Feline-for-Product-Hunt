@@ -24,6 +24,7 @@ const GoogleAnalytics = require('react-native-google-analytics-bridge');
 
 var CollectionWidget = require('./CollectionWidget');
 var DrawerWidget = require('./DrawerWidget');
+var Mixpanel = require('react-native-mixpanel');
 
 var Collections = React.createClass({
 
@@ -41,7 +42,8 @@ var Collections = React.createClass({
 
     componentDidMount: function() {
         this.fetchData();
-        GoogleAnalytics.trackScreenView(' Collections Page');
+        GoogleAnalytics.trackScreenView('Collections Page');
+        Mixpanel.track("Collections Page");
     },
 
     fetchData: function() {

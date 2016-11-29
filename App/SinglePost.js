@@ -30,7 +30,7 @@ var ScrollableTabView = require('react-native-scrollable-tab-view');
 import ActionButton from 'react-native-action-button';
 
 var Fabric = require('react-native-fabric');
-var {Answers} = Fabric;
+var Mixpanel = require('react-native-mixpanel');
 
 import Store from 'react-native-store';
 const DB = {
@@ -59,6 +59,9 @@ var SinglePost = React.createClass({
         this.getStarredPosts();
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
         GoogleAnalytics.trackScreenView('Post Page');
+        Mixpanel.trackWithProperties('View Post', {
+            post_title: this.props.post.name
+        });
     },
 
     componentWillUnmount(){
@@ -107,6 +110,10 @@ var SinglePost = React.createClass({
     },
 
     share: function () {
+        Mixpanel.trackWithProperties('Share Post', {
+            share_text: this.state.post.name,
+            share_URL: this.state.post.redirect_url
+        });
         Share.open({
             share_text: this.state.post.name,
             share_URL: this.state.post.redirect_url,
@@ -125,6 +132,7 @@ var SinglePost = React.createClass({
                     }
                 }).then(() => {
                     this.setState({starred: false});
+                    Mixpanel.track("Remove Star");
                     ToastAndroid.show('Post has been removed from starred', ToastAndroid.LONG);
                 });
             } else {
@@ -132,6 +140,7 @@ var SinglePost = React.createClass({
                 delete save['_id'];
                 DB.starred.add(save).then(() => {
                     this.setState({starred: true})
+                    Mixpanel.track("Star Post");
                     ToastAndroid.show('Post has been starred', ToastAndroid.LONG);
                 });
             }

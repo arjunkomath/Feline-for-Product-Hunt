@@ -25,6 +25,7 @@ var ProgressBar = require('ProgressBarAndroid');
 const GoogleAnalytics = require('react-native-google-analytics-bridge');
 import { Toolbar as MaterialToolbar } from 'react-native-material-design';
 var Share = require('react-native-share');
+var Mixpanel = require('react-native-mixpanel');
 
 var ProductWebPage = React.createClass({
 
@@ -47,6 +48,10 @@ var ProductWebPage = React.createClass({
     componentDidMount: function() {
         BackAndroid.addEventListener('hardwareBackPress', this.navigatorPop);
         GoogleAnalytics.trackScreenView('WebView');
+        Mixpanel.trackWithProperties('WebView', {
+            url: this.props.url,
+            title: this.props.title
+        });
     },
 
     componentWillUnmount(){
