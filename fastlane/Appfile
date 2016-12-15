@@ -1,0 +1,2 @@
+json_key_file "android/app/fastlane.json"
+package_name "com.arjunkomath.product_hunt"

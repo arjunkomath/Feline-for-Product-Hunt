@@ -45,3 +45,8 @@ android/app/techulus.jks
 release
 android/app/src/main/res/values/strings.xml
 android/app/src/main/java/com/product_hunt/Constants.java
+
+# Build Tools
+android/app/fastlane.json
+fastlane/report.xml
+fastlane/README.md
