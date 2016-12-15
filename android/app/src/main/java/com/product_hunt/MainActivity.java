@@ -8,24 +8,20 @@ import com.facebook.react.shell.MainReactPackage;
 
 import java.util.Arrays;
 import java.util.List;
+import static com.product_hunt.Constants.*;
 
 import com.oblador.vectoricons.VectorIconsPackage;
-
 import me.neo.react.StatusBarPackage;
-
 import com.chymtt.reactnativecalendar.CalendarPackage;
 import com.idehub.GoogleAnalyticsBridge.GoogleAnalyticsBridgePackage;
 import com.microsoft.codepush.react.CodePush;
-
 import cl.json.RNSharePackage;
-
 import com.slowpath.hockeyapp.RNHockeyAppModule;
 import com.slowpath.hockeyapp.RNHockeyAppPackage;
 import com.idehub.Billing.InAppBillingBridgePackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
 import com.smixx.fabric.FabricPackage;
 import com.crashlytics.android.Crashlytics;
-
 import io.fabric.sdk.android.Fabric;
 import com.kevinejohn.RNMixpanel.*;
 
@@ -67,14 +63,14 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected List<ReactPackage> getPackages() {
-        this._codePush = new CodePush("bEo2X-mD6peAHxpQMA2zw-d8dIvfE1B2J_Xug", this, BuildConfig.DEBUG);
+        this._codePush = new CodePush(CODE_PUSH_KEY, this, BuildConfig.DEBUG);
         return Arrays.<ReactPackage>asList(
                 new MainReactPackage(),
                 this._codePush.getReactPackage(),
                 new VectorIconsPackage(),
                 new StatusBarPackage(this),
                 new CalendarPackage(),
-                new GoogleAnalyticsBridgePackage("UA-4655726-8"),
+                new GoogleAnalyticsBridgePackage(GA_ID),
                 new RNSharePackage(),
                 new RNHockeyAppPackage(this),
                 new InAppBillingBridgePackage(this),
