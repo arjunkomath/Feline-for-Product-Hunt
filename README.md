@@ -20,6 +20,7 @@ Feature Request, Bugs and Ideas can be added [here.](https://github.com/arjunkom
 * [Product Hunt Team :)](https://www.producthunt.com/about)
 * [Facebook - React Native](https://facebook.github.io/react-native/)
 * [Microsoft - CodePush](http://microsoft.github.io/code-push/)
+* [JetBrains - WebStorm IDE](https://www.jetbrains.com/)
 
 ## :heart_eyes: About Author
 * Built with <3 by [Arjun](https://twitter.com/arjunz) / [arjunkomath@gmail.com](mailto:arjunkomath@gmail.com)
