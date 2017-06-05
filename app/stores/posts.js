@@ -4,11 +4,18 @@ import {API_KEY, API_SECRET, HOST} from "../constants";
 
 class Store {
 
-    access_token = '';
-    @observable listItems = []
+    access_token = null;
+    @observable listItems = {
+        tech: [],
+        games: [],
+        books: []
+    };
     @observable isLoading = false;
 
     getAuthToken() {
+        if (this.access_token) {
+            return new Promise.resolve();
+        }
         var requestObj = {
             method: 'POST',
             headers: {
@@ -34,15 +41,17 @@ class Store {
             });
     }
 
-    getPosts() {
+    getPosts(category) {
+        this.isLoading = true;
         let date = moment().format('YYYY-MM-DD').toString();
+        if (this.listItems[category].length) {
+            date = moment(this.listItems[category][this.listItems[category].length - 1].date).add(-1, 'days').format('YYYY-MM-DD').toString();
+        }
         let self = this;
         this
             .getAuthToken()
             .then(function () {
-                console.log('Got token!');
-                this.isLoading = true;
-                var url = 'https://api.producthunt.com/v1/categories/tech/posts?day=' + date;
+                var url = 'https://api.producthunt.com/v1/categories/' + category + '/posts?day=' + date;
                 var requestObj = {
                     headers: {
                         'Accept': 'application/json',
@@ -52,15 +61,17 @@ class Store {
                     }
                 };
 
-                console.log(requestObj);
                 fetch(url, requestObj)
                     .then((response) => response.json())
                     .then((responseData) => {
-                        console.log(responseData);
-                        self.listItems.push({
+                        self.listItems[category].push({
                             date: date,
                             posts: responseData.posts
-                        })
+                        });
+                        if (!responseData.posts.length) {
+                            self.getPosts(category);
+                        }
+                        self.isLoading = false;
                     })
                     .catch((err) => {
                         console.log(err);

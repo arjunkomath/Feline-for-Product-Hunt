@@ -1,4 +1,4 @@
-import {TabNavigator} from 'react-navigation';
+import {TabNavigator,StackNavigator} from 'react-navigation';
 import {
     ACTIVE_BACKGROUND_COLOR,
     INACTIVE_BACKGROUND_COLOR,
@@ -9,6 +9,7 @@ import TechScreen from '@scene/tech';
 import GamesScreen from '@scene/games';
 import BooksScreen from '@scene/books';
 import AboutScreen from '@scene/about';
+import PostScreen from '@scene/postPage';
 
 const App = TabNavigator({
     Tech: {
@@ -25,6 +26,7 @@ const App = TabNavigator({
     }
 }, {
     tabBarOptions: {
+        lazy: true,
         scrollEnabled: true,
         activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
         inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
@@ -47,4 +49,18 @@ const App = TabNavigator({
     },
 });
 
-export default App;
+const Stack = StackNavigator({
+    Home: {
+        screen: App,
+    },
+    Post: {
+        path: 'post/:id',
+        screen: PostScreen
+    },
+}, {
+    navigationOptions: {
+        header: null
+    }
+});
+
+export default Stack;

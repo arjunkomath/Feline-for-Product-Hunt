@@ -1,14 +1,17 @@
 import React, {Component} from 'react';
 import {observer} from 'mobx-react/native';
+import {toJS} from 'mobx';
 import {
     ScrollView,
     StyleSheet,
     View,
-    Text
+    TouchableOpacity,
+    Text,
+    ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
 
-import TechStore from '@store/tech';
+import PostStore from '@store/posts';
 import Post from '@component/post';
 
 import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
@@ -21,52 +24,88 @@ class Screen extends React.Component {
 
     constructor(props) {
         super(props);
-        TechStore.getPosts();
+        this.category = 'tech';
+        PostStore.getPosts(this.category);
     }
 
     renderPost(post) {
-        return <Post key={post.id} post={post}/>
+        return <Post key={post.id} post={toJS(post)} navigation={this.props.navigation}/>
     }
 
     renderListItem(item) {
         let self = this;
         return (
-            <ScrollView key={item.date}>
+            <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={styles.date}>{moment(item.date).format('dddd, MMMM Do YYYY').toString()}</Text>
+                    <Text style={styles.date}>{moment(item.date).format('dddd, MMMM Do YYYY').toString().toUpperCase()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);
                 })}
-            </ScrollView>
+            </View>
         );
+    }
+
+    renderFooter() {
+        if(PostStore.isLoading) {
+            return (
+                <ActivityIndicator
+                    animating={true}
+                    style={[styles.centering, {height: 40}]}
+                    color="black"
+                    size="small"
+                />
+            )
+        } else {
+            return (
+                <TouchableOpacity onPress={() => {
+                    PostStore.getPosts(this.category);
+                }}>
+                    <View style={styles.loadMoreContainer}>
+                        <Text style={styles.date}>LOAD MORE</Text>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
     }
 
     render() {
         let self = this;
+
         return (
-            <View style={styles.container}>
-                {TechStore.listItems.map((item) => {
+            <ScrollView style={styles.container}>
+                {PostStore.listItems[this.category].map((item) => {
                     return self.renderListItem(item);
                 })}
-            </View>
+                {self.renderFooter()}
+            </ScrollView>
         );
     }
 }
 
 const styles = StyleSheet.create({
     date: {
-        fontSize: 15,
+        fontSize: 11,
+        textAlign: 'center',
         padding: 5,
-        marginLeft: 10,
-        fontFamily: 'Raleway-Medium',
-        color: GREY_DARK
+        marginLeft: 10
+    },
+    centering: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 15,
+    },
+    loadMoreContainer: {
+        marginTop: 10,
+        marginBottom: 10,
     },
     dateContainer: {
-        backgroundColor: GREY_MED_LIGHT
+        backgroundColor: GREY_LIGHT
     },
     container: {
-        backgroundColor: GREY_LIGHT
+        borderTopWidth: 1,
+        borderTopColor: GREY_MED_LIGHT,
+        backgroundColor: '#ffffff'
     }
 });
 
