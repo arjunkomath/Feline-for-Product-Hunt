@@ -17,7 +17,7 @@ import Post from '@component/post';
 import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
 
 @observer
-class Screen extends React.Component {
+class Screen extends Component {
     static navigationOptions = {
         tabBarLabel: 'Tech'
     };
@@ -25,6 +25,9 @@ class Screen extends React.Component {
     constructor(props) {
         super(props);
         this.category = 'tech';
+    }
+
+    componentDidMount() {
         PostStore.getPosts(this.category);
     }
 

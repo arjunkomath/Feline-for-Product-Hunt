@@ -1,6 +1,9 @@
 import {observable} from "mobx";
 import moment from "moment";
 import {API_KEY, API_SECRET, HOST} from "../constants";
+import {
+    AsyncStorage
+} from "react-native";
 
 class Store {
 
@@ -32,8 +35,12 @@ class Store {
         return fetch('https://api.producthunt.com/v1/oauth/token', requestObj)
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData);
                 this.access_token = responseData.access_token;
+                try {
+                    AsyncStorage.setItem('access_token', responseData.access_token);
+                } catch (error) {
+                    console.log(error);
+                }
                 return;
             })
             .catch((err) => {
@@ -70,8 +77,9 @@ class Store {
                         });
                         if (!responseData.posts.length) {
                             self.getPosts(category);
+                        } else {
+                            self.isLoading = false;
                         }
-                        self.isLoading = false;
                     })
                     .catch((err) => {
                         console.log(err);

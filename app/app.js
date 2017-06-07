@@ -26,8 +26,8 @@ const App = TabNavigator({
     }
 }, {
     tabBarOptions: {
-        lazy: true,
         scrollEnabled: true,
+        lazy: true,
         activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
         inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
         inactiveTintColor: INACTIVE_TINT_COLOR,

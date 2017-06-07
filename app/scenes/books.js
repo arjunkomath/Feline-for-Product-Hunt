@@ -25,6 +25,9 @@ class Screen extends React.Component {
     constructor(props) {
         super(props);
         this.category = 'books';
+    }
+
+    componentDidMount() {
         PostStore.getPosts(this.category);
     }
 

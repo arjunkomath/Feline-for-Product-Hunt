@@ -19,7 +19,6 @@ class Post extends Component {
     }
 
     openPost(post) {
-        console.log(post.id);
         const navigateAction = NavigationActions.navigate({
             routeName: 'Post',
             params: {
@@ -41,7 +40,7 @@ class Post extends Component {
                         <Image style={styles.image} source={{uri: post.thumbnail.image_url}}/>
                         <View style={[{flex: 1}, styles.rightContainer]}>
                             <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
-                            <Text style={styles.tagline} ellipsizeMode="tail" numberOfLines={1}>{post.tagline}</Text>
+                            <Text style={styles.tagline} ellipsizeMode="tail" numberOfLines={2}>{post.tagline}</Text>
                         </View>
                     </View>
 
@@ -86,7 +85,7 @@ const styles = StyleSheet.create({
         borderBottomColor: '#e3e3e3'
     },
     votes: {
-        color: GREY_DARK,
+        color: "black",
         fontWeight: 'bold',
         fontSize: 13
     },
