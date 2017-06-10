@@ -7,10 +7,12 @@ import {
     ActivityIndicator,
     Image,
     Dimensions,
+    TouchableOpacity,
     AsyncStorage
 } from 'react-native';
 import {HOST} from "../constants";
 let {height, width} = Dimensions.get('window');
+import {NavigationActions} from 'react-navigation'
 
 import {GREY, GREY_DARK, GREY_LIGHT, PH_ORANGE} from '@theme/light';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -52,11 +54,20 @@ class Screen extends Component {
         fetch('https://api.producthunt.com/v1/posts/' + postId, requestObj)
             .then((response) => response.json())
             .then((responseData) => {
-                console.log(responseData.post);
                 this.setState({
                     post: responseData.post
                 });
             });
+    }
+
+    openUrl(url) {
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'WebView',
+            params: {
+                url: url
+            }
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     renderForeground() {
@@ -88,9 +99,13 @@ class Screen extends Component {
                     </View>
 
                     <View style={[styles.rightContainer, {marginLeft: 10}]}>
-                        <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                            <Text style={styles.getIt}>GET IT</Text>
-                        </View>
+                        <TouchableOpacity onPress={() => {
+                            this.openUrl(post.redirect_url)
+                        }}>
+                            <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
+                                <Text style={styles.getIt}>GET IT</Text>
+                            </View>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>

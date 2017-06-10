@@ -10,6 +10,7 @@ import GamesScreen from '@scene/games';
 import BooksScreen from '@scene/books';
 import AboutScreen from '@scene/about';
 import PostScreen from '@scene/postPage';
+import WebScreen from '@scene/webScreen';
 
 const App = TabNavigator({
     Tech: {
@@ -56,6 +57,10 @@ const Stack = StackNavigator({
     Post: {
         path: 'post/:id',
         screen: PostScreen
+    },
+    WebView: {
+        path: 'view/:url',
+        screen: WebScreen
     },
 }, {
     navigationOptions: {
