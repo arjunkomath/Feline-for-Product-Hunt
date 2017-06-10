@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
-    Linking
+    Linking,
+    Image
 } from 'react-native';
 import {PH_ORANGE} from '@theme/light';
 
@@ -16,6 +17,14 @@ class Screen extends React.Component {
     render() {
         return (
             <View style={styles.mainContainer}>
+
+                <Image
+                    style={{
+                        width: 100,
+                        height: 100
+                    }}
+                    source={require('./../../assets/images/icon.png')}/>
+
                 <Text style={styles.feline}>Feline</Text>
                 <Text style={styles.tagline}>for Product Hunt</Text>
                 <Text style={styles.tagline}>v2.0.0</Text>
@@ -36,7 +45,14 @@ class Screen extends React.Component {
                 </View>
                 <View style={styles.button}>
                     <TouchableOpacity onPress={() => {
-                        Linking.openURL("mailto:arjunkomath@gmail.com")
+                        Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt/issues")
+                    }}>
+                        <Text style={styles.button_text}>Request Issue</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.button}>
+                    <TouchableOpacity onPress={() => {
+                        Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt/issues")
                     }}>
                         <Text style={styles.button_text}>Request Feature</Text>
                     </TouchableOpacity>
@@ -64,7 +80,7 @@ const styles = StyleSheet.create({
     },
     button_text: {
         marginLeft: 10,
-        color: PH_ORANGE,
+        color: '#3F51B5',
         fontSize: 15,
         fontFamily: "SFRegular"
     },

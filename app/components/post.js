@@ -9,8 +9,8 @@ import {
 import User from '@component/user';
 import {GREY, GREY_DARK, GREY_LIGHT} from '@theme/light';
 import {NavigationActions} from 'react-navigation'
-
 import Icon from 'react-native-vector-icons/FontAwesome';
+import analytics from '@store/analytics';
 
 class Post extends Component {
 
@@ -19,6 +19,7 @@ class Post extends Component {
     }
 
     openPost(post) {
+        analytics.logEvent("View Content");
         const navigateAction = NavigationActions.navigate({
             routeName: 'Post',
             params: {

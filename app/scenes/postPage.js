@@ -172,8 +172,13 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     getIt: {
-        fontWeight: "bold",
-        color: "white"
+        color: "white",
+        fontFamily: "SFRegular"
+    },
+    votes: {
+        color: "black",
+        fontWeight: 'bold',
+        fontSize: 13
     },
     imageContainer: {
         padding: 15,

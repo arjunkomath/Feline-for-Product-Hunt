@@ -74,7 +74,7 @@ class CommentWidget extends Component {
                         </ParsedText>
 
                         <Text style={styles.votes}>
-                            {comment.votes + ' Vote - Comment by ' + comment.user.name}
+                            {comment.votes + ' Vote(s) - Comment by ' + comment.user.name}
                         </Text>
                     </View>
                 </View>
@@ -113,6 +113,7 @@ var styles = StyleSheet.create({
         fontSize: 10,
         color: '#3e3e3e',
         marginLeft: 20,
+        fontFamily: 'SFRegular'
     },
     thumbnail: {
         height: 50,

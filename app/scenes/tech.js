@@ -40,7 +40,7 @@ class Screen extends Component {
         return (
             <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={styles.date}>{moment(item.date).format('dddd, MMMM Do YYYY').toString().toUpperCase()}</Text>
+                    <Text style={styles.loadMoreText}>{moment(item.date).format('dddd, MMMM Do YYYY').toString()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);
@@ -65,7 +65,7 @@ class Screen extends Component {
                     PostStore.getPosts(this.category);
                 }}>
                     <View style={styles.loadMoreContainer}>
-                        <Text style={styles.date}>LOAD MORE</Text>
+                        <Text style={styles.loadMoreText}>View More</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -93,17 +93,27 @@ const styles = StyleSheet.create({
         padding: 5,
         marginLeft: 10
     },
+    loadMoreText: {
+        fontFamily: "SFBold",
+        fontSize: 25,
+        marginLeft: 10,
+        color: '#1a1a1a'
+    },
     centering: {
         alignItems: 'center',
         justifyContent: 'center',
         margin: 15,
     },
     loadMoreContainer: {
+        justifyContent: 'center',
+        height: 50,
         marginTop: 10,
         marginBottom: 10,
     },
     dateContainer: {
-        backgroundColor: GREY_LIGHT
+        marginTop: 20,
+        marginBottom: 10,
+        height: 40
     },
     container: {
         borderTopWidth: 1,

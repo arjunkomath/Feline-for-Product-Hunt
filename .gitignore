@@ -51,3 +51,7 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+android/app/fabric.properties
+crashlytics-build.properties
+com_crashlytics_export_strings.xml

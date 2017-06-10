@@ -8,4 +8,4 @@ export const GREY_MED_LIGHT = '#bdbdbd';
 export const GREY = '#9e9e9e';
 export const GREY_DARK = '#212121';
 
-export const PH_ORANGE = '#ea532a';
+export const PH_ORANGE = '#3F51B5';

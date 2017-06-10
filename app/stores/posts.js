@@ -8,6 +8,11 @@ import {
 class Store {
 
     access_token = null;
+    dates = {
+        tech: moment().add(1, 'days').format('YYYY-MM-DD').toString(),
+        games: moment().add(1, 'days').format('YYYY-MM-DD').toString(),
+        books: moment().add(1, 'days').format('YYYY-MM-DD').toString()
+    };
     @observable listItems = {
         tech: [],
         games: [],
@@ -49,16 +54,14 @@ class Store {
     }
 
     getPosts(category) {
+        // console.log("Loading", category, this.dates[category]);
         this.isLoading = true;
-        let date = moment().format('YYYY-MM-DD').toString();
-        if (this.listItems[category].length) {
-            date = moment(this.listItems[category][this.listItems[category].length - 1].date).add(-1, 'days').format('YYYY-MM-DD').toString();
-        }
+        this.dates[category] = moment(this.dates[category]).add(-1, 'days').format('YYYY-MM-DD').toString();
         let self = this;
         this
             .getAuthToken()
             .then(function () {
-                var url = 'https://api.producthunt.com/v1/categories/' + category + '/posts?day=' + date;
+                var url = 'https://api.producthunt.com/v1/categories/' + category + '/posts?day=' + self.dates[category];
                 var requestObj = {
                     headers: {
                         'Accept': 'application/json',
@@ -71,14 +74,14 @@ class Store {
                 fetch(url, requestObj)
                     .then((response) => response.json())
                     .then((responseData) => {
-                        self.listItems[category].push({
-                            date: date,
-                            posts: responseData.posts
-                        });
                         if (!responseData.posts.length) {
                             self.getPosts(category);
                         } else {
                             self.isLoading = false;
+                            self.listItems[category].push({
+                                date: self.dates[category],
+                                posts: responseData.posts
+                            });
                         }
                     })
                     .catch((err) => {

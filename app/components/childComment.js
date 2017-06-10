@@ -69,7 +69,7 @@ class ChildCommentsWidget extends Component {
                                         {comment.body}
                                     </ParsedText>
                                     <Text style={styles.votes}>
-                                        {comment.votes + "-" + comment.user.name}
+                                        {comment.votes + " Vote(s) - Comment by " + comment.user.name}
                                     </Text>
                                 </View>
                             </View>
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         color: '#3e3e3e',
         marginLeft: 20,
+        fontFamily: 'SFRegular'
     },
     thumbnail: {
         height: 50,
