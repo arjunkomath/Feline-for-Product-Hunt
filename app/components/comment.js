@@ -90,7 +90,7 @@ var styles = StyleSheet.create({
     container: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: '#F5F5F5',
+        backgroundColor: 'white',
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 10,
