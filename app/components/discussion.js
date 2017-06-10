@@ -4,7 +4,7 @@ import React, {Component} from "react";
 import {
     StyleSheet,
     ScrollView,
-    ListView,
+    View,
     Text
 } from 'react-native' ;
 
@@ -30,11 +30,14 @@ class DiscussionPage extends Component {
             return null;
         }
         return (
-            <ScrollView style={{flex: 1}}>
-                {this.state.comments.map((comment) => {
-                    return (<Comment comment={comment} key={comment.id}/>)
-                })}
-            </ScrollView>
+            <View style={styles.container}>
+                <Text style={styles.title}>Discussions</Text>
+                <ScrollView>
+                    {this.state.comments.map((comment) => {
+                        return (<Comment comment={comment} key={comment.id}/>)
+                    })}
+                </ScrollView>
+            </View>
         )
     }
 
@@ -42,8 +45,13 @@ class DiscussionPage extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        margin: 15
     },
+    title: {
+        color: "#1a1a1a",
+        fontSize: 25,
+        fontFamily: "SFBold"
+    }
 });
 
 module.exports = DiscussionPage;

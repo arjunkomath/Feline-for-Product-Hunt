@@ -47,28 +47,6 @@ class InfoPage extends Component {
         return rows;
     }
 
-    _viewProfile(user) {
-    }
-
-    _translateCategory(id) {
-        switch (id) {
-            case 1:
-                return 'Tech';
-                break;
-            case 2:
-                return 'Games';
-                break;
-            case 3:
-                return 'Podcasts';
-                break;
-            case 4:
-                return 'Books';
-                break;
-            default:
-                return 'Tech';
-        }
-    }
-
     render() {
         if (!this.state.post) {
             return (null);
@@ -79,28 +57,16 @@ class InfoPage extends Component {
 
         return (
             <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
                 style={styles.container}>
-
-                {/*<Text style={styles.head}>MAKERS</Text>*/}
-                {/*<View style={styles.users}>*/}
-                    {/*{post.makers.map((maker, i) =>*/}
-                        {/*<TouchableOpacity key={i} onPress={() => this._viewProfile(maker)}>*/}
-                            {/*<Image key={i} source={{uri: maker.image_url['50px']}} style={styles.thumbnail}/>*/}
-                        {/*</TouchableOpacity>*/}
-                    {/*) }*/}
-                {/*</View>*/}
-
-                {/*<Text style={styles.head}>UPVOTES</Text>*/}
-                {/*<View style={styles.users}>*/}
-                    {/*{this.renderVotes()}*/}
-                {/*</View>*/}
-
-                <Text style={styles.head}>CATEGORY</Text>
-                <Text style={styles.tag}>{this._translateCategory(this.state.post.category_id)}</Text>
-
-                <Text style={styles.head}>HUNTED BY</Text>
-                {/*<UserWidget user={this.state.post.user}/>*/}
-
+                {this.state.post.topics.map(function (topic) {
+                    return (
+                        <View key={topic.name} style={styles.box}>
+                            <Text style={styles.tag}>{topic.name}</Text>
+                        </View>
+                    )
+                })}
             </ScrollView>
         );
     }
@@ -110,31 +76,19 @@ class InfoPage extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
+        margin: 15
     },
-    head: {
-        fontWeight: 'bold',
-        marginTop: 15,
-        marginBottom: 5,
-        marginLeft: 10,
-        color: '#000000'
+    box: {
+        padding: 5,
+        borderWidth: 1,
+        borderRadius: 5,
+        marginRight: 10,
+        borderColor: '#e3e3e3'
     },
     tag: {
-        marginTop: 5,
-        marginBottom: 5,
-        marginLeft: 10,
+        fontFamily: "SFRegular",
         color: '#3e3e3e'
     },
-    thumbnail: {
-        height: 50,
-        width: 50,
-        borderRadius: 50,
-        marginLeft: 5
-    },
-    users: {
-        flex: 1,
-        flexDirection: 'row',
-        marginLeft: 5
-    }
 });
 
 module.exports = InfoPage;

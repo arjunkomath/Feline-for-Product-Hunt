@@ -34,7 +34,7 @@ const App = TabNavigator({
         activeTintColor: ACTIVE_TINT_COLOR,
         labelStyle: {
             fontSize: 12,
-            fontFamily: 'Raleway-Medium'
+            fontFamily: 'SFBold'
         },
         tabStyle: {
             width: 120,

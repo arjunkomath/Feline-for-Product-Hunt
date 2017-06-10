@@ -123,15 +123,17 @@ const styles = StyleSheet.create({
     name: {
         fontSize: 17,
         color: GREY_DARK,
-        fontFamily: 'Raleway-Medium',
+        fontFamily: 'SFBold',
     },
     stats: {
         marginTop: 10,
-        fontSize: 13
+        fontSize: 13,
+        fontFamily: 'SFRegular'
     },
     tagline: {
         marginTop: 5,
         fontSize: 13,
+        fontFamily: 'SFRegular'
     },
     votesButton: {
         width: 75

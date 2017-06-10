@@ -92,6 +92,7 @@ var styles = StyleSheet.create({
         fontSize: 14,
         color: '#3e3e3e',
         marginLeft: 20,
+        fontFamily: 'SFRegular'
     },
     url: {
         fontSize: 14,

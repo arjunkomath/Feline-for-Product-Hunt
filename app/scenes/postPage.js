@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {
     View,
+    ScrollView,
     Text,
     StyleSheet,
     ActivityIndicator,
@@ -12,9 +13,7 @@ import {HOST} from "../constants";
 let {height, width} = Dimensions.get('window');
 
 import {GREY, GREY_DARK, GREY_LIGHT, PH_ORANGE} from '@theme/light';
-import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import DiscussionPage from '@component/discussion';
 import MediaPage from '@component/media';
@@ -63,7 +62,7 @@ class Screen extends Component {
     renderForeground() {
         let {post} = this.state;
         return (
-            <View style={{height: 250, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+            <View style={{height: 210, backgroundColor: GREY_LIGHT}}>
                 <Image resizeMode={Image.resizeMode.strech} style={styles.screenshot} source={{uri: post.thumbnail.image_url}}>
                     <Image
                         resizeMode={Image.resizeMode.strech}
@@ -73,42 +72,27 @@ class Screen extends Component {
                         <View style={styles.imageContainer}>
                             <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
                             <Text style={styles.tagline} ellipsizeMode="tail" numberOfLines={1}>{post.tagline}</Text>
-
-                            <View style={styles.rowContainer}>
-                                <View style={[styles.box, {backgroundColor: "white"}]}>
-                                    <View style={styles.rowContainer}>
-                                        <Icon style={{
-                                            marginRight: 5,
-                                            marginTop: 1
-                                        }} name="caret-up" size={15} color={GREY_DARK}/>
-                                        <Text style={styles.votes}>{post.votes_count}</Text>
-                                    </View>
-                                </View>
-
-                                <View style={[styles.rightContainer, {marginLeft: 10}]}>
-                                    <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                                        <Text style={styles.getIt}>GET IT</Text>
-                                    </View>
-                                </View>
-                            </View>
                         </View>
                     </Image>
                 </Image>
-            </View>
-        )
-    }
 
-    renderStickyHeader() {
-        let {post} = this.state;
-        return (
-            <View style={{
-                height: 50,
-                width: width,
-                backgroundColor: PH_ORANGE,
-                alignItems: 'center',
-                justifyContent: 'center'
-            }}>
-                <Text style={styles.name}>{post.name}</Text>
+                <View style={styles.rowContainer}>
+                    <View style={[styles.box, {backgroundColor: "white", marginLeft: 15}]}>
+                        <View style={styles.rowContainer}>
+                            <Icon style={{
+                                marginRight: 5,
+                                marginTop: 1
+                            }} name="caret-up" size={15} color={GREY_DARK}/>
+                            <Text style={styles.votes}>{post.votes_count}</Text>
+                        </View>
+                    </View>
+
+                    <View style={[styles.rightContainer, {marginLeft: 10}]}>
+                        <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
+                            <Text style={styles.getIt}>GET IT</Text>
+                        </View>
+                    </View>
+                </View>
             </View>
         )
     }
@@ -125,25 +109,15 @@ class Screen extends Component {
             )
         }
 
+        console.log(this.state.post);
+
         return (
-            <ParallaxScrollView
-                backgroundColor={PH_ORANGE}
-                contentBackgroundColor="white"
-                parallaxHeaderHeight={250}
-                renderForeground={this.renderForeground.bind(this)}
-                stickyHeaderHeight={50}
-                renderStickyHeader={this.renderStickyHeader.bind(this)}
-            >
-                <View style={{height: height}}>
-                    <ScrollableTabView
-                        tabBarActiveTextColor={PH_ORANGE}
-                        tabBarUnderlineStyle={{backgroundColor: PH_ORANGE}}>
-                        <DiscussionPage tabLabel="Discussion" comments={this.state.post.comments}/>
-                        <MediaPage tabLabel="Media" media={this.state.post.media}/>
-                        <InfoPage tabLabel="Info" post={this.state.post}/>
-                    </ScrollableTabView>
-                </View>
-            </ParallaxScrollView>
+            <ScrollView style={{backgroundColor: "white"}}>
+                {this.renderForeground()}
+                <InfoPage post={this.state.post}/>
+                <MediaPage media={this.state.post.media}/>
+                {this.state.post.comments_count ? <DiscussionPage comments={this.state.post.comments}/> : null}
+            </ScrollView>
         );
     }
 }
@@ -151,7 +125,7 @@ class Screen extends Component {
 const styles = StyleSheet.create({
     screenshot: {
         width: width,
-        height: 250
+        height: 150
     },
     box: {
         height: 40,
@@ -170,15 +144,16 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         padding: 15,
-        marginTop: 130
+        marginTop: 60
     },
     name: {
-        fontSize: 17,
+        fontSize: 28,
         color: "white",
-        fontFamily: 'Raleway-Medium',
+        fontFamily: 'SFBold',
     },
     tagline: {
         color: "white",
+        fontFamily: 'SFRegular',
         fontSize: 13,
     },
     centering: {
