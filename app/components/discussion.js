@@ -34,7 +34,7 @@ class DiscussionPage extends Component {
                 <Text style={styles.title}>Discussions</Text>
                 <ScrollView>
                     {this.state.comments.map((comment) => {
-                        return (<Comment comment={comment} key={comment.id}/>)
+                        return (<Comment comment={comment} key={comment.id} navigation={this.props.navigation}/>)
                     })}
                 </ScrollView>
             </View>

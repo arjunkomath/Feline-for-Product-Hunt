@@ -6,6 +6,7 @@ import {
     StyleSheet,
     ActivityIndicator,
     Image,
+    Share,
     Dimensions,
     TouchableOpacity,
     AsyncStorage
@@ -70,6 +71,16 @@ class Screen extends Component {
         this.props.navigation.dispatch(navigateAction);
     }
 
+
+    sharePost(post) {
+        Share.share({
+            dialogTitle: 'Sharing is Caring',
+            title: post.name,
+            message: post.tagline,
+            url: post.redirect_url,
+        });
+    }
+
     renderForeground() {
         let {post} = this.state;
         return (
@@ -107,6 +118,16 @@ class Screen extends Component {
                             </View>
                         </TouchableOpacity>
                     </View>
+
+                    <View style={[styles.rightContainer, {marginLeft: 10}]}>
+                        <TouchableOpacity onPress={() => {
+                            this.sharePost(post)
+                        }}>
+                            <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
+                                <Text style={styles.getIt}>SHARE</Text>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         )
@@ -123,15 +144,12 @@ class Screen extends Component {
                 />
             )
         }
-
-        console.log(this.state.post);
-
         return (
             <ScrollView style={{backgroundColor: "white"}}>
                 {this.renderForeground()}
                 <InfoPage post={this.state.post}/>
                 <MediaPage media={this.state.post.media}/>
-                {this.state.post.comments_count ? <DiscussionPage comments={this.state.post.comments}/> : null}
+                {this.state.post.comments_count ? <DiscussionPage comments={this.state.post.comments} navigation={this.props.navigation}/> : null}
             </ScrollView>
         );
     }

@@ -9,11 +9,10 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity,
-    ListView,
-    IntentAndroid
+    Linking
 } from "react-native";
 
+import {NavigationActions} from 'react-navigation'
 import ParsedText from 'react-native-parsed-text';
 import {PH_ORANGE} from '@theme/light';
 
@@ -22,8 +21,19 @@ class ChildCommentsWidget extends Component {
     handleUrlPress(url) {
     }
 
+
+    handleUrlPress(url) {
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'WebView',
+            params: {
+                url: url
+            }
+        });
+        this.props.navigation.dispatch(navigateAction);
+    }
+
     handleEmailPress(email) {
-        IntentAndroid.openURL('mailto:' + email);
+        Linking.openURL('mailto:' + email);
     }
 
     render() {

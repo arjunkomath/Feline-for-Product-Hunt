@@ -9,10 +9,10 @@ import {
     Text,
     View,
     Image,
-    TouchableOpacity,
-    IntentAndroid
+    Linking
 } from "react-native";
 
+import {NavigationActions} from 'react-navigation'
 import ParsedText from 'react-native-parsed-text';
 var ChildComments = require('./childComment');
 import {PH_ORANGE} from '@theme/light';
@@ -33,10 +33,17 @@ class CommentWidget extends Component {
     }
 
     handleUrlPress(url) {
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'WebView',
+            params: {
+                url: url
+            }
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     handleEmailPress(email) {
-        IntentAndroid.openURL('mailto:' + email);
+        Linking.openURL('mailto:' + email);
     }
 
     render() {
@@ -71,7 +78,8 @@ class CommentWidget extends Component {
                         </Text>
                     </View>
                 </View>
-                { (comment.child_comments.length) ? <ChildComments comments={comment.child_comments}/> : null }
+                { (comment.child_comments.length) ?
+                    <ChildComments comments={comment.child_comments} navigation={this.props.navigation}/> : null }
             </View>
         );
     }

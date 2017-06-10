@@ -3,7 +3,9 @@ import {
     View,
     Text,
     StyleSheet,
-    ActivityIndicator
+    ActivityIndicator,
+    Linking,
+    TouchableOpacity
 } from 'react-native';
 import {WebView} from 'react-native';
 
@@ -31,16 +33,22 @@ class Screen extends Component {
         }
         return (
             <View style={{backgroundColor: "white", flex: 1}}>
-                { this.state.loading ? (
-                    <View style={styles.border}>
+                <View style={styles.border}>
+                    { this.state.loading ? (
                         <ActivityIndicator
                             animating={true}
-                            style={[{height: 40}]}
+                            style={[{height: 50}]}
                             color="black"
                             size="small"
                         />
-                    </View>
-                ) : null }
+                    ) : (
+                        <TouchableOpacity onPress={() => {
+                            Linking.openURL(this.state.url)
+                        }}>
+                            <Text style={styles.title}>Preview in Browser</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
                 <WebView
                     onLoad={() => {
                         this.setState({
@@ -60,7 +68,14 @@ const styles = StyleSheet.create({
     },
     border: {
         borderBottomColor: '#3e3e3e',
-        borderBottomWidth: 1
+        borderBottomWidth: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 50
+    },
+    title: {
+        color: '#1a1a1a',
+        fontFamily: "SFRegular"
     }
 });
 
