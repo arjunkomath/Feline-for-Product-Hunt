@@ -1,53 +1,54 @@
-import {TabNavigator,StackNavigator} from 'react-navigation';
+import React, {Component} from "react";
+import {TabNavigator, StackNavigator} from 'react-navigation';
 import {
     ACTIVE_BACKGROUND_COLOR,
     INACTIVE_BACKGROUND_COLOR,
     ACTIVE_TINT_COLOR,
     INACTIVE_TINT_COLOR
 } from '@theme/light';
-import TechScreen from '@scene/tech';
-import GamesScreen from '@scene/games';
-import BooksScreen from '@scene/books';
+import MainScreen from '@scene/mainScreen';
 import AboutScreen from '@scene/about';
 import PostScreen from '@scene/postPage';
 import WebScreen from '@scene/webScreen';
 
+const tabOptions = {
+    scrollEnabled: true,
+    lazy: true,
+    activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
+    inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
+    inactiveTintColor: INACTIVE_TINT_COLOR,
+    activeTintColor: ACTIVE_TINT_COLOR,
+    labelStyle: {
+        fontSize: 12,
+        fontFamily: 'SFBold'
+    },
+    tabStyle: {
+        width: 120,
+        height: 40
+    },
+    style: {
+        backgroundColor: ACTIVE_BACKGROUND_COLOR
+    },
+    indicatorStyle: {
+        backgroundColor: ACTIVE_TINT_COLOR
+    }
+};
+
 const App = TabNavigator({
     Tech: {
-        screen: TechScreen,
+        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'tech'}}/>,
     },
     Games: {
-        screen: GamesScreen,
+        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'games'}}/>,
     },
     Books: {
-        screen: BooksScreen,
+        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'books'}}/>,
     },
     About: {
         screen: AboutScreen,
     }
 }, {
-    tabBarOptions: {
-        scrollEnabled: true,
-        lazy: true,
-        activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
-        inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
-        inactiveTintColor: INACTIVE_TINT_COLOR,
-        activeTintColor: ACTIVE_TINT_COLOR,
-        labelStyle: {
-            fontSize: 12,
-            fontFamily: 'SFBold'
-        },
-        tabStyle: {
-            width: 120,
-            height: 40
-        },
-        style: {
-            backgroundColor: ACTIVE_BACKGROUND_COLOR
-        },
-        indicatorStyle: {
-            backgroundColor: ACTIVE_TINT_COLOR
-        }
-    },
+    tabBarOptions: tabOptions
 });
 
 const Stack = StackNavigator({

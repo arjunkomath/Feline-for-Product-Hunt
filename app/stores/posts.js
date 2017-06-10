@@ -8,17 +8,14 @@ import {
 class Store {
 
     access_token = null;
-    dates = {
-        tech: moment().add(1, 'days').format('YYYY-MM-DD').toString(),
-        games: moment().add(1, 'days').format('YYYY-MM-DD').toString(),
-        books: moment().add(1, 'days').format('YYYY-MM-DD').toString()
-    };
-    @observable listItems = {
-        tech: [],
-        games: [],
-        books: []
-    };
-    @observable isLoading = false;
+    date = moment().add(1, 'days').format('YYYY-MM-DD').toString();
+    @observable listItems = [];
+    @observable isLoading = true;
+
+    constructor(category) {
+        this.category = category;
+        this.getPosts(category);
+    }
 
     getAuthToken() {
         if (this.access_token) {
@@ -54,14 +51,14 @@ class Store {
     }
 
     getPosts(category) {
-        // console.log("Loading", category, this.dates[category]);
         this.isLoading = true;
-        this.dates[category] = moment(this.dates[category]).add(-1, 'days').format('YYYY-MM-DD').toString();
+        console.log("Loading", category, this.date);
+        this.date = moment(this.date).add(-1, 'days').format('YYYY-MM-DD').toString();
         let self = this;
         this
             .getAuthToken()
             .then(function () {
-                var url = 'https://api.producthunt.com/v1/categories/' + category + '/posts?day=' + self.dates[category];
+                var url = 'https://api.producthunt.com/v1/categories/' + category + '/posts?day=' + self.date;
                 var requestObj = {
                     headers: {
                         'Accept': 'application/json',
@@ -78,8 +75,8 @@ class Store {
                             self.getPosts(category);
                         } else {
                             self.isLoading = false;
-                            self.listItems[category].push({
-                                date: self.dates[category],
+                            self.listItems.push({
+                                date: self.date,
                                 posts: responseData.posts
                             });
                         }
@@ -92,4 +89,4 @@ class Store {
 
 }
 
-export default store = new Store
+export default Store
