@@ -64,7 +64,11 @@ class Screen extends Component {
 
     renderFooter() {
         if (this.state.postStore.isLoading) {
-            return null;
+            return (
+                <View style={styles.loadMoreContainer}>
+                    <Text style={styles.loadMoreText}>...</Text>
+                </View>
+            );
         } else {
             return (
                 <TouchableOpacity onPress={() => {
