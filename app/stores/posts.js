@@ -4,6 +4,7 @@ import {API_KEY, API_SECRET, HOST} from "../constants";
 import {
     AsyncStorage,
     NetInfo,
+    ToastAndroid,
     Alert
 } from "react-native";
 
@@ -100,10 +101,9 @@ class Store {
                         }
                     })
                     .catch((err) => {
-                        Alert.alert(
-                            'No Internet Connection',
-                            'Make sure your device is connected to the Internet'
-                        );
+                        if (err) {
+                            ToastAndroid.show('Make sure your device is connected to the Internet', ToastAndroid.LONG);
+                        }
                     });
             });
     }
@@ -117,7 +117,7 @@ class Store {
     handleFirstConnectivityChange(reach) {
         console.log('First change: ' + reach);
         let self = this;
-        if(reach != "NONE") {
+        if (reach != "NONE") {
             self.reload(self.category);
         }
         NetInfo.removeEventListener(

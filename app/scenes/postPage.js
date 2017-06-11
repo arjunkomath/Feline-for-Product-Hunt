@@ -10,7 +10,7 @@ import {
     Dimensions,
     TouchableOpacity,
     AsyncStorage,
-    Alert
+    ToastAndroid
 } from 'react-native';
 import {HOST} from "../constants";
 let {height, width} = Dimensions.get('window');
@@ -62,10 +62,7 @@ class Screen extends Component {
             })
             .catch((err) => {
                 if (err) {
-                    Alert.alert(
-                        'No Internet Connection',
-                        'Make sure your device is connected to the Internet'
-                    );
+                    ToastAndroid.show('Make sure your device is connected to the Internet', ToastAndroid.LONG);
                 }
             });
     }
