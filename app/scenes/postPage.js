@@ -62,6 +62,7 @@ class Screen extends Component {
             })
             .catch((err) => {
                 if (err) {
+                    console.log("Error", err);
                     ToastAndroid.show('Make sure your device is connected to the Internet', ToastAndroid.LONG);
                 }
             });

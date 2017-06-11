@@ -95,19 +95,21 @@ class Screen extends Component {
             )
         }
         return (
-            <ScrollView
-                refreshControl={
-                    <RefreshControl
-                        refreshing={this.state.postStore.isLoading}
-                        onRefresh={this._onRefresh.bind(this)}
-                    />
-                }
+            <View
                 style={styles.container}>
-                {this.state.postStore.listItems.map((item) => {
-                    return self.renderListItem(item);
-                })}
-                {self.renderFooter()}
-            </ScrollView>
+                <ScrollView
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={this.state.postStore.isLoading}
+                            onRefresh={this._onRefresh.bind(this)}
+                        />
+                    }>
+                    {this.state.postStore.listItems.map((item) => {
+                        return self.renderListItem(item);
+                    })}
+                    {self.renderFooter()}
+                </ScrollView>
+            </View>
         );
     }
 }
@@ -142,9 +144,10 @@ const styles = StyleSheet.create({
         height: 40
     },
     container: {
+        flex: 1,
+        backgroundColor: '#ffffff',
         borderTopWidth: 1,
-        borderTopColor: GREY_MED_LIGHT,
-        backgroundColor: '#ffffff'
+        borderTopColor: '#e3e3e3'
     }
 });
 

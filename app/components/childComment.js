@@ -15,6 +15,7 @@ import {
 import {NavigationActions} from 'react-navigation'
 import ParsedText from 'react-native-parsed-text';
 import {PH_ORANGE} from '@theme/light';
+import User from '@component/user';
 
 class ChildCommentsWidget extends Component {
 
