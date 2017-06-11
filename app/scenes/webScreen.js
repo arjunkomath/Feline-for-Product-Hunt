@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#1a1a1a',
-        fontFamily: "SFRegular"
+        fontFamily: "SFBold"
     }
 });
 

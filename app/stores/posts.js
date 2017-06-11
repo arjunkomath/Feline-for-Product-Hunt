@@ -2,7 +2,9 @@ import {observable} from "mobx";
 import moment from "moment";
 import {API_KEY, API_SECRET, HOST} from "../constants";
 import {
-    AsyncStorage
+    AsyncStorage,
+    NetInfo,
+    Alert
 } from "react-native";
 
 class Store {
@@ -14,7 +16,23 @@ class Store {
 
     constructor(category) {
         this.category = category;
-        this.getPosts(category);
+        this.handleFirstConnectivityChange = this.handleFirstConnectivityChange.bind(this);
+        NetInfo.fetch().then((reach) => {
+            console.log('Initial: ' + reach);
+            if (reach == "NONE") {
+                Alert.alert(
+                    'No Internet Connection',
+                    'Make sure your device is connected to the Internet'
+                );
+
+                NetInfo.addEventListener(
+                    'change',
+                    this.handleFirstConnectivityChange
+                );
+            } else {
+                this.getPosts(category);
+            }
+        });
     }
 
     getAuthToken() {
@@ -82,9 +100,30 @@ class Store {
                         }
                     })
                     .catch((err) => {
-                        console.log(err);
+                        Alert.alert(
+                            'No Internet Connection',
+                            'Make sure your device is connected to the Internet'
+                        );
                     });
             });
+    }
+
+    reload(category) {
+        this.date = moment().add(1, 'days').format('YYYY-MM-DD').toString();
+        this.listItems = [];
+        this.getPosts(category);
+    }
+
+    handleFirstConnectivityChange(reach) {
+        console.log('First change: ' + reach);
+        let self = this;
+        if(reach != "NONE") {
+            self.reload(self.category);
+        }
+        NetInfo.removeEventListener(
+            'change',
+            this.handleFirstConnectivityChange
+        );
     }
 
 }

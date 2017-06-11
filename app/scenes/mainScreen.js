@@ -7,6 +7,7 @@ import {
     View,
     TouchableOpacity,
     Text,
+    RefreshControl,
     ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
@@ -63,14 +64,7 @@ class Screen extends Component {
 
     renderFooter() {
         if (this.state.postStore.isLoading) {
-            return (
-                <ActivityIndicator
-                    animating={true}
-                    style={[styles.centering, {height: 40}]}
-                    color="black"
-                    size="small"
-                />
-            )
+            return null;
         } else {
             return (
                 <TouchableOpacity onPress={() => {
@@ -82,6 +76,10 @@ class Screen extends Component {
                 </TouchableOpacity>
             )
         }
+    }
+
+    _onRefresh() {
+        this.state.postStore.reload(this.state.category);
     }
 
     render() {
@@ -97,7 +95,14 @@ class Screen extends Component {
             )
         }
         return (
-            <ScrollView style={styles.container}>
+            <ScrollView
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.postStore.isLoading}
+                        onRefresh={this._onRefresh.bind(this)}
+                    />
+                }
+                style={styles.container}>
                 {this.state.postStore.listItems.map((item) => {
                     return self.renderListItem(item);
                 })}

@@ -9,7 +9,8 @@ import {
     Share,
     Dimensions,
     TouchableOpacity,
-    AsyncStorage
+    AsyncStorage,
+    Alert
 } from 'react-native';
 import {HOST} from "../constants";
 let {height, width} = Dimensions.get('window');
@@ -58,6 +59,14 @@ class Screen extends Component {
                 this.setState({
                     post: responseData.post
                 });
+            })
+            .catch((err) => {
+                if (err) {
+                    Alert.alert(
+                        'No Internet Connection',
+                        'Make sure your device is connected to the Internet'
+                    );
+                }
             });
     }
 
@@ -149,7 +158,8 @@ class Screen extends Component {
                 {this.renderForeground()}
                 <InfoPage post={this.state.post}/>
                 <MediaPage media={this.state.post.media}/>
-                {this.state.post.comments_count ? <DiscussionPage comments={this.state.post.comments} navigation={this.props.navigation}/> : null}
+                {this.state.post.comments_count ?
+                    <DiscussionPage comments={this.state.post.comments} navigation={this.props.navigation}/> : null}
             </ScrollView>
         );
     }
