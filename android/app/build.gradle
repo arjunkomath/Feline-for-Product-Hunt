@@ -126,6 +126,7 @@ android {
 }
 
 dependencies {
+    compile project(':bugsnag-react-native')
     compile project(':react-native-fabric')
     compile project(':react-native-vector-icons')
     compile fileTree(dir: "libs", include: ["*.jar"])
