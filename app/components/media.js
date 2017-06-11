@@ -6,7 +6,9 @@ import {
     View,
     Text,
     Image,
-    ScrollView
+    ScrollView,
+    Linking,
+    TouchableOpacity
 } from "react-native";
 
 import Dimensions from 'Dimensions';
@@ -32,8 +34,8 @@ class MediaPage extends Component {
     _keyExtractor = (item, index) => item.id;
 
     calcWidth(media, height) {
-        var height_perc = (height/media.original_height) * 100;
-        var width = (height_perc/100) * media.original_width;
+        var height_perc = (height / media.original_height) * 100;
+        var width = (height_perc / 100) * media.original_width;
         return width;
     }
 
@@ -50,26 +52,49 @@ class MediaPage extends Component {
                     showsHorizontalScrollIndicator={false}
                     style={{height: 300}}>
                     {this.state.medias.map(function (media) {
-                        if(media.media_type != 'image') {
+                        var newWidth = self.calcWidth(media, 300);
+                        if (media.media_type == 'image') {
+                            return (
+                                <Image
+                                    key={media.id}
+                                    source={{uri: media.image_url}}
+                                    resizeMethod="auto"
+                                    style={{
+                                        borderRadius: 5,
+                                        marginRight: 15,
+                                        height: 300,
+                                        width: newWidth,
+                                        flex: 1,
+                                        alignSelf: 'stretch',
+                                        resizeMode: 'contain'
+                                    }}
+                                />
+                            )
+                        } else if (media.media_type == 'video' && media.platform == "youtube") {
+                            return (
+                                <TouchableOpacity
+                                    key={media.id}
+                                    onPress={() => {
+                                        Linking.openURL("https://www.youtube.com/watch?v=" + media.video_id)
+                                    }}>
+                                    <Image
+                                        source={{uri: media.image_url}}
+                                        resizeMethod="auto"
+                                        style={{
+                                            borderRadius: 5,
+                                            marginRight: 15,
+                                            height: 300,
+                                            width: 300,
+                                            flex: 1,
+                                            alignSelf: 'stretch',
+                                            resizeMode: 'contain'
+                                        }}
+                                    />
+                                </TouchableOpacity>
+                            )
+                        } else {
                             return null;
                         }
-                        var newWidth = self.calcWidth(media, 300);
-                        return (
-                            <Image
-                                key={media.id}
-                                source={{uri: media.image_url}}
-                                resizeMethod="auto"
-                                style={{
-                                    borderRadius: 5,
-                                    marginRight: 15,
-                                    height: 300,
-                                    width: newWidth,
-                                    flex: 1,
-                                    alignSelf: 'stretch',
-                                    resizeMode: 'contain'
-                                }}
-                            />
-                        )
                     })}
                 </ScrollView>
             </View>
