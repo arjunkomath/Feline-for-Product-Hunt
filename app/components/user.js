@@ -15,17 +15,23 @@ class User extends Component {
     }
 
     openUser(user) {
-        console.log(user.id);
+        const navigateAction = NavigationActions.navigate({
+            routeName: 'WebView',
+            params: {
+                url: user.profile_url
+            }
+        });
+        this.props.navigation.dispatch(navigateAction);
     }
 
     render() {
         let {user} = this.props;
         return (
             <TouchableOpacity onPress={() => {
-                this.openUser(user)
+                this.openUser(user);
             }}>
                 <View style={styles.container}>
-                    <Image style={styles.makerImage} source={{uri: user.image_url['30px']}}/>
+                    <Image style={styles.makerImage} source={{uri: user.image_url['50px']}}/>
                 </View>
             </TouchableOpacity>
         );

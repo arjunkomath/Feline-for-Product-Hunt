@@ -13,6 +13,7 @@ import moment from 'moment';
 
 import PostStore from '@store/posts';
 import Post from '@component/post';
+import analytics from '@store/analytics';
 
 import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
 
@@ -34,6 +35,9 @@ class Screen extends Component {
         this.setState({
             postStore: new PostStore(this.state.category)
         })
+        analytics.logEvent("View Main Page", {
+            category: this.state.category
+        });
     }
 
     renderPost(post) {

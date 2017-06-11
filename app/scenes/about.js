@@ -8,11 +8,17 @@ import {
     Image
 } from 'react-native';
 import {PH_ORANGE} from '@theme/light';
+import analytics from '@store/analytics';
 
-class Screen extends React.Component {
+class Screen extends Component {
+
     static navigationOptions = {
         tabBarLabel: 'About'
     };
+
+    componentDidMount() {
+        analytics.logEvent("View About Page");
+    }
 
     render() {
         return (
@@ -27,7 +33,6 @@ class Screen extends React.Component {
 
                 <Text style={styles.feline}>Feline</Text>
                 <Text style={styles.tagline}>for Product Hunt</Text>
-                <Text style={styles.tagline}>v2.0.0</Text>
 
                 <View style={[styles.button, {marginTop: 15}]}>
                     <TouchableOpacity onPress={() => {
@@ -47,7 +52,7 @@ class Screen extends React.Component {
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt/issues")
                     }}>
-                        <Text style={styles.button_text}>Request Issue</Text>
+                        <Text style={styles.button_text}>Report Issue</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.button}>
@@ -56,6 +61,10 @@ class Screen extends React.Component {
                     }}>
                         <Text style={styles.button_text}>Request Feature</Text>
                     </TouchableOpacity>
+                </View>
+
+                <View style={[styles.button, {marginTop: 15}]}>
+                    <Text style={styles.button_text_grey}>v2.0.0</Text>
                 </View>
 
             </View>
@@ -81,6 +90,11 @@ const styles = StyleSheet.create({
     button_text: {
         marginLeft: 10,
         color: '#3F51B5',
+        fontSize: 15,
+        fontFamily: "SFRegular"
+    },
+    button_text_grey: {
+        marginLeft: 10,
         fontSize: 15,
         fontFamily: "SFRegular"
     },

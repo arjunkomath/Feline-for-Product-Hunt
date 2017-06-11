@@ -53,7 +53,6 @@ class InfoPage extends Component {
         }
 
         let {post} = this.state;
-        console.log(post);
 
         return (
             <ScrollView

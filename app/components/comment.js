@@ -15,6 +15,7 @@ import {
 import {NavigationActions} from 'react-navigation'
 import ParsedText from 'react-native-parsed-text';
 var ChildComments = require('./childComment');
+import User from '@component/user';
 import {PH_ORANGE} from '@theme/light';
 
 class CommentWidget extends Component {
@@ -59,7 +60,7 @@ class CommentWidget extends Component {
         return (
             <View style={{flex: 1}}>
                 <View style={styles.container}>
-                    <Image source={{uri: comment.user.image_url['50px']}} style={styles.thumbnail}/>
+                    <User user={comment.user} navigation={this.props.navigation}/>
                     <View style={{flex: 1}}>
                         <ParsedText
                             style={styles.body}

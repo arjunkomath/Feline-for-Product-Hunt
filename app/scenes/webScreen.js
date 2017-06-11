@@ -8,6 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import {WebView} from 'react-native';
+import analytics from '@store/analytics';
 
 class Screen extends Component {
 
@@ -25,6 +26,9 @@ class Screen extends Component {
         this.setState({
             url: url
         });
+        analytics.logEvent("Load WebView", {
+            url: url
+        })
     }
 
     render() {

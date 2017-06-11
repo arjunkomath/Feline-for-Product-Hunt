@@ -47,7 +47,7 @@ class ChildCommentsWidget extends Component {
                     this.props.comments.map((comment) => {
                         return (
                             <View style={styles.container} key={comment.id}>
-                                <Image source={{uri: comment.user.image_url['50px']}} style={styles.thumbnail}/>
+                                <User user={comment.user} navigation={this.props.navigation}/>
                                 <View style={{flex: 1}}>
                                     <ParsedText
                                         style={styles.body}

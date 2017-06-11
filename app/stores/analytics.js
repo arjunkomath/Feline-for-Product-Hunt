@@ -8,7 +8,8 @@ var {Answers} = Fabric;
 class Analytics {
 
     logEvent(name, attrObj) {
-        Answers.logCustom(name);
+        console.log("logEvent", name, attrObj);
+        Answers.logCustom(name, attrObj);
     }
 
 }

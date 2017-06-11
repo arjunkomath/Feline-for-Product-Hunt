@@ -19,7 +19,7 @@ class Post extends Component {
     }
 
     openPost(post) {
-        analytics.logEvent("View Content");
+        analytics.logEvent("View Post");
         const navigateAction = NavigationActions.navigate({
             routeName: 'Post',
             params: {
@@ -46,26 +46,27 @@ class Post extends Component {
                     </View>
 
                     <View style={styles.container}>
-                        <View style={[styles.container, {flex: 0.9}]}>
+                        <View style={styles.box}>
+                            <View style={styles.rowContainer}>
+                                <Icon style={{
+                                    marginRight: 5,
+                                    marginTop: 1
+                                }} name="caret-up" size={15} color={GREY_DARK}/>
+                                <Text style={styles.votes}>{post.votes_count}</Text>
+                            </View>
+                        </View>
+
+                        <View style={[styles.rightContainer]}>
                             <View style={styles.box}>
                                 <View style={styles.rowContainer}>
-                                    <Icon style={{marginRight: 5, marginTop: 1}} name="caret-up" size={15} color={GREY_DARK}/>
-                                    <Text style={styles.votes}>{post.votes_count}</Text>
-                                </View>
-                            </View>
-
-                            <View style={[styles.rightContainer]}>
-                                <View style={styles.box}>
-                                    <View style={styles.rowContainer}>
-                                        <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={GREY}/>
-                                        <Text style={styles.comments}>{post.comments_count}</Text>
-                                    </View>
+                                    <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={GREY}/>
+                                    <Text style={styles.comments}>{post.comments_count}</Text>
                                 </View>
                             </View>
                         </View>
 
-                        <View style={{flex: 0.1, marginTop: 15}}>
-                            <User user={post.user}/>
+                        <View style={{marginTop: 13, marginLeft: 10}}>
+                            <User user={post.user} navigation={this.props.navigation}/>
                         </View>
                     </View>
 

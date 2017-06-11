@@ -114,7 +114,7 @@ class Screen extends Component {
                             this.openUrl(post.redirect_url)
                         }}>
                             <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                                <Text style={styles.getIt}>GET IT</Text>
+                                <Text style={styles.getIt}>Get It</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -124,7 +124,7 @@ class Screen extends Component {
                             this.sharePost(post)
                         }}>
                             <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                                <Text style={styles.getIt}>SHARE</Text>
+                                <Text style={styles.getIt}>Share</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
