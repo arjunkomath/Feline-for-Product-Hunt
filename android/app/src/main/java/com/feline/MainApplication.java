@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
 import com.facebook.react.ReactApplication;
+import com.dylanvann.fastimage.FastImageViewPackage;
 import com.bugsnag.BugsnagReactNative;
 import com.facebook.react.shell.MainReactPackage;
 import com.smixx.fabric.FabricPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new FastImageViewPackage(),
             BugsnagReactNative.getPackage(),
                     new FabricPackage(),
                     new VectorIconsPackage()

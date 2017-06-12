@@ -2998,6 +2998,10 @@ react-native-fabric@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-native-fabric/-/react-native-fabric-0.4.1.tgz#5fcb604daf17d0dff70603ff3eeba9e3f3160ddd"
 
+react-native-fast-image@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/react-native-fast-image/-/react-native-fast-image-0.0.10.tgz#cf99ceb73c11b589eca2f7930399a868437e2e2c"
+
 react-native-parsed-text@^0.0.18:
   version "0.0.18"
   resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.18.tgz#b528eb6f1410f552d2e3fd8d80da7ff0a7890c71"
