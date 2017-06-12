@@ -3006,6 +3006,10 @@ react-native-parsed-text@^0.0.18:
   version "0.0.18"
   resolved "https://registry.yarnpkg.com/react-native-parsed-text/-/react-native-parsed-text-0.0.18.tgz#b528eb6f1410f552d2e3fd8d80da7ff0a7890c71"
 
+react-native-select-multiple@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-select-multiple/-/react-native-select-multiple-1.0.4.tgz#05510e152631fd6dc1930b8605f66340f7c9c5b1"
+
 react-native-tab-view@^0.0.65:
   version "0.0.65"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.65.tgz#b685ea3081ff7c96486cd997361026c407302c59"
