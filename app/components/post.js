@@ -11,7 +11,6 @@ import {GREY, GREY_DARK, GREY_LIGHT} from '@theme/light';
 import {NavigationActions} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@store/analytics';
-import FastImage from 'react-native-fast-image'
 
 class Post extends Component {
 
@@ -39,11 +38,10 @@ class Post extends Component {
                 <View style={styles.mainContainer}>
 
                     <View style={styles.container}>
-                        <FastImage
+                        <Image
                             style={styles.image}
                             source={{
                                 uri: post.thumbnail.image_url,
-                                priority: FastImage.priority.normal
                             }}
                         />
                         <View style={[{flex: 1}, styles.rightContainer]}>

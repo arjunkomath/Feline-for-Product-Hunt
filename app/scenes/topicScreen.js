@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import moment from 'moment';
 
-import PostStore from '@store/posts';
+import TopicStore from '@store/topic';
 import Post from '@component/post';
 import analytics from '@store/analytics';
 
@@ -24,43 +24,22 @@ class Screen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            category: this.props.screenProps.category,
-            postStore: null
+            topic: this.props.screenProps.topic,
+            topicStore: null
         };
     }
 
     componentDidMount() {
         this.setState({
-            postStore: new PostStore(this.state.category)
+            topicStore: new TopicStore(this.state.topic)
         })
-        analytics.logEvent("View Main Page", {
-            category: this.state.category
+        analytics.logEvent("View Topic Page", {
+            topic: this.state.topic
         });
     }
 
-    renderPost(post) {
-        return <Post key={post.id} post={toJS(post)} navigation={this.props.navigation}/>
-    }
-
-    renderListItem(item) {
-        let self = this;
-        if (!item.posts.length) {
-            return null;
-        }
-        return (
-            <View key={item.date}>
-                <View style={styles.dateContainer}>
-                    <Text style={styles.loadMoreText}>{moment(item.date).format('dddd, MMMM Do YYYY').toString()}</Text>
-                </View>
-                {item.posts.map((post) => {
-                    return self.renderPost(post);
-                })}
-            </View>
-        );
-    }
-
     renderFooter() {
-        if (this.state.postStore.isLoading) {
+        if (this.state.topicStore.isLoading) {
             return (
                 <View style={styles.loadMoreContainer}>
                     <Text style={styles.loadMoreText}>...</Text>
@@ -69,7 +48,7 @@ class Screen extends Component {
         } else {
             return (
                 <TouchableOpacity onPress={() => {
-                    this.state.postStore.getPosts(this.state.category);
+                    this.state.topicStore.getPosts(this.state.category);
                 }}>
                     <View style={styles.loadMoreContainer}>
                         <Text style={styles.loadMoreText}>View More</Text>
@@ -80,12 +59,12 @@ class Screen extends Component {
     }
 
     _onRefresh() {
-        this.state.postStore.reload(this.state.category);
+        this.state.topicStore.reload(this.state.category);
     }
 
     render() {
         let self = this;
-        if (!this.state.category || !this.state.postStore) {
+        if (!this.state.topic || !this.state.topicStore) {
             return (
                 <ActivityIndicator
                     animating={true}
@@ -101,14 +80,14 @@ class Screen extends Component {
                 <ScrollView
                     refreshControl={
                         <RefreshControl
-                            refreshing={this.state.postStore.isLoading}
+                            refreshing={this.state.topicStore.isLoading}
                             onRefresh={this._onRefresh.bind(this)}
                         />
                     }>
-                    {this.state.postStore.listItems.map((item) => {
-                        return self.renderListItem(item);
+                    {this.state.topicStore.listItems.map((post) => {
+                        return (<Post key={post.id} post={toJS(post)} navigation={this.props.navigation}/>)
                     })}
-                    {self.renderFooter()}
+                    {/*{self.renderFooter()}*/}
                 </ScrollView>
             </View>
         );
