@@ -18,7 +18,7 @@ const categories = [{
     value: 'tech'
 }, {
     label: 'Games',
-    value: 'Games'
+    value: 'games'
 }, {
     label: 'Books',
     value: 'books'
@@ -56,39 +56,41 @@ class Screen extends Component {
         let selectedCategories = [].concat(toJS(CategoryStore.categories));
         let selectedTopics = [].concat(toJS(CategoryStore.topics));
         return (
-            <ScrollView style={styles.mainContainer}>
-                <Text style={styles.title}>Categories</Text>
-                <SelectMultiple
-                    items={categories}
-                    selectedItems={selectedCategories}
-                    labelStyle={styles.button_text}
-                    onSelectionsChange={this.onSelectionsChange}/>
+            <View style={styles.mainContainer}>
+                <ScrollView style={{flex: 1}}>
+                    <Text style={styles.title}>Categories</Text>
+                    <SelectMultiple
+                        items={categories}
+                        selectedItems={selectedCategories}
+                        labelStyle={styles.button_text}
+                        onSelectionsChange={this.onSelectionsChange}/>
 
-                <Text style={[styles.title, {marginTop: 20}]}>Trending Topics</Text>
-                <SelectMultiple
-                    style={{marginBottom: 20}}
-                    items={toJS(CategoryStore.trendingTopics)}
-                    selectedItems={selectedTopics}
-                    labelStyle={styles.button_text}
-                    onSelectionsChange={this.onSelectionsChangeTopics}/>
+                    <Text style={[styles.title, {marginTop: 20}]}>Trending Topics</Text>
+                    <SelectMultiple
+                        style={{marginBottom: 20}}
+                        items={toJS(CategoryStore.trendingTopics)}
+                        selectedItems={selectedTopics}
+                        labelStyle={styles.button_text}
+                        onSelectionsChange={this.onSelectionsChangeTopics}/>
 
-                <TouchableOpacity onPress={() => {
-                    CategoryStore.reload();
-                }}>
-                    <View style={styles.button}>
-                        <Text style={styles.button_text}>Save</Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        CategoryStore.reload();
+                    }}>
+                        <View style={styles.button}>
+                            <Text style={styles.button_text}>Save</Text>
+                        </View>
+                    </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => {
-                    CategoryStore.reset();
-                }}>
-                    <View style={[styles.button, {marginBottom: 50}]}>
-                        <Text style={styles.button_text}>Reset</Text>
-                    </View>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => {
+                        CategoryStore.reset();
+                    }}>
+                        <View style={[styles.button, {marginBottom: 50}]}>
+                            <Text style={styles.button_text}>Reset</Text>
+                        </View>
+                    </TouchableOpacity>
 
-            </ScrollView>
+                </ScrollView>
+            </View>
         );
     }
 }
