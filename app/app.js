@@ -1,59 +1,44 @@
 import React, {Component} from "react";
-import {TabNavigator, StackNavigator} from 'react-navigation';
-import {
-    ACTIVE_BACKGROUND_COLOR,
-    INACTIVE_BACKGROUND_COLOR,
-    ACTIVE_TINT_COLOR,
-    INACTIVE_TINT_COLOR
-} from '@theme/light';
-import MainScreen from '@scene/mainScreen';
-import AboutScreen from '@scene/about';
+import {StackNavigator} from 'react-navigation';
+
 import PostScreen from '@scene/postPage';
 import WebScreen from '@scene/webScreen';
+import {observer} from 'mobx-react/native';
+import CategoryStore from '@store/category';
 
-const tabOptions = {
-    scrollEnabled: true,
-    lazy: true,
-    activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
-    inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
-    inactiveTintColor: INACTIVE_TINT_COLOR,
-    activeTintColor: ACTIVE_TINT_COLOR,
-    labelStyle: {
-        fontSize: 12,
-        fontFamily: 'SFBold'
-    },
-    tabStyle: {
-        width: 120,
-        height: 40
-    },
-    style: {
-        backgroundColor: ACTIVE_BACKGROUND_COLOR
-    },
-    indicatorStyle: {
-        backgroundColor: ACTIVE_TINT_COLOR
-    }
-};
+import {
+    ActivityIndicator,
+    StyleSheet
+} from "react-native";
 
-const App = TabNavigator({
-    Tech: {
-        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'tech'}}/>,
-    },
-    Games: {
-        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'games'}}/>,
-    },
-    Books: {
-        screen: ({navigation}) => <MainScreen navigation={navigation} screenProps={{ category: 'books'}}/>,
-    },
-    About: {
-        screen: AboutScreen,
+@observer
+class App extends Component {
+
+    componentWillMount() {
+        let self = this;
+        CategoryStore.navigation = this.props.navigation;
     }
-}, {
-    tabBarOptions: tabOptions
-});
+
+    render() {
+        if (!CategoryStore.isLoading) {
+            return <CategoryStore.tabs />;
+        } else {
+            return (
+                <ActivityIndicator
+                    animating={true}
+                    style={[styles.centering]}
+                    color="black"
+                    size="large"
+                />
+            )
+        }
+    }
+
+}
 
 const Stack = StackNavigator({
     Home: {
-        screen: App,
+        screen: ({navigation}) => <App navigation={navigation}/>
     },
     Post: {
         path: 'post/:id',
@@ -66,6 +51,14 @@ const Stack = StackNavigator({
 }, {
     navigationOptions: {
         header: null
+    }
+});
+
+const styles = StyleSheet.create({
+    centering: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

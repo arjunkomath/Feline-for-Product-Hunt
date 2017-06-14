@@ -38,7 +38,12 @@ class Post extends Component {
                 <View style={styles.mainContainer}>
 
                     <View style={styles.container}>
-                        <Image style={styles.image} source={{uri: post.thumbnail.image_url}}/>
+                        <Image
+                            style={styles.image}
+                            source={{
+                                uri: post.thumbnail.image_url,
+                            }}
+                        />
                         <View style={[{flex: 1}, styles.rightContainer]}>
                             <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
                             <Text style={styles.tagline} ellipsizeMode="tail" numberOfLines={2}>{post.tagline}</Text>
