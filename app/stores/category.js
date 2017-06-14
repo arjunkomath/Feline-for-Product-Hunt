@@ -19,6 +19,7 @@ import ManageScreen from '@scene/settings';
 
 const tabOptions = {
     scrollEnabled: true,
+    // Had to edit tab navigator source to make it work :(
     lazy: true,
     activeBackgroundColor: ACTIVE_BACKGROUND_COLOR,
     inactiveBackgroundColor: INACTIVE_BACKGROUND_COLOR,
@@ -211,7 +212,10 @@ class Store {
                         responseData.topics.forEach((topic) => {
                             if (['tech', 'games', 'books'].indexOf(topic.slug) > -1)
                                 return true;
-                            self.trendingTopics.push(topic.slug);
+                            self.trendingTopics.push({
+                                label: topic.name,
+                                value: topic.slug
+                            });
                         })
                     })
                     .catch((err) => {

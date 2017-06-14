@@ -13,7 +13,16 @@ import {observer} from 'mobx-react/native';
 import  {toJS} from 'mobx';
 import CategoryStore from '@store/category';
 
-const categories = ['tech', 'games', 'books'];
+const categories = [{
+    label: 'Tech',
+    value: 'tech'
+}, {
+    label: 'Games',
+    value: 'Games'
+}, {
+    label: 'Books',
+    value: 'books'
+}];
 
 @observer
 class Screen extends Component {
