@@ -64,7 +64,7 @@ class Screen extends Component {
                 </View>
 
                 <View style={[styles.button, {marginTop: 15}]}>
-                    <Text style={styles.button_text_grey}>v2.0.1</Text>
+                    <Text style={styles.button_text_grey}>v2.1.0</Text>
                 </View>
 
             </View>

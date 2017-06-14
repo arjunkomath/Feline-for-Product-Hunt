@@ -37,7 +37,7 @@ const tabOptions = {
         backgroundColor: ACTIVE_BACKGROUND_COLOR
     },
     indicatorStyle: {
-        backgroundColor: ACTIVE_TINT_COLOR
+        backgroundColor: ACTIVE_BACKGROUND_COLOR
     }
 };
 
