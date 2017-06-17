@@ -4,6 +4,7 @@
 ### A beautiful, Open Source unofficial [Android app](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
 
 ### <a href="https://play.google.com/apps/testing/com.arjunkomath.product_hunt">Join Beta Testing</a>
+### <a href="https://expo.io/@community/feline">View on Expo</a>
 
 ----------
 ## Download
