@@ -12,6 +12,9 @@ import {NavigationActions} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@store/analytics';
 
+/**
+ * Post component for rendering category and topic list view
+ */
 class Post extends Component {
 
     constructor() {

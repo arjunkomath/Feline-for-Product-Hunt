@@ -18,6 +18,9 @@ import analytics from '@store/analytics';
 
 import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
 
+/**
+ * Listing page for posts in a category
+ */
 @observer
 class Screen extends Component {
 

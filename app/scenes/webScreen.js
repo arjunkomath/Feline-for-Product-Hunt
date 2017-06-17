@@ -10,6 +10,9 @@ import {
 import {WebView} from 'react-native';
 import analytics from '@store/analytics';
 
+/**
+ * Show WebView
+ */
 class Screen extends Component {
 
     constructor() {

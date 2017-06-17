@@ -14,6 +14,9 @@ import {
 var Icon = require('react-native-vector-icons/FontAwesome');
 var UserWidget = require('./user');
 
+/**
+ * Post Info Section
+ */
 class InfoPage extends Component {
 
     constructor() {

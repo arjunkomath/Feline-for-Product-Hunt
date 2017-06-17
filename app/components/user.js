@@ -8,6 +8,9 @@ import {
 
 import {NavigationActions} from 'react-navigation'
 
+/**
+ * User Widget
+ */
 class User extends Component {
 
     constructor() {

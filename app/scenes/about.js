@@ -10,6 +10,9 @@ import {
 import {PH_ORANGE} from '@theme/light';
 import analytics from '@store/analytics';
 
+/**
+ * About Page
+ */
 class Screen extends Component {
 
     static navigationOptions = {

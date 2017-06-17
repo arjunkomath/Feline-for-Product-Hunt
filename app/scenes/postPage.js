@@ -23,6 +23,9 @@ import DiscussionPage from '@component/discussion';
 import MediaPage from '@component/media';
 import InfoPage from '@component/info';
 
+/**
+ * Post Details Page
+ */
 class Screen extends Component {
 
     constructor() {

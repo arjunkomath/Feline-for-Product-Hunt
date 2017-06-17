@@ -16,6 +16,9 @@ var {height, width} = Dimensions.get('window');
 
 var _height = 250;
 
+/**
+ * Media Widget
+ */
 class MediaPage extends Component {
 
     constructor() {

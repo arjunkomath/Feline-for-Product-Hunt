@@ -24,6 +24,9 @@ const categories = [{
     value: 'books'
 }];
 
+/**
+ * Settings Page
+ */
 @observer
 class Screen extends Component {
 

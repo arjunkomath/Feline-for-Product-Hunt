@@ -8,6 +8,9 @@ import {
     Alert
 } from "react-native";
 
+/**
+ * Store for fetching posts in a category
+ */
 class Store {
 
     access_token = null;

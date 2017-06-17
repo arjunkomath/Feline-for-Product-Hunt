@@ -10,6 +10,9 @@ import {
 
 const Comment = require('./comment');
 
+/**
+ * Discussions Area consisting of comments
+ */
 class DiscussionPage extends Component {
 
     constructor() {
