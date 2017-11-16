@@ -10,7 +10,8 @@ import {
     Dimensions,
     TouchableOpacity,
     AsyncStorage,
-    ToastAndroid
+    ToastAndroid,
+    Platform
 } from 'react-native';
 import {HOST} from "../constants";
 let {height, width} = Dimensions.get('window');
@@ -81,13 +82,13 @@ class Screen extends Component {
         this.props.navigation.dispatch(navigateAction);
     }
 
-
     sharePost(post) {
+        let sharedMessage = Platform.OS === "ios" ? post.tagline : post.tagline + "\n" + post.discussion_url;
         Share.share({
             dialogTitle: 'Sharing is Caring',
             title: post.name,
-            message: post.tagline,
-            url: post.redirect_url,
+            message: sharedMessage,
+            url: post.discussion_url,
         });
     }
 
