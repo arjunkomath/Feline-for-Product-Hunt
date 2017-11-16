@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    ScrollView,
     View,
     Text,
     StyleSheet,
@@ -19,13 +20,34 @@ class Screen extends Component {
         tabBarLabel: 'About'
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            contributors: []
+        };
+    }
+
     componentDidMount() {
+        var self = this;
         analytics.logEvent("View About Page");
+        fetch('https://api.github.com/repos/arjunkomath/Feline-for-Product-Hunt/contributors')
+            .then((response) => response.json())
+            .then((responseData) => {
+                console.log(responseData);
+                self.setState({
+                    contributors: responseData
+                });
+            })
+            .catch((err) => {
+                if (err) {
+                    console.log("Error", err);
+                }
+            });
     }
 
     render() {
         return (
-            <View style={styles.mainContainer}>
+            <ScrollView style={styles.mainContainer}>
 
                 <Image
                     style={{
@@ -66,11 +88,35 @@ class Screen extends Component {
                     </TouchableOpacity>
                 </View>
 
-                <View style={[styles.button, {marginTop: 15}]}>
-                    <Text style={styles.button_text_grey}>v2.1.0</Text>
+                <Text style={styles.contributors}>Contributors</Text>
+                {
+                    this.state.contributors.length ?
+                        this.state.contributors.map(function (user) {
+                            return (
+                                <View style={styles.button}>
+                                    <TouchableOpacity onPress={() => {
+                                        Linking.openURL(user.html_url)
+                                    }}>
+                                        <Text style={styles.button_text}>{user.login}</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )
+                        })
+                        : null
+                }
+                <View style={styles.button}>
+                    <TouchableOpacity onPress={() => {
+                        Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt")
+                    }}>
+                        <Text style={styles.button_text}>Be the game changer!</Text>
+                    </TouchableOpacity>
                 </View>
 
-            </View>
+                <View style={[styles.button, { marginTop: 15, marginBottom: 50 }]}>
+                    <Text style={styles.button_text_grey}>Version 2.2.0</Text>
+                </View>
+
+            </ScrollView>
         );
     }
 }
@@ -109,6 +155,14 @@ const styles = StyleSheet.create({
     tagline: {
         fontSize: 20,
         marginTop: -10,
+        fontFamily: "SFRegular",
+        color: "#1a1a1a",
+        fontFamily: "SFBold"
+    },
+    contributors: {
+        fontSize: 20,
+        marginTop: 30,
+        marginBottom: 15,
         fontFamily: "SFRegular",
         color: "#1a1a1a",
         fontFamily: "SFBold"

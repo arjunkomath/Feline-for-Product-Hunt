@@ -53,7 +53,7 @@ class Screen extends Component {
         return (
             <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={styles.loadMoreText}>{moment(item.date).format('dddd, MMMM Do YYYY').toString()}</Text>
+                    <Text style={styles.loadMoreText}>{moment(item.date).format('MMMM Do YYYY').toString()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);

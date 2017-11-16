@@ -18,6 +18,7 @@ import AboutScreen from '@scene/about';
 import ManageScreen from '@scene/settings';
 
 const tabOptions = {
+    tabBarPosition: 'top',
     scrollEnabled: true,
     // Had to edit tab navigator source to make it work :(
     lazy: true,
