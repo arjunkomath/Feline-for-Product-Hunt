@@ -56,3 +56,4 @@ android/app/fabric.properties
 crashlytics-build.properties
 com_crashlytics_export_strings.xml
 techulus.jks
+app/constants.js
