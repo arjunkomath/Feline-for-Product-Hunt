@@ -113,7 +113,7 @@ class Screen extends Component {
                 </View>
 
                 <View style={[styles.button, { marginTop: 15, marginBottom: 50 }]}>
-                    <Text style={styles.button_text_grey}>Version 2.2.0</Text>
+                    <Text style={styles.button_text_grey}>Version 2.2.1</Text>
                 </View>
 
             </ScrollView>
