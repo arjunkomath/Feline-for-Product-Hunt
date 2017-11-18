@@ -93,7 +93,7 @@ class Screen extends Component {
                     this.state.contributors.length ?
                         this.state.contributors.map(function (user) {
                             return (
-                                <View style={styles.button}>
+                                <View key={user.login} style={styles.button}>
                                     <TouchableOpacity onPress={() => {
                                         Linking.openURL(user.html_url)
                                     }}>
