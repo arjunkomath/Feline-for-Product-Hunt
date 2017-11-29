@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {WebView} from 'react-native';
 import analytics from '@store/analytics';
+import theme from '@store/theme';
 
 /**
  * Show WebView
@@ -39,20 +40,20 @@ class Screen extends Component {
             return null;
         }
         return (
-            <View style={{backgroundColor: "white", flex: 1}}>
+            <View style={{backgroundColor: theme.colors.MAIN_BG, flex: 1}}>
                 <View style={styles.border}>
                     { this.state.loading ? (
                         <ActivityIndicator
                             animating={true}
                             style={[{height: 50}]}
-                            color="black"
+                            color={theme.colors.MAIN_TEXT}
                             size="small"
                         />
                     ) : (
                         <TouchableOpacity onPress={() => {
                             Linking.openURL(this.state.url)
                         }}>
-                            <Text style={styles.title}>Preview in Browser</Text>
+                            <Text style={[styles.title, {color: theme.colors.MAIN_TEXT}]}>Preview in Browser</Text>
                         </TouchableOpacity>
                     )}
                 </View>

@@ -15,8 +15,7 @@ import moment from 'moment';
 import PostStore from '@store/posts';
 import Post from '@component/post';
 import analytics from '@store/analytics';
-
-import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
+import theme from '@store/theme'
 
 /**
  * Listing page for posts in a category
@@ -53,7 +52,7 @@ class Screen extends Component {
         return (
             <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={styles.loadMoreText}>{moment(item.date).format('MMMM Do YYYY').toString()}</Text>
+                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>{moment(item.date).format('MMMM Do YYYY').toString()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);
@@ -66,7 +65,7 @@ class Screen extends Component {
         if (this.state.postStore.isLoading) {
             return (
                 <View style={styles.loadMoreContainer}>
-                    <Text style={styles.loadMoreText}>...</Text>
+                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>...</Text>
                 </View>
             );
         } else {
@@ -75,7 +74,7 @@ class Screen extends Component {
                     this.state.postStore.getPosts(this.state.category);
                 }}>
                     <View style={styles.loadMoreContainer}>
-                        <Text style={styles.loadMoreText}>View More</Text>
+                        <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>View More</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -100,7 +99,7 @@ class Screen extends Component {
         }
         return (
             <View
-                style={styles.container}>
+                style={[styles.container, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR }]}>
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -118,7 +117,7 @@ class Screen extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
     date: {
         fontSize: 11,
         textAlign: 'center',
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
         fontFamily: "SFBold",
         fontSize: 25,
         marginLeft: 10,
-        color: '#1a1a1a'
     },
     centering: {
         alignItems: 'center',
@@ -149,10 +147,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
-        borderTopWidth: 1,
-        borderTopColor: '#e3e3e3'
+        borderTopWidth: 1
     }
-});
+};
 
 export default Screen

@@ -1,11 +1,11 @@
-import React, {Component} from "react";
-import {observable} from "mobx";
-import {TabNavigator} from 'react-navigation';
+import React, { Component } from "react";
+import { observable } from "mobx";
+import { TabNavigator } from 'react-navigation';
 import {
     AsyncStorage,
     ToastAndroid
 } from "react-native";
-import {API_KEY, API_SECRET, HOST} from "../constants";
+import { API_KEY, API_SECRET, HOST } from "../constants";
 import {
     ACTIVE_BACKGROUND_COLOR,
     INACTIVE_BACKGROUND_COLOR,
@@ -17,7 +17,7 @@ import TopicScreen from '@scene/topicScreen';
 import AboutScreen from '@scene/about';
 import ManageScreen from '@scene/settings';
 
-const tabOptions = {
+let tabOptions = {
     tabBarPosition: 'top',
     scrollEnabled: true,
     // Had to edit tab navigator source to make it work :(
@@ -49,9 +49,27 @@ class Store {
 
     navigation = {};
     @observable isLoading = true;
+
     @observable categories = [];
+    @observable defaultCategories = [
+        {
+            label: 'Tech',
+            value: 'tech',
+            selected: true 
+        }, {
+            label: 'Games',
+            value: 'games',
+            selected: true
+        }, {
+            label: 'Books',
+            value: 'books',
+            selected: false
+        }
+    ];
+
     @observable topics = [];
     @observable trendingTopics = [];
+
     @observable tabs = {};
 
     /**
@@ -82,40 +100,31 @@ class Store {
     }
 
     /**
-     * Update Category Prefs
-     * @param categories
-     */
-    update(categories) {
-        this.categories = categories;
-    }
-
-    /**
-     * Update Topic Prefs
-     * @param topics
-     */
-    updateTopics(topics) {
-        this.topics = topics;
-    }
-
-    /**
      * Reload App
      */
     reload() {
         let self = this;
         const screens = {};
+
+        // Selecte default categories
+        self.defaultCategories = self.defaultCategories.map((category) => {
+            category.selected = self.categories.indexOf(category.value) > -1
+            return category;
+        });
+
         self.categories.forEach((category, i) => {
             screens[this.categories[i]] = {
-                screen: () => <MainScreen navigation={self.navigation} screenProps={{category: category}}/>
+                screen: () => <MainScreen navigation={self.navigation} screenProps={{ category: category }} />
             };
         });
         self.topics.forEach((topic, i) => {
             screens[this.topics[i]] = {
-                screen: () => <TopicScreen navigation={self.navigation} screenProps={{topic: topic}}/>
+                screen: () => <TopicScreen navigation={self.navigation} screenProps={{ topic: topic }} />
             };
         });
-        screens['settings'] = {screen: ManageScreen};
-        screens['about'] = {screen: AboutScreen};
-        this.tabs = TabNavigator(screens, {tabBarOptions: tabOptions});
+        screens['settings'] = { screen: ManageScreen };
+        screens['about'] = { screen: AboutScreen };
+        this.tabs = TabNavigator(screens, { tabBarOptions: tabOptions });
         AsyncStorage
             .setItem('categories', JSON.stringify(self.categories))
             .then(() => {
@@ -135,6 +144,7 @@ class Store {
         this.isLoading = true;
         self.categories = ['tech', 'games', 'books'];
         self.topics = [];
+        self.getTrendingTopics();
         AsyncStorage
             .setItem('categories', JSON.stringify(self.categories))
             .then(() => {
@@ -194,6 +204,7 @@ class Store {
      */
     getTrendingTopics() {
         let self = this;
+        self.trendingTopics = [];
         this.isLoading = true;
         this
             .getAuthToken()
@@ -215,7 +226,8 @@ class Store {
                                 return true;
                             self.trendingTopics.push({
                                 label: topic.name,
-                                value: topic.slug
+                                value: topic.slug,
+                                selected: self.topics.indexOf(topic.slug) > -1
                             });
                         })
                     })
@@ -225,6 +237,36 @@ class Store {
                         }
                     });
             });
+    }
+
+    selectCategory(selectedCategory, value) {
+        var self = this;
+        this.defaultCategories = this.defaultCategories.map((category) => {
+            if (category.value == selectedCategory.value) {
+                category.selected = value;
+            }
+            return category;
+        });
+        self.categories = [];
+        this.defaultCategories.forEach((category) => {
+            if (category.selected)
+                self.categories.push(category.value)
+        });
+    }
+
+    selectTopic(selectedTopic, value) {
+        var self = this;
+        this.trendingTopics = this.trendingTopics.map((topic) => {
+            if (topic.value == selectedTopic.value) {
+                topic.selected = value;
+            }
+            return topic;
+        });
+        self.topics = [];
+        this.trendingTopics.forEach((topic) => {
+            if (topic.selected)
+                self.topics.push(topic.value)
+        });
     }
 
 }

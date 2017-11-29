@@ -15,8 +15,7 @@ import moment from 'moment';
 import TopicStore from '@store/topic';
 import Post from '@component/post';
 import analytics from '@store/analytics';
-
-import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
+import theme from '@store/theme'
 
 /**
  * Listing page for posts in a category
@@ -79,7 +78,7 @@ class Screen extends Component {
         }
         return (
             <View
-                style={styles.container}>
+                style={[styles.container, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR }]}>
                 <ScrollView
                     refreshControl={
                         <RefreshControl

@@ -10,10 +10,13 @@ import {
 } from 'react-native';
 import {PH_ORANGE} from '@theme/light';
 import analytics from '@store/analytics';
+import theme from '@store/theme'
+import {observer} from 'mobx-react/native';
 
 /**
  * About Page
  */
+@observer
 class Screen extends Component {
 
     static navigationOptions = {
@@ -47,7 +50,7 @@ class Screen extends Component {
 
     render() {
         return (
-            <ScrollView style={styles.mainContainer}>
+            <ScrollView style={[styles.mainContainer, {backgroundColor: theme.colors.MAIN_BG}]}>
 
                 <Image
                     style={{
@@ -56,64 +59,64 @@ class Screen extends Component {
                     }}
                     source={require('./../../assets/images/icon.png')}/>
 
-                <Text style={styles.feline}>Feline</Text>
-                <Text style={styles.tagline}>for Product Hunt</Text>
+                <Text style={[styles.feline, {color: theme.colors.MAIN_TEXT}]}>Feline</Text>
+                <Text style={[styles.tagline, {color: theme.colors.MAIN_TEXT}]}>for Product Hunt</Text>
 
-                <View style={[styles.button, {marginTop: 15}]}>
+                <View style={[styles.button, {marginTop: 15, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt")
                     }}>
-                        <Text style={styles.button_text}>Rate Feline</Text>
+                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Rate Feline</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.button}>
+                <View style={[styles.button, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://www.paypal.me/ArjunKomath/1.99")
                     }}>
-                        <Text style={styles.button_text}>Donate</Text>
+                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Donate</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.button}>
+                <View style={[styles.button, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt/issues")
                     }}>
-                        <Text style={styles.button_text}>Report Issue</Text>
+                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Report Issue</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={styles.button}>
+                <View style={[styles.button, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt/issues")
                     }}>
-                        <Text style={styles.button_text}>Request Feature</Text>
+                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Request Feature</Text>
                     </TouchableOpacity>
                 </View>
 
-                <Text style={styles.contributors}>Contributors</Text>
+                <Text style={[styles.contributors, {color: theme.colors.MAIN_TEXT}]}>Contributors</Text>
                 {
                     this.state.contributors.length ?
                         this.state.contributors.map(function (user) {
                             return (
-                                <View key={user.login} style={styles.button}>
+                                <View key={user.login} style={[styles.button, , {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                                     <TouchableOpacity onPress={() => {
                                         Linking.openURL(user.html_url)
                                     }}>
-                                        <Text style={styles.button_text}>{user.login}</Text>
+                                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>{user.login}</Text>
                                     </TouchableOpacity>
                                 </View>
                             )
                         })
                         : null
                 }
-                <View style={styles.button}>
+                <View style={[styles.button, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                     <TouchableOpacity onPress={() => {
                         Linking.openURL("https://github.com/arjunkomath/Feline-for-Product-Hunt")
                     }}>
-                        <Text style={styles.button_text}>Be the game changer!</Text>
+                        <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Be the game changer!</Text>
                     </TouchableOpacity>
                 </View>
 
-                <View style={[styles.button, { marginTop: 15, marginBottom: 50 }]}>
-                    <Text style={styles.button_text_grey}>Version 2.2.1</Text>
+                <View style={[styles.button, { marginTop: 15, marginBottom: 50, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR }]}>
+                    <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Version 2.2.1</Text>
                 </View>
 
             </ScrollView>

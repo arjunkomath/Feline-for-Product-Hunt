@@ -13,6 +13,7 @@ import {
 
 var Icon = require('react-native-vector-icons/FontAwesome');
 var UserWidget = require('./user');
+import theme from '@store/theme';
 
 /**
  * Post Info Section
@@ -64,8 +65,8 @@ class InfoPage extends Component {
                 style={styles.container}>
                 {this.state.post.topics.map(function (topic) {
                     return (
-                        <View key={topic.name} style={styles.box}>
-                            <Text style={styles.tag}>{topic.name}</Text>
+                        <View key={topic.name} style={[styles.box, {backgroundColor: theme.colors.SECONDARY_BG}]}>
+                            <Text style={[styles.tag, {color: theme.colors.MAIN_TEXT}]}>{topic.name}</Text>
                         </View>
                     )
                 })}

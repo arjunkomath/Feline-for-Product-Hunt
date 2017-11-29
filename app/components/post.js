@@ -11,6 +11,7 @@ import {GREY, GREY_DARK, GREY_LIGHT} from '@theme/light';
 import {NavigationActions} from 'react-navigation'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import analytics from '@store/analytics';
+import theme from '@store/theme'
 
 /**
  * Post component for rendering category and topic list view
@@ -38,7 +39,7 @@ class Post extends Component {
             <TouchableOpacity onPress={() => {
                 this.openPost(post)
             }}>
-                <View style={styles.mainContainer}>
+                <View style={[styles.mainContainer, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
 
                     <View style={styles.container}>
                         <Image
@@ -48,8 +49,8 @@ class Post extends Component {
                             }}
                         />
                         <View style={[{flex: 1}, styles.rightContainer]}>
-                            <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
-                            <Text style={styles.tagline} ellipsizeMode="tail" numberOfLines={2}>{post.tagline}</Text>
+                            <Text style={[styles.name, {color: theme.colors.MAIN_TEXT}]} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
+                            <Text style={[styles.tagline, {color: theme.colors.MAIN_TEXT}]} ellipsizeMode="tail" numberOfLines={2}>{post.tagline}</Text>
                         </View>
                     </View>
 
@@ -59,16 +60,16 @@ class Post extends Component {
                                 <Icon style={{
                                     marginRight: 5,
                                     marginTop: 1
-                                }} name="caret-up" size={15} color={GREY_DARK}/>
-                                <Text style={styles.votes}>{post.votes_count}</Text>
+                                }} name="caret-up" size={15} color={theme.colors.MAIN_TEXT_LIGHT}/>
+                                <Text style={[styles.votes, {color: theme.colors.MAIN_TEXT_LIGHT}]}>{post.votes_count}</Text>
                             </View>
                         </View>
 
                         <View style={[styles.rightContainer]}>
                             <View style={styles.box}>
                                 <View style={styles.rowContainer}>
-                                    <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={GREY}/>
-                                    <Text style={styles.comments}>{post.comments_count}</Text>
+                                    <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={theme.colors.MAIN_TEXT_LIGHT}/>
+                                    <Text style={[styles.comments, {color: theme.colors.MAIN_TEXT_LIGHT}]}>{post.comments_count}</Text>
                                 </View>
                             </View>
                         </View>
@@ -91,8 +92,7 @@ const styles = StyleSheet.create({
     },
     mainContainer: {
         padding: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: '#e3e3e3'
+        borderBottomWidth: 1
     },
     votes: {
         color: "black",
@@ -132,7 +132,6 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 17,
-        color: GREY_DARK,
         fontFamily: 'SFBold',
     },
     stats: {

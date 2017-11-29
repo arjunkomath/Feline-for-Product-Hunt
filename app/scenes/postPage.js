@@ -23,6 +23,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DiscussionPage from '@component/discussion';
 import MediaPage from '@component/media';
 import InfoPage from '@component/info';
+import theme from '@store/theme';
 
 /**
  * Post Details Page
@@ -95,7 +96,7 @@ class Screen extends Component {
     renderForeground() {
         let {post} = this.state;
         return (
-            <View style={{height: 210, backgroundColor: GREY_LIGHT}}>
+            <View style={{height: 210, backgroundColor: theme.colors.SECONDARY_BG}}>
                 <Image resizeMode={Image.resizeMode.strech} style={styles.screenshot} source={{uri: post.thumbnail.image_url}}>
                     <Image
                         resizeMode={Image.resizeMode.strech}
@@ -110,13 +111,13 @@ class Screen extends Component {
                 </Image>
 
                 <View style={styles.rowContainer}>
-                    <View style={[styles.box, {backgroundColor: "white", marginLeft: 15}]}>
+                    <View style={[styles.box, {backgroundColor: theme.colors.MAIN_BG, marginLeft: 15}]}>
                         <View style={styles.rowContainer}>
                             <Icon style={{
                                 marginRight: 5,
                                 marginTop: 1
-                            }} name="caret-up" size={15} color={GREY_DARK}/>
-                            <Text style={styles.votes}>{post.votes_count}</Text>
+                            }} name="caret-up" size={15} color={theme.colors.MAIN_TEXT}/>
+                            <Text style={[styles.votes, {color: theme.colors.MAIN_TEXT}]}>{post.votes_count}</Text>
                         </View>
                     </View>
 
@@ -149,14 +150,14 @@ class Screen extends Component {
             return (
                 <ActivityIndicator
                     animating={true}
-                    style={[styles.centering]}
-                    color="black"
+                    style={[styles.centering, {backgroundColor: theme.colors.MAIN_BG}]}
+                    color={theme.colors.MAIN_TEXT}
                     size="large"
                 />
             )
         }
         return (
-            <ScrollView style={{backgroundColor: "white"}}>
+            <ScrollView style={{backgroundColor: theme.colors.MAIN_BG}}>
                 {this.renderForeground()}
                 <InfoPage post={this.state.post}/>
                 <MediaPage media={this.state.post.media}/>

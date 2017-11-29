@@ -16,6 +16,7 @@ import {NavigationActions} from 'react-navigation'
 import ParsedText from 'react-native-parsed-text';
 import {PH_ORANGE} from '@theme/light';
 import User from '@component/user';
+import theme from '@store/theme';
 
 class ChildCommentsWidget extends Component {
 
@@ -47,11 +48,11 @@ class ChildCommentsWidget extends Component {
                 {
                     this.props.comments.map((comment) => {
                         return (
-                            <View style={styles.container} key={comment.id}>
+                            <View style={[styles.container, {backgroundColor: theme.colors.MAIN_BG}]} key={comment.id}>
                                 <User user={comment.user} navigation={this.props.navigation}/>
                                 <View style={{flex: 1}}>
                                     <ParsedText
-                                        style={styles.body}
+                                        style={[styles.body, {color: theme.colors.MAIN_TEXT}]}
                                         parse={
                                             [
                                                 {
@@ -69,7 +70,7 @@ class ChildCommentsWidget extends Component {
                                     >
                                         {comment.body}
                                     </ParsedText>
-                                    <Text style={styles.votes}>
+                                    <Text style={[styles.votes, {color: theme.colors.BUTTON_TEXT}]}>
                                         {comment.votes + " Vote(s) - Comment by " + comment.user.name}
                                     </Text>
                                 </View>

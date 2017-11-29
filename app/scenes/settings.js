@@ -4,25 +4,16 @@ import {
     ScrollView,
     Text,
     StyleSheet,
-    TouchableOpacity
+    TouchableOpacity,
+    Switch
 } from 'react-native';
 import analytics from '@store/analytics';
-import SelectMultiple from 'react-native-select-multiple'
 
 import {observer} from 'mobx-react/native';
 import  {toJS} from 'mobx';
 import CategoryStore from '@store/category';
 
-const categories = [{
-    label: 'Tech',
-    value: 'tech'
-}, {
-    label: 'Games',
-    value: 'games'
-}, {
-    label: 'Books',
-    value: 'books'
-}];
+import theme from '@store/theme'
 
 /**
  * Settings Page
@@ -36,59 +27,62 @@ class Screen extends Component {
 
     componentDidMount() {
         analytics.logEvent("View Settings Page");
-
-    }
-
-    onSelectionsChange = (selected) => {
-        let categories = [];
-        selected.forEach(function (category) {
-            categories.push(category.value);
-        });
-        CategoryStore.update(categories);
-    }
-
-    onSelectionsChangeTopics = (selected) => {
-        let topics = [];
-        selected.forEach(function (topic) {
-            topics.push(topic.value);
-        });
-        CategoryStore.updateTopics(topics);
     }
 
     render() {
-        let selectedCategories = [].concat(toJS(CategoryStore.categories));
-        let selectedTopics = [].concat(toJS(CategoryStore.topics));
+        let topics = toJS(CategoryStore.trendingTopics);
+        let categories = toJS(CategoryStore.defaultCategories);
         return (
-            <View style={styles.mainContainer}>
+            <View style={[styles.mainContainer, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR}]}>
                 <ScrollView style={{flex: 1}}>
-                    <Text style={styles.title}>Categories</Text>
-                    <SelectMultiple
-                        items={categories}
-                        selectedItems={selectedCategories}
-                        labelStyle={styles.button_text}
-                        onSelectionsChange={this.onSelectionsChange}/>
 
-                    <Text style={[styles.title, {marginTop: 20}]}>Trending Topics</Text>
-                    <SelectMultiple
-                        style={{marginBottom: 20}}
-                        items={toJS(CategoryStore.trendingTopics)}
-                        selectedItems={selectedTopics}
-                        labelStyle={styles.button_text}
-                        onSelectionsChange={this.onSelectionsChangeTopics}/>
+                    <Text style={[styles.title, {color: theme.colors.MAIN_TEXT}]}>Categories</Text>
+                    <View style={{ backgroundColor: theme.colors.MAIN_BG }}>
+                        {
+                            categories.map((category) => {
+                                return (
+                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }} key={category.value}>
+                                        <Switch value={category.selected} onValueChange={(value) => CategoryStore.selectCategory(category, value)} />
+                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>{category.label}</Text>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+
+                    <Text style={[styles.title, {marginTop: 20, color: theme.colors.MAIN_TEXT}]}>Trending Topics</Text>
+                    <View style={{ backgroundColor: theme.colors.MAIN_BG, marginBottom: 20 }}>
+                        {
+                            topics.map((topic) => {
+                                return (
+                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }} key={topic.value}>
+                                        <Switch value={topic.selected} onValueChange={(value) => CategoryStore.selectTopic(topic, value)} />
+                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>{topic.label}</Text>
+                                    </View>
+                                )
+                            })
+                        }
+                    </View>
+
+                    <Text style={[styles.title, { color: theme.colors.MAIN_TEXT }]}>Look and Feel</Text>
+                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, marginBottom: 20, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }}>
+                        <Switch value={theme.current_theme == 'dark'} onValueChange={(value) => theme.toggleDark(value)} />
+                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>Dark Theme</Text>
+                    </View>
 
                     <TouchableOpacity onPress={() => {
                         CategoryStore.reload();
                     }}>
-                        <View style={styles.button}>
-                            <Text style={styles.button_text}>Save</Text>
+                        <View style={[styles.button, {borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
+                            <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Save</Text>
                         </View>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={() => {
                         CategoryStore.reset();
                     }}>
-                        <View style={[styles.button, {marginBottom: 50}]}>
-                            <Text style={styles.button_text}>Reset</Text>
+                        <View style={[styles.button, {marginBottom: 50, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR}]}>
+                            <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Reset</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -103,19 +97,15 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 15,
         borderTopWidth: 1,
-        borderTopColor: '#e3e3e3',
-        backgroundColor: "white",
         paddingBottom: 30
     },
     button: {
         height: 45,
         borderBottomWidth: 1,
-        justifyContent: 'center',
-        borderBottomColor: '#e3e3e3',
+        justifyContent: 'center'
     },
     button_text: {
         marginLeft: 10,
-        color: '#3F51B5',
         fontSize: 15,
         fontFamily: "SFRegular"
     },

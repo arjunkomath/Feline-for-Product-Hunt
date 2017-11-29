@@ -17,6 +17,7 @@ import ParsedText from 'react-native-parsed-text';
 var ChildComments = require('./childComment');
 import User from '@component/user';
 import {PH_ORANGE} from '@theme/light';
+import theme from '@store/theme';
 
 class CommentWidget extends Component {
 
@@ -59,11 +60,11 @@ class CommentWidget extends Component {
 
         return (
             <View style={{flex: 1}}>
-                <View style={styles.container}>
+                <View style={[styles.container, {backgroundColor: theme.colors.MAIN_BG}]}>
                     <User user={comment.user} navigation={this.props.navigation}/>
                     <View style={{flex: 1}}>
                         <ParsedText
-                            style={styles.body}
+                            style={[styles.body, {color: theme.colors.MAIN_TEXT}]}
                             parse={
                                 [
                                     {type: 'url', style: styles.url, onPress: self.handleUrlPress.bind(self)},
@@ -74,7 +75,7 @@ class CommentWidget extends Component {
                             {comment.body}
                         </ParsedText>
 
-                        <Text style={styles.votes}>
+                        <Text style={[styles.votes, {color: theme.colors.BUTTON_TEXT}]}>
                             {comment.votes + ' Vote(s) - Comment by ' + comment.user.name}
                         </Text>
                     </View>
