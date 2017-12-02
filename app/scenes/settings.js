@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {
     View,
     ScrollView,
@@ -6,14 +6,14 @@ import {
     StyleSheet,
     TouchableOpacity,
     Switch
-} from 'react-native';
-import analytics from '@store/analytics';
+} from "react-native";
+import analytics from "@store/analytics";
 
-import {observer} from 'mobx-react/native';
-import  {toJS} from 'mobx';
-import CategoryStore from '@store/category';
+import {observer} from "mobx-react/native";
+import  {toJS} from "mobx";
+import CategoryStore from "@store/category";
 
-import theme from '@store/theme'
+import theme from "@store/theme"
 
 /**
  * Settings Page
@@ -22,7 +22,7 @@ import theme from '@store/theme'
 class Screen extends Component {
 
     static navigationOptions = {
-        tabBarLabel: 'Settings'
+        tabBarLabel: "Settings"
     };
 
     componentDidMount() {
@@ -41,9 +41,9 @@ class Screen extends Component {
                         {
                             categories.map((category) => {
                                 return (
-                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }} key={category.value}>
+                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }} key={category.value}>
                                         <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={category.selected} onValueChange={(value) => CategoryStore.selectCategory(category, value)} />
-                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>{category.label}</Text>
+                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>{category.label}</Text>
                                     </View>
                                 )
                             })
@@ -55,9 +55,9 @@ class Screen extends Component {
                         {
                             topics.map((topic) => {
                                 return (
-                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }} key={topic.value}>
+                                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }} key={topic.value}>
                                         <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={topic.selected} onValueChange={(value) => CategoryStore.selectTopic(topic, value)} />
-                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>{topic.label}</Text>
+                                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>{topic.label}</Text>
                                     </View>
                                 )
                             })
@@ -65,9 +65,9 @@ class Screen extends Component {
                     </View>
 
                     <Text style={[styles.title, { color: theme.colors.MAIN_TEXT }]}>Look and Feel</Text>
-                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, marginBottom: 20, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: 'row' }}>
-                        <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={theme.current_theme == 'dark'} onValueChange={(value) => theme.toggleDark(value)} />
-                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: 'center', fontFamily: "SFRegular" }}>Dark Theme</Text>
+                    <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, marginBottom: 20, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }}>
+                        <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={theme.current_theme == "dark"} onValueChange={(value) => theme.toggleDark(value)} />
+                        <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>Dark Theme</Text>
                     </View>
 
                     <TouchableOpacity onPress={() => {
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     button: {
         height: 45,
         borderBottomWidth: 1,
-        justifyContent: 'center'
+        justifyContent: "center"
     },
     button_text: {
         marginLeft: 10,

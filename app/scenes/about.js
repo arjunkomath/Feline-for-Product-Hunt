@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {
     ScrollView,
     View,
@@ -7,11 +7,11 @@ import {
     TouchableOpacity,
     Linking,
     Image
-} from 'react-native';
-import {PH_ORANGE} from '@theme/light';
-import analytics from '@store/analytics';
-import theme from '@store/theme'
-import {observer} from 'mobx-react/native';
+} from "react-native";
+import {PH_ORANGE} from "@theme/light";
+import analytics from "@store/analytics";
+import theme from "@store/theme"
+import {observer} from "mobx-react/native";
 
 /**
  * About Page
@@ -20,7 +20,7 @@ import {observer} from 'mobx-react/native';
 class Screen extends Component {
 
     static navigationOptions = {
-        tabBarLabel: 'About'
+        tabBarLabel: "About"
     };
 
     constructor(props) {
@@ -33,7 +33,7 @@ class Screen extends Component {
     componentDidMount() {
         var self = this;
         analytics.logEvent("View About Page");
-        fetch('https://api.github.com/repos/arjunkomath/Feline-for-Product-Hunt/contributors')
+        fetch("https://api.github.com/repos/arjunkomath/Feline-for-Product-Hunt/contributors")
             .then((response) => response.json())
             .then((responseData) => {
                 console.log(responseData);
@@ -57,7 +57,7 @@ class Screen extends Component {
                         width: 100,
                         height: 100
                     }}
-                    source={require('./../../assets/images/icon.png')}/>
+                    source={require("./../../assets/images/icon.png")}/>
 
                 <Text style={[styles.feline, {color: theme.colors.MAIN_TEXT}]}>Feline</Text>
                 <Text style={[styles.tagline, {color: theme.colors.MAIN_TEXT}]}>for Product Hunt</Text>
@@ -129,19 +129,19 @@ const styles = StyleSheet.create({
         flex: 1,
         padding: 15,
         borderTopWidth: 1,
-        borderTopColor: '#e3e3e3',
+        borderTopColor: "#e3e3e3",
         backgroundColor: "white"
     },
     button: {
         marginLeft: 15,
         height: 45,
         borderBottomWidth: 1,
-        justifyContent: 'center',
-        borderBottomColor: '#e3e3e3',
+        justifyContent: "center",
+        borderBottomColor: "#e3e3e3",
     },
     button_text: {
         marginLeft: 10,
-        color: '#3F51B5',
+        color: "#3F51B5",
         fontSize: 15,
         fontFamily: "SFRegular"
     },

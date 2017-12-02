@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 import React, {Component} from "react";
 import {
@@ -6,11 +6,11 @@ import {
     ScrollView,
     View,
     Text
-} from 'react-native' ;
+} from "react-native" ;
 
-import theme from '@store/theme';
+import theme from "@store/theme";
 
-const Comment = require('./comment');
+const Comment = require("./comment");
 
 /**
  * Discussions Area consisting of comments

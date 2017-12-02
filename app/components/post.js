@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import {
     View,
     Text,
     Image,
     StyleSheet,
     TouchableOpacity
-} from 'react-native';
-import User from '@component/user';
-import {GREY, GREY_DARK, GREY_LIGHT} from '@theme/light';
-import {NavigationActions} from 'react-navigation'
-import Icon from 'react-native-vector-icons/FontAwesome';
-import analytics from '@store/analytics';
-import theme from '@store/theme'
+} from "react-native";
+import User from "@component/user";
+import {GREY, GREY_DARK, GREY_LIGHT} from "@theme/light";
+import {NavigationActions} from "react-navigation"
+import Icon from "react-native-vector-icons/FontAwesome";
+import analytics from "@store/analytics";
+import theme from "@store/theme"
 
 /**
  * Post component for rendering category and topic list view
@@ -25,7 +25,7 @@ class Post extends Component {
     openPost(post) {
         analytics.logEvent("View Post");
         const navigateAction = NavigationActions.navigate({
-            routeName: 'Post',
+            routeName: "Post",
             params: {
                 id: post.id
             }
@@ -88,7 +88,7 @@ class Post extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     mainContainer: {
         padding: 10,
@@ -96,26 +96,26 @@ const styles = StyleSheet.create({
     },
     votes: {
         color: "black",
-        fontWeight: 'bold',
+        fontWeight: "bold",
         fontSize: 13
     },
     comments: {
         color: GREY,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         fontSize: 13
     },
     box: {
         height: 40,
         width: 75,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         marginTop: 10,
         borderRadius: 5,
         borderColor: GREY_LIGHT,
         borderWidth: 1
     },
     rowContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     rightContainer: {
         paddingLeft: 10
@@ -132,17 +132,17 @@ const styles = StyleSheet.create({
     },
     name: {
         fontSize: 17,
-        fontFamily: 'SFBold',
+        fontFamily: "SFBold",
     },
     stats: {
         marginTop: 10,
         fontSize: 13,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     tagline: {
         marginTop: 5,
         fontSize: 13,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     votesButton: {
         width: 75

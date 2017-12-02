@@ -6,10 +6,10 @@ import {
     ActivityIndicator,
     Linking,
     TouchableOpacity
-} from 'react-native';
-import {WebView} from 'react-native';
-import analytics from '@store/analytics';
-import theme from '@store/theme';
+} from "react-native";
+import {WebView} from "react-native";
+import analytics from "@store/analytics";
+import theme from "@store/theme";
 
 /**
  * Show WebView
@@ -75,14 +75,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     border: {
-        borderBottomColor: '#3e3e3e',
+        borderBottomColor: "#3e3e3e",
         borderBottomWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         height: 50
     },
     title: {
-        color: '#1a1a1a',
+        color: "#1a1a1a",
         fontFamily: "SFBold"
     }
 });

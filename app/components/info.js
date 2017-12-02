@@ -11,9 +11,9 @@ import {
     TouchableOpacity,
 } from "react-native";
 
-var Icon = require('react-native-vector-icons/FontAwesome');
-var UserWidget = require('./user');
-import theme from '@store/theme';
+var Icon = require("react-native-vector-icons/FontAwesome");
+var UserWidget = require("./user");
+import theme from "@store/theme";
 
 /**
  * Post Info Section
@@ -86,7 +86,7 @@ var styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 5,
         marginRight: 10,
-        borderColor: '#e3e3e3'
+        borderColor: "#e3e3e3"
     },
     tag: {
         fontFamily: "SFRegular",

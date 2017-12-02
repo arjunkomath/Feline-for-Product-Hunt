@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {observer} from 'mobx-react/native';
-import {toJS} from 'mobx';
+import React, {Component} from "react";
+import {observer} from "mobx-react/native";
+import {toJS} from "mobx";
 import {
     ScrollView,
     StyleSheet,
@@ -10,13 +10,13 @@ import {
     RefreshControl,
     StatusBar,
     ActivityIndicator
-} from 'react-native';
-import moment from 'moment';
+} from "react-native";
+import moment from "moment";
 
-import PostStore from '@store/posts';
-import Post from '@component/post';
-import analytics from '@store/analytics';
-import theme from '@store/theme'
+import PostStore from "@store/posts";
+import Post from "@component/post";
+import analytics from "@store/analytics";
+import theme from "@store/theme"
 
 /**
  * Listing page for posts in a category
@@ -53,7 +53,7 @@ class Screen extends Component {
         return (
             <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>{moment(item.date).format('MMMM Do YYYY').toString()}</Text>
+                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>{moment(item.date).format("MMMM Do YYYY").toString()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);
@@ -125,7 +125,7 @@ class Screen extends Component {
 const styles = {
     date: {
         fontSize: 11,
-        textAlign: 'center',
+        textAlign: "center",
         padding: 5,
         marginLeft: 10
     },
@@ -135,12 +135,12 @@ const styles = {
         marginLeft: 10,
     },
     centering: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         margin: 15,
     },
     loadMoreContainer: {
-        justifyContent: 'center',
+        justifyContent: "center",
         height: 50,
         marginTop: 10,
         marginBottom: 10,

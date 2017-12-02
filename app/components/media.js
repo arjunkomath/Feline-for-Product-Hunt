@@ -11,8 +11,9 @@ import {
     TouchableOpacity
 } from "react-native";
 
-import Dimensions from 'Dimensions';
-var {height, width} = Dimensions.get('window');
+import Dimensions from "Dimensions";
+import theme from "@store/theme";
+var {height, width} = Dimensions.get("window");
 
 var _height = 250;
 
@@ -49,14 +50,14 @@ class MediaPage extends Component {
         let self = this;
         return (
             <View style={styles.container}>
-                <Text style={[styles.title, {color: theme.color.MAIN_TEXT}]}>Media</Text>
+                <Text style={[styles.title, {color: theme.colors.MAIN_TEXT}]}>Media</Text>
                 <ScrollView
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
                     style={{height: 300}}>
                     {this.state.medias.map(function (media) {
                         var newWidth = self.calcWidth(media, 300);
-                        if (media.media_type == 'image') {
+                        if (media.media_type == "image") {
                             return (
                                 <Image
                                     key={media.id}
@@ -68,12 +69,12 @@ class MediaPage extends Component {
                                         height: 300,
                                         width: newWidth,
                                         flex: 1,
-                                        alignSelf: 'stretch',
-                                        resizeMode: 'contain'
+                                        alignSelf: "stretch",
+                                        resizeMode: "contain"
                                     }}
                                 />
                             )
-                        } else if (media.media_type == 'video' && media.platform == "youtube") {
+                        } else if (media.media_type == "video" && media.platform == "youtube") {
                             return (
                                 <TouchableOpacity
                                     key={media.id}
@@ -89,8 +90,8 @@ class MediaPage extends Component {
                                             height: 300,
                                             width: 300,
                                             flex: 1,
-                                            alignSelf: 'stretch',
-                                            resizeMode: 'contain'
+                                            alignSelf: "stretch",
+                                            resizeMode: "contain"
                                         }}
                                     />
                                 </TouchableOpacity>

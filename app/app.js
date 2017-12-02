@@ -26,14 +26,14 @@ class App extends Component {
             return <CategoryStore.tabs />;
         } else {
             return (
-                <View style={{ flex: 1, backgroundColor: '#212121' }}>
+                <View style={{ flex: 1, backgroundColor: "#212121" }}>
                     <StatusBar
                         backgroundColor="#212121"
                         barStyle="light-content"
                     />
                     <ActivityIndicator
                         animating={true}
-                        style={[styles.centering, { backgroundColor: '#212121' }]}
+                        style={[styles.centering, { backgroundColor: "#212121" }]}
                         color="white"
                         size="large"
                     />
@@ -49,11 +49,11 @@ const Stack = StackNavigator({
         screen: ({ navigation }) => <App navigation={navigation} />
     },
     Post: {
-        path: 'post/:id',
+        path: "post/:id",
         screen: PostScreen
     },
     WebView: {
-        path: 'view/:url',
+        path: "view/:url",
         screen: WebScreen
     },
 }, {
@@ -65,8 +65,8 @@ const Stack = StackNavigator({
 const styles = StyleSheet.create({
     centering: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        alignItems: "center",
+        justifyContent: "center"
     }
 });
 

@@ -12,12 +12,12 @@ import {
     Linking
 } from "react-native";
 
-import {NavigationActions} from 'react-navigation'
-import ParsedText from 'react-native-parsed-text';
-var ChildComments = require('./childComment');
-import User from '@component/user';
-import {PH_ORANGE} from '@theme/light';
-import theme from '@store/theme';
+import {NavigationActions} from "react-navigation"
+import ParsedText from "react-native-parsed-text";
+var ChildComments = require("./childComment");
+import User from "@component/user";
+import {PH_ORANGE} from "@theme/light";
+import theme from "@store/theme";
 
 class CommentWidget extends Component {
 
@@ -36,7 +36,7 @@ class CommentWidget extends Component {
 
     handleUrlPress(url) {
         const navigateAction = NavigationActions.navigate({
-            routeName: 'WebView',
+            routeName: "WebView",
             params: {
                 url: url
             }
@@ -45,7 +45,7 @@ class CommentWidget extends Component {
     }
 
     handleEmailPress(email) {
-        Linking.openURL('mailto:' + email);
+        Linking.openURL("mailto:" + email);
     }
 
     render() {
@@ -67,8 +67,8 @@ class CommentWidget extends Component {
                             style={[styles.body, {color: theme.colors.MAIN_TEXT}]}
                             parse={
                                 [
-                                    {type: 'url', style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleUrlPress.bind(self)},
-                                    {type: 'email', style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleEmailPress.bind(self)},
+                                    {type: "url", style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleUrlPress.bind(self)},
+                                    {type: "email", style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleEmailPress.bind(self)},
                                 ]
                             }
                         >
@@ -76,7 +76,7 @@ class CommentWidget extends Component {
                         </ParsedText>
 
                         <Text style={[styles.votes, {color: theme.colors.BUTTON_TEXT}]}>
-                            {comment.votes + ' Vote(s) - Comment by ' + comment.user.name}
+                            {comment.votes + " Vote(s) - Comment by " + comment.user.name}
                         </Text>
                     </View>
                 </View>
@@ -91,8 +91,8 @@ class CommentWidget extends Component {
 var styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'white',
+        flexDirection: "row",
+        backgroundColor: "white",
         paddingTop: 10,
         paddingBottom: 10,
         paddingLeft: 10,
@@ -100,22 +100,22 @@ var styles = StyleSheet.create({
     },
     body: {
         fontSize: 14,
-        color: '#3e3e3e',
+        color: "#3e3e3e",
         marginLeft: 20,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     url: {
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         color: PH_ORANGE,
         marginLeft: 20,
-        textDecorationLine: 'underline',
+        textDecorationLine: "underline",
     },
     votes: {
         fontSize: 10,
-        color: '#3e3e3e',
+        color: "#3e3e3e",
         marginLeft: 20,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     thumbnail: {
         height: 50,
