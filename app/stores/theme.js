@@ -1,4 +1,7 @@
 import { observable } from "mobx";
+import {
+    AsyncStorage
+} from "react-native";
 
 /**
  * Store for theme data
@@ -23,12 +26,28 @@ class Store {
     };
 
     constructor() {
-        this.toggleDark(false);
+        var self = this;
+        AsyncStorage
+            .getItem('theme', (err, theme) => {
+                console.log("theme", theme);
+                if (!theme) {
+                    this.toggleDark(false);
+                } else {
+                    switch (theme) {
+                        case 'dark':
+                            this.toggleDark(true);
+                            break;
+                        case 'light':
+                            this.toggleDark(false);
+                            break;
+                    }
+                }
+            });
     }
 
     toggleDark(value) {
         var self = this;
-        if(value) {
+        if (value) {
             this.current_theme = 'dark';
             self.colors = {
                 ACTIVE_BACKGROUND_COLOR: '#333333',
@@ -42,9 +61,11 @@ class Store {
                 MAIN_TEXT: '#ffffff',
                 MAIN_TEXT_LIGHT: '#f2f2f2',
                 MAIN_BG: '#1a1a1a',
-                BUTTON_TEXT: '#7986CB',
+                BUTTON_TEXT: '#B71C1C',
                 SECONDARY_BG: '#4e4e4e'
             };
+            AsyncStorage
+                .setItem('theme', 'dark');
         } else {
             this.current_theme = 'light';
             self.colors = {
@@ -62,6 +83,8 @@ class Store {
                 BUTTON_TEXT: '#3F51B5',
                 SECONDARY_BG: '#f5f5f5'
             };
+            AsyncStorage
+                .setItem('theme', 'light');
         }
     }
 

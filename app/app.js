@@ -1,14 +1,16 @@
-import React, {Component} from "react";
-import {StackNavigator} from 'react-navigation';
+import React, { Component } from "react";
+import { StackNavigator } from 'react-navigation';
 
 import PostScreen from '@scene/postPage';
 import WebScreen from '@scene/webScreen';
-import {observer} from 'mobx-react/native';
+import { observer } from 'mobx-react/native';
 import CategoryStore from '@store/category';
 
 import {
     ActivityIndicator,
-    StyleSheet
+    StyleSheet,
+    View,
+    StatusBar
 } from "react-native";
 
 @observer
@@ -24,12 +26,18 @@ class App extends Component {
             return <CategoryStore.tabs />;
         } else {
             return (
-                <ActivityIndicator
-                    animating={true}
-                    style={[styles.centering]}
-                    color="black"
-                    size="large"
-                />
+                <View style={{ flex: 1, backgroundColor: '#212121' }}>
+                    <StatusBar
+                        backgroundColor="#212121"
+                        barStyle="light-content"
+                    />
+                    <ActivityIndicator
+                        animating={true}
+                        style={[styles.centering, { backgroundColor: '#212121' }]}
+                        color="white"
+                        size="large"
+                    />
+                </View>
             )
         }
     }
@@ -38,7 +46,7 @@ class App extends Component {
 
 const Stack = StackNavigator({
     Home: {
-        screen: ({navigation}) => <App navigation={navigation}/>
+        screen: ({ navigation }) => <App navigation={navigation} />
     },
     Post: {
         path: 'post/:id',
@@ -49,10 +57,10 @@ const Stack = StackNavigator({
         screen: WebScreen
     },
 }, {
-    navigationOptions: {
-        header: null
-    }
-});
+        navigationOptions: {
+            header: null
+        }
+    });
 
 const styles = StyleSheet.create({
     centering: {

@@ -55,21 +55,21 @@ class Post extends Component {
                     </View>
 
                     <View style={styles.container}>
-                        <View style={styles.box}>
+                        <View style={[styles.box, {borderColor: theme.colors.BUTTON_TEXT}]}>
                             <View style={styles.rowContainer}>
                                 <Icon style={{
                                     marginRight: 5,
                                     marginTop: 1
-                                }} name="caret-up" size={15} color={theme.colors.MAIN_TEXT_LIGHT}/>
-                                <Text style={[styles.votes, {color: theme.colors.MAIN_TEXT_LIGHT}]}>{post.votes_count}</Text>
+                                }} name="caret-up" size={15} color={theme.colors.BUTTON_TEXT}/>
+                                <Text style={[styles.votes, {color: theme.colors.BUTTON_TEXT}]}>{post.votes_count}</Text>
                             </View>
                         </View>
 
                         <View style={[styles.rightContainer]}>
-                            <View style={styles.box}>
+                            <View style={[styles.box, {borderColor: theme.colors.BUTTON_TEXT}]}>
                                 <View style={styles.rowContainer}>
-                                    <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={theme.colors.MAIN_TEXT_LIGHT}/>
-                                    <Text style={[styles.comments, {color: theme.colors.MAIN_TEXT_LIGHT}]}>{post.comments_count}</Text>
+                                    <Icon style={{marginRight: 5, marginTop: 3}} name="comment" size={10} color={theme.colors.BUTTON_TEXT}/>
+                                    <Text style={[styles.comments, {color: theme.colors.BUTTON_TEXT}]}>{post.comments_count}</Text>
                                 </View>
                             </View>
                         </View>

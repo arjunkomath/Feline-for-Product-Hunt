@@ -8,6 +8,7 @@ import {
     TouchableOpacity,
     Text,
     RefreshControl,
+    StatusBar,
     ActivityIndicator
 } from 'react-native';
 import moment from 'moment';
@@ -92,7 +93,7 @@ class Screen extends Component {
                 <ActivityIndicator
                     animating={true}
                     style={[styles.centering, {height: 40}]}
-                    color="black"
+                    color={theme.colors.MAIN_BG}
                     size="small"
                 />
             )
@@ -100,6 +101,10 @@ class Screen extends Component {
         return (
             <View
                 style={[styles.container, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR }]}>
+                <StatusBar
+                    backgroundColor="#212121"
+                    barStyle="light-content"
+                />
                 <ScrollView
                     refreshControl={
                         <RefreshControl

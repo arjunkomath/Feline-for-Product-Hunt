@@ -50,7 +50,7 @@ class Screen extends Component {
 
     render() {
         return (
-            <ScrollView style={[styles.mainContainer, {backgroundColor: theme.colors.MAIN_BG}]}>
+            <ScrollView style={[styles.mainContainer, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR}]}>
 
                 <Image
                     style={{

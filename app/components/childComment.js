@@ -55,16 +55,8 @@ class ChildCommentsWidget extends Component {
                                         style={[styles.body, {color: theme.colors.MAIN_TEXT}]}
                                         parse={
                                             [
-                                                {
-                                                    type: 'url',
-                                                    style: styles.url,
-                                                    onPress: self.handleUrlPress.bind(self)
-                                                },
-                                                {
-                                                    type: 'email',
-                                                    style: styles.url,
-                                                    onPress: self.handleEmailPress.bind(self)
-                                                },
+                                                {type: 'url', style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleUrlPress.bind(self)},
+                                                {type: 'email', style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleEmailPress.bind(self)},
                                             ]
                                         }
                                     >
