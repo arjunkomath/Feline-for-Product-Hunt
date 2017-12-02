@@ -34,7 +34,7 @@ class Screen extends Component {
         let categories = toJS(CategoryStore.defaultCategories);
         return (
             <View style={[styles.mainContainer, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR}]}>
-                <ScrollView style={{flex: 1}}>
+                <ScrollView style={{flex: 1, padding: 15}}>
 
                     <Text style={[styles.title, {color: theme.colors.MAIN_TEXT}]}>Categories</Text>
                     <View style={{ backgroundColor: theme.colors.MAIN_BG }}>
@@ -95,7 +95,6 @@ class Screen extends Component {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        padding: 15,
         borderTopWidth: 1
     },
     button: {

@@ -49,7 +49,7 @@ class MediaPage extends Component {
         let self = this;
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>Media</Text>
+                <Text style={[styles.title, {color: theme.color.MAIN_TEXT}]}>Media</Text>
                 <ScrollView
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
