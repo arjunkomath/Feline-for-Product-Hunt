@@ -6,9 +6,10 @@ import {
     ActivityIndicator,
     Linking,
     TouchableOpacity
-} from 'react-native';
-import {WebView} from 'react-native';
-import analytics from '@store/analytics';
+} from "react-native";
+import {WebView} from "react-native";
+import analytics from "@store/analytics";
+import theme from "@store/theme";
 
 /**
  * Show WebView
@@ -39,20 +40,20 @@ class Screen extends Component {
             return null;
         }
         return (
-            <View style={{backgroundColor: "white", flex: 1}}>
+            <View style={{backgroundColor: theme.colors.MAIN_BG, flex: 1}}>
                 <View style={styles.border}>
                     { this.state.loading ? (
                         <ActivityIndicator
                             animating={true}
                             style={[{height: 50}]}
-                            color="black"
+                            color={theme.colors.MAIN_TEXT}
                             size="small"
                         />
                     ) : (
                         <TouchableOpacity onPress={() => {
                             Linking.openURL(this.state.url)
                         }}>
-                            <Text style={styles.title}>Preview in Browser</Text>
+                            <Text style={[styles.title, {color: theme.colors.MAIN_TEXT}]}>Preview in Browser</Text>
                         </TouchableOpacity>
                     )}
                 </View>
@@ -74,14 +75,14 @@ const styles = StyleSheet.create({
         flex: 1
     },
     border: {
-        borderBottomColor: '#3e3e3e',
+        borderBottomColor: "#3e3e3e",
         borderBottomWidth: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         height: 50
     },
     title: {
-        color: '#1a1a1a',
+        color: "#1a1a1a",
         fontFamily: "SFBold"
     }
 });

@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {observer} from 'mobx-react/native';
-import {toJS} from 'mobx';
+import React, {Component} from "react";
+import {observer} from "mobx-react/native";
+import {toJS} from "mobx";
 import {
     ScrollView,
     StyleSheet,
@@ -8,15 +8,15 @@ import {
     TouchableOpacity,
     Text,
     RefreshControl,
+    StatusBar,
     ActivityIndicator
-} from 'react-native';
-import moment from 'moment';
+} from "react-native";
+import moment from "moment";
 
-import PostStore from '@store/posts';
-import Post from '@component/post';
-import analytics from '@store/analytics';
-
-import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
+import PostStore from "@store/posts";
+import Post from "@component/post";
+import analytics from "@store/analytics";
+import theme from "@store/theme"
 
 /**
  * Listing page for posts in a category
@@ -53,7 +53,7 @@ class Screen extends Component {
         return (
             <View key={item.date}>
                 <View style={styles.dateContainer}>
-                    <Text style={styles.loadMoreText}>{moment(item.date).format('MMMM Do YYYY').toString()}</Text>
+                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>{moment(item.date).format("MMMM Do YYYY").toString()}</Text>
                 </View>
                 {item.posts.map((post) => {
                     return self.renderPost(post);
@@ -66,7 +66,7 @@ class Screen extends Component {
         if (this.state.postStore.isLoading) {
             return (
                 <View style={styles.loadMoreContainer}>
-                    <Text style={styles.loadMoreText}>...</Text>
+                    <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>...</Text>
                 </View>
             );
         } else {
@@ -75,7 +75,7 @@ class Screen extends Component {
                     this.state.postStore.getPosts(this.state.category);
                 }}>
                     <View style={styles.loadMoreContainer}>
-                        <Text style={styles.loadMoreText}>View More</Text>
+                        <Text style={[styles.loadMoreText, {color: theme.colors.MAIN_TEXT}]}>View More</Text>
                     </View>
                 </TouchableOpacity>
             )
@@ -93,14 +93,18 @@ class Screen extends Component {
                 <ActivityIndicator
                     animating={true}
                     style={[styles.centering, {height: 40}]}
-                    color="black"
+                    color={theme.colors.MAIN_BG}
                     size="small"
                 />
             )
         }
         return (
             <View
-                style={styles.container}>
+                style={[styles.container, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR }]}>
+                <StatusBar
+                    backgroundColor="#212121"
+                    barStyle="light-content"
+                />
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -118,10 +122,10 @@ class Screen extends Component {
     }
 }
 
-const styles = StyleSheet.create({
+const styles = {
     date: {
         fontSize: 11,
-        textAlign: 'center',
+        textAlign: "center",
         padding: 5,
         marginLeft: 10
     },
@@ -129,15 +133,14 @@ const styles = StyleSheet.create({
         fontFamily: "SFBold",
         fontSize: 25,
         marginLeft: 10,
-        color: '#1a1a1a'
     },
     centering: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         margin: 15,
     },
     loadMoreContainer: {
-        justifyContent: 'center',
+        justifyContent: "center",
         height: 50,
         marginTop: 10,
         marginBottom: 10,
@@ -149,10 +152,8 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
-        borderTopWidth: 1,
-        borderTopColor: '#e3e3e3'
+        borderTopWidth: 1
     }
-});
+};
 
 export default Screen

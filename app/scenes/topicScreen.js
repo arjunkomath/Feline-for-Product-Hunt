@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {observer} from 'mobx-react/native';
-import {toJS} from 'mobx';
+import React, {Component} from "react";
+import {observer} from "mobx-react/native";
+import {toJS} from "mobx";
 import {
     ScrollView,
     StyleSheet,
@@ -9,14 +9,13 @@ import {
     Text,
     RefreshControl,
     ActivityIndicator
-} from 'react-native';
-import moment from 'moment';
+} from "react-native";
+import moment from "moment";
 
-import TopicStore from '@store/topic';
-import Post from '@component/post';
-import analytics from '@store/analytics';
-
-import {GREY_LIGHT, GREY_MED_LIGHT, GREY_DARK} from '@theme/light';
+import TopicStore from "@store/topic";
+import Post from "@component/post";
+import analytics from "@store/analytics";
+import theme from "@store/theme"
 
 /**
  * Listing page for posts in a category
@@ -79,7 +78,7 @@ class Screen extends Component {
         }
         return (
             <View
-                style={styles.container}>
+                style={[styles.container, {backgroundColor: theme.colors.MAIN_BG, borderTopColor: theme.colors.INACTIVE_TINT_COLOR }]}>
                 <ScrollView
                     refreshControl={
                         <RefreshControl
@@ -100,7 +99,7 @@ class Screen extends Component {
 const styles = StyleSheet.create({
     date: {
         fontSize: 11,
-        textAlign: 'center',
+        textAlign: "center",
         padding: 5,
         marginLeft: 10
     },
@@ -108,15 +107,15 @@ const styles = StyleSheet.create({
         fontFamily: "SFBold",
         fontSize: 25,
         marginLeft: 10,
-        color: '#1a1a1a'
+        color: "#1a1a1a"
     },
     centering: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: "center",
+        justifyContent: "center",
         margin: 15,
     },
     loadMoreContainer: {
-        justifyContent: 'center',
+        justifyContent: "center",
         height: 50,
         marginTop: 10,
         marginBottom: 10,
@@ -128,9 +127,9 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         borderTopWidth: 1,
-        borderTopColor: '#e3e3e3'
+        borderTopColor: "#e3e3e3"
     }
 });
 

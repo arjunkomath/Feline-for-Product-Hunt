@@ -12,10 +12,11 @@ import {
     Linking
 } from "react-native";
 
-import {NavigationActions} from 'react-navigation'
-import ParsedText from 'react-native-parsed-text';
-import {PH_ORANGE} from '@theme/light';
-import User from '@component/user';
+import {NavigationActions} from "react-navigation"
+import ParsedText from "react-native-parsed-text";
+import {PH_ORANGE} from "@theme/light";
+import User from "@component/user";
+import theme from "@store/theme";
 
 class ChildCommentsWidget extends Component {
 
@@ -25,7 +26,7 @@ class ChildCommentsWidget extends Component {
 
     handleUrlPress(url) {
         const navigateAction = NavigationActions.navigate({
-            routeName: 'WebView',
+            routeName: "WebView",
             params: {
                 url: url
             }
@@ -34,12 +35,12 @@ class ChildCommentsWidget extends Component {
     }
 
     handleEmailPress(email) {
-        Linking.openURL('mailto:' + email);
+        Linking.openURL("mailto:" + email);
     }
 
     render() {
         let self = this;
-        if (!this.props.hasOwnProperty('comments') && this.props.comments.length == 0) {
+        if (!this.props.hasOwnProperty("comments") && this.props.comments.length == 0) {
             return null;
         }
         return (
@@ -47,29 +48,21 @@ class ChildCommentsWidget extends Component {
                 {
                     this.props.comments.map((comment) => {
                         return (
-                            <View style={styles.container} key={comment.id}>
+                            <View style={[styles.container, {backgroundColor: theme.colors.MAIN_BG}]} key={comment.id}>
                                 <User user={comment.user} navigation={this.props.navigation}/>
                                 <View style={{flex: 1}}>
                                     <ParsedText
-                                        style={styles.body}
+                                        style={[styles.body, {color: theme.colors.MAIN_TEXT}]}
                                         parse={
                                             [
-                                                {
-                                                    type: 'url',
-                                                    style: styles.url,
-                                                    onPress: self.handleUrlPress.bind(self)
-                                                },
-                                                {
-                                                    type: 'email',
-                                                    style: styles.url,
-                                                    onPress: self.handleEmailPress.bind(self)
-                                                },
+                                                {type: "url", style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleUrlPress.bind(self)},
+                                                {type: "email", style: [styles.url, {color: theme.colors.BUTTON_TEXT}], onPress: self.handleEmailPress.bind(self)},
                                             ]
                                         }
                                     >
                                         {comment.body}
                                     </ParsedText>
-                                    <Text style={styles.votes}>
+                                    <Text style={[styles.votes, {color: theme.colors.BUTTON_TEXT}]}>
                                         {comment.votes + " Vote(s) - Comment by " + comment.user.name}
                                     </Text>
                                 </View>
@@ -86,8 +79,8 @@ class ChildCommentsWidget extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
-        backgroundColor: '#FAFAFA',
+        flexDirection: "row",
+        backgroundColor: "#FAFAFA",
         paddingTop: 10,
         paddingBottom: 10,
         paddingRight: 10,
@@ -95,22 +88,22 @@ const styles = StyleSheet.create({
     },
     url: {
         fontSize: 14,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         color: PH_ORANGE,
         marginLeft: 20,
-        textDecorationLine: 'underline',
+        textDecorationLine: "underline",
     },
     body: {
         fontSize: 14,
-        color: '#3e3e3e',
+        color: "#3e3e3e",
         marginLeft: 20,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     votes: {
         fontSize: 10,
-        color: '#3e3e3e',
+        color: "#3e3e3e",
         marginLeft: 20,
-        fontFamily: 'SFRegular'
+        fontFamily: "SFRegular"
     },
     thumbnail: {
         height: 50,

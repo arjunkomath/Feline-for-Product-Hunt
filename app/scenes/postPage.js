@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
     View,
     ScrollView,
@@ -11,18 +11,20 @@ import {
     TouchableOpacity,
     AsyncStorage,
     ToastAndroid,
+    StatusBar,
     Platform
 } from 'react-native';
-import {HOST} from "../constants";
-let {height, width} = Dimensions.get('window');
-import {NavigationActions} from 'react-navigation'
+import { HOST } from "../constants";
+let { height, width } = Dimensions.get('window');
+import { NavigationActions } from 'react-navigation'
 
-import {GREY, GREY_DARK, GREY_LIGHT, PH_ORANGE} from '@theme/light';
+import { GREY, GREY_DARK, GREY_LIGHT, PH_ORANGE } from '@theme/light';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import DiscussionPage from '@component/discussion';
 import MediaPage from '@component/media';
 import InfoPage from '@component/info';
+import theme from '@store/theme';
 
 /**
  * Post Details Page
@@ -37,7 +39,7 @@ class Screen extends Component {
     }
 
     componentDidMount() {
-        let {navigation} = this.props;
+        let { navigation } = this.props;
         let postId = navigation.state.params.id;
         let self = this;
         AsyncStorage
@@ -93,14 +95,14 @@ class Screen extends Component {
     }
 
     renderForeground() {
-        let {post} = this.state;
+        let { post } = this.state;
         return (
-            <View style={{height: 210, backgroundColor: GREY_LIGHT}}>
-                <Image resizeMode={Image.resizeMode.strech} style={styles.screenshot} source={{uri: post.thumbnail.image_url}}>
+            <View style={{ height: 210, backgroundColor: theme.colors.SECONDARY_BG }}>
+                <Image resizeMode={Image.resizeMode.strech} style={styles.screenshot} source={{ uri: post.thumbnail.image_url }}>
                     <Image
                         resizeMode={Image.resizeMode.strech}
                         source={require('./../../assets/images/row_bag.png')}
-                        style={{flex: 1}}
+                        style={{ flex: 1 }}
                     >
                         <View style={styles.imageContainer}>
                             <Text style={styles.name} ellipsizeMode="tail" numberOfLines={1}>{post.name}</Text>
@@ -110,32 +112,32 @@ class Screen extends Component {
                 </Image>
 
                 <View style={styles.rowContainer}>
-                    <View style={[styles.box, {backgroundColor: "white", marginLeft: 15}]}>
+                    <View style={[styles.box, { backgroundColor: theme.colors.MAIN_BG, marginLeft: 15 }]}>
                         <View style={styles.rowContainer}>
                             <Icon style={{
                                 marginRight: 5,
                                 marginTop: 1
-                            }} name="caret-up" size={15} color={GREY_DARK}/>
-                            <Text style={styles.votes}>{post.votes_count}</Text>
+                            }} name="caret-up" size={15} color={theme.colors.MAIN_TEXT} />
+                            <Text style={[styles.votes, { color: theme.colors.MAIN_TEXT }]}>{post.votes_count}</Text>
                         </View>
                     </View>
 
-                    <View style={[styles.rightContainer, {marginLeft: 10}]}>
+                    <View style={[styles.rightContainer, { marginLeft: 10 }]}>
                         <TouchableOpacity onPress={() => {
                             this.openUrl(post.redirect_url)
                         }}>
-                            <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                                <Text style={styles.getIt}>Get It</Text>
+                            <View style={[styles.box, { backgroundColor: theme.colors.BUTTON_TEXT }]}>
+                                <Text style={[styles.getIt, { color: 'white' }]}>Get It</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
 
-                    <View style={[styles.rightContainer, {marginLeft: 10}]}>
+                    <View style={[styles.rightContainer, { marginLeft: 10 }]}>
                         <TouchableOpacity onPress={() => {
                             this.sharePost(post)
                         }}>
-                            <View style={[styles.box, {backgroundColor: PH_ORANGE}]}>
-                                <Text style={styles.getIt}>Share</Text>
+                            <View style={[styles.box, { backgroundColor: theme.colors.BUTTON_TEXT }]}>
+                                <Text style={[styles.getIt, { color: 'white' }]}>Share</Text>
                             </View>
                         </TouchableOpacity>
                     </View>
@@ -149,19 +151,23 @@ class Screen extends Component {
             return (
                 <ActivityIndicator
                     animating={true}
-                    style={[styles.centering]}
-                    color="black"
+                    style={[styles.centering, { backgroundColor: theme.colors.MAIN_BG }]}
+                    color={theme.colors.MAIN_TEXT}
                     size="large"
                 />
             )
         }
         return (
-            <ScrollView style={{backgroundColor: "white"}}>
+            <ScrollView style={{ backgroundColor: theme.colors.MAIN_BG }}>
+                <StatusBar
+                    backgroundColor={theme.colors.BUTTON_TEXT}
+                    barStyle="light-content"
+                />
                 {this.renderForeground()}
-                <InfoPage post={this.state.post}/>
-                <MediaPage media={this.state.post.media}/>
+                <InfoPage post={this.state.post} />
+                <MediaPage media={this.state.post.media} />
                 {this.state.post.comments_count ?
-                    <DiscussionPage comments={this.state.post.comments} navigation={this.props.navigation}/> : null}
+                    <DiscussionPage comments={this.state.post.comments} navigation={this.props.navigation} /> : null}
             </ScrollView>
         );
     }
