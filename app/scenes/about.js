@@ -116,7 +116,7 @@ class Screen extends Component {
                 </View>
 
                 <View style={[styles.button, { marginTop: 15, marginBottom: 50, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR }]}>
-                    <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Version 2.2.1</Text>
+                    <Text style={[styles.button_text, {color: theme.colors.BUTTON_TEXT}]}>Version 2.3</Text>
                 </View>
 
             </ScrollView>

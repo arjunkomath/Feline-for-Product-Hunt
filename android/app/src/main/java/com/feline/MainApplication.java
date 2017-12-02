@@ -3,6 +3,7 @@ package com.feline;
 import android.app.Application;
 
 import com.crashlytics.android.Crashlytics;
+import com.crashlytics.android.core.CrashlyticsCore;
 import com.facebook.react.ReactApplication;
 import com.bugsnag.BugsnagReactNative;
 import com.facebook.react.shell.MainReactPackage;
@@ -45,7 +46,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
+        // Set up Crashlytics, disabled for debug builds
+        Crashlytics crashlyticsKit = new Crashlytics.Builder()
+                .core(new CrashlyticsCore.Builder().disabled(BuildConfig.DEBUG).build())
+                .build();
+        Fabric.with(this, crashlyticsKit);
         BugsnagReactNative.start(this);
         SoLoader.init(this, /* native exopackage */ false);
     }
