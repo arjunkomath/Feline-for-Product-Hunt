@@ -4,6 +4,8 @@
 ### <a href="https://play.google.com/apps/testing/com.arjunkomath.product_hunt">Join Beta Testing</a>
 ### <a href="https://expo.io/@community/feline">View on Expo</a>
 
+<a href="https://www.buymeacoffee.com/arjunkomath"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"  target="_blank"></a>
+
 ----------
 ## Download
 <a href="https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-AC-global-none-all-co-pr-py-PartBadges-Oct1515-1"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/apps/en-play-badge.png" width="175" /></a>
