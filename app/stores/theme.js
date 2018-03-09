@@ -47,7 +47,7 @@ class Store {
                 MAIN_TEXT: "#ffffff",
                 MAIN_TEXT_LIGHT: "#f2f2f2",
                 MAIN_BG: "#1a1a1a",
-                BUTTON_TEXT: "#B71C1C",
+                BUTTON_TEXT: "#3F51B5",
                 SECONDARY_BG: "#4e4e4e"
             };
             AsyncStorage

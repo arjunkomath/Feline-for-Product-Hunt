@@ -42,7 +42,7 @@ class Screen extends Component {
                             categories.map((category) => {
                                 return (
                                     <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }} key={category.value}>
-                                        <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={category.selected} onValueChange={(value) => CategoryStore.selectCategory(category, value)} />
+                                        <Switch thumbTintColor={theme.colors.GREY_LIGHT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={category.selected} onValueChange={(value) => CategoryStore.selectCategory(category, value)} />
                                         <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>{category.label}</Text>
                                     </View>
                                 )
@@ -56,7 +56,7 @@ class Screen extends Component {
                             topics.map((topic) => {
                                 return (
                                     <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }} key={topic.value}>
-                                        <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={topic.selected} onValueChange={(value) => CategoryStore.selectTopic(topic, value)} />
+                                        <Switch thumbTintColor={theme.colors.GREY_LIGHT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={topic.selected} onValueChange={(value) => CategoryStore.selectTopic(topic, value)} />
                                         <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>{topic.label}</Text>
                                     </View>
                                 )
@@ -66,7 +66,7 @@ class Screen extends Component {
 
                     <Text style={[styles.title, { color: theme.colors.MAIN_TEXT }]}>Look and Feel</Text>
                     <View style={{ borderBottomWidth: 1, height: 55, marginTop: 5, marginBottom: 20, borderBottomColor: theme.colors.INACTIVE_TINT_COLOR, flexDirection: "row" }}>
-                        <Switch thumbTintColor={theme.colors.BUTTON_TEXT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={theme.current_theme == "dark"} onValueChange={(value) => theme.toggleDark(value)} />
+                        <Switch thumbTintColor={theme.colors.GREY_LIGHT} onTintColor={theme.colors.INACTIVE_TINT_COLOR} value={theme.current_theme == "dark"} onValueChange={(value) => theme.toggleDark(value)} />
                         <Text style={{ color: theme.colors.BUTTON_TEXT, fontSize: 15, marginLeft: 15, alignSelf: "center", fontFamily: "SFRegular" }}>Dark Theme</Text>
                     </View>
 
