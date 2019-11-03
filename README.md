@@ -1,3 +1,5 @@
+⚠️ **Note**: This repository is no longer actively maintained, I'm working on a new version! ⚠️
+
 # Feline for Product Hunt (v2)
 ### A beautiful, Open Source unofficial [Android app](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
 
