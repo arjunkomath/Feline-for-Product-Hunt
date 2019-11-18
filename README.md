@@ -1,10 +1,7 @@
 ⚠️ **Note**: This repository is no longer actively maintained, I'm working on a new version! ⚠️
 
 # Feline for Product Hunt (v2)
-### A beautiful, Open Source unofficial [Android app](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
-
-### <a href="https://play.google.com/apps/testing/com.arjunkomath.product_hunt">Join Beta Testing</a>
-### <a href="https://expo.io/@community/feline">View on Expo</a>
+### Unofficial [client](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
 
 <a href="https://www.buymeacoffee.com/arjunkomath"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;"  target="_blank"></a>
 
