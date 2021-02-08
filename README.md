@@ -1,4 +1,4 @@
-⚠️ **Note**: This repository is no longer actively maintained, I'm working on a new version! ⚠️
+## ⚠️ Note: This repository is not maintained ⚠️
 
 # Feline for Product Hunt
 ### Unofficial [client](https://play.google.com/store/apps/details?id=com.arjunkomath.product_hunt) for [Product Hunt](https://www.producthunt.com/)
